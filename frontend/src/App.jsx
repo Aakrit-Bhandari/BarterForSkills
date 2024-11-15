@@ -38,9 +38,9 @@ function App() {
           console.log(response.data.userData)
           // If token is valid, navigate to the welcome page if on login
           if (location.pathname === '/login/freelance' && response.data.userData.userData.usertype==="freelance"){
-            navigate(`/welcome/freelance/${response.data.userData.username}`);
+            navigate(`/welcome/freelance/in23x/${response.data.userData.username}`);
           }else if(location.pathname==='/login/workprovider' && response.data.userData.userData.usertype==="workprovider") {
-            navigate(`/welcome/workprovider/${response.data.userData.username}`);
+            navigate(`/welcome/workprovider/wpd78x/${response.data.userData.username}`);
           }
         } else {
           // If token is not valid, redirect to login
@@ -71,7 +71,7 @@ function App() {
         <Route path='/login/freelance' element={<Loginfreelance />} />
         <Route path='/login/workprovider' element={<Loginworkprovider />} />
         <Route path='/signup/:email' element={<Signup />} />
-        <Route path='/welcome/:usertype/:username' element={<Welcome />} />
+        <Route path='/welcome/:usertype/:logic/:username' element={<Welcome />} />
         <Route path='/add-project/:userid/:username' element={<Addnewproject/>} />
       </Routes>
     </>

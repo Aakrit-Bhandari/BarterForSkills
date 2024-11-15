@@ -37,6 +37,10 @@ const Signup = () => {
         if (!userData || !userData.email || !userData.usertype) {
             navigate('/login');
         }
+        if(localstoragedata?.anothertypeuser){
+            alert("Already registed email with another usertype.")
+            navigate('/login');
+        }
     }, [userData, navigate]);
 
     const handleChange = (e) => {
@@ -93,7 +97,7 @@ const Signup = () => {
 
                     if (newUserResponse.data.userAdded) {
                         localStorage.setItem("response-userdata", JSON.stringify(newUserResponse.data));
-                        navigate(`/welcome/${userData.usertype}/${encodeURIComponent(userData.username)}`);
+                        navigate(`/welcome/${userData.usertype==='freelance'?'freelance/in23x':'workprovider/wpd78x'}/${encodeURIComponent(userData.username)}`);
                     } else {
                         setErrorMessage("An error occurred while adding the user. Please try again.");
                     }
@@ -117,12 +121,12 @@ const Signup = () => {
                     <input type="text" value={userData.usertype || ''} readOnly required /><br />
                     <input type="text" placeholder="Username*" name="username" value={userData.username || ''} onChange={handleChange} required /><br />
                     <input type="text" placeholder="Name*" name="personaldetails.name" value={userData.personaldetails?.name || ''} onChange={handleChange} required /><br />
-                    <input type="text" placeholder="Contact No*" name="personaldetails.conatactno" value={userData.personaldetails.conatactno || ''} onChange={handleChange} required /><br />
+                    <input type="text" placeholder="Contact No*" name="personaldetails.conatactno" value={userData.personaldetails?.conatactno || ''} onChange={handleChange} required /><br />
                     <input type="text" placeholder="Skills (comma separated)*" onChange={handleSkillsChange} required /><br />
-                    <input type="text" placeholder="Location*" name="personaldetails.location" value={userData.personaldetails.location || ''} onChange={handleChange} required /><br />
-                    <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails.linkedinid || ''} onChange={handleChange} /><br />
-                    <textarea placeholder="Description" name="personaldetails.description" value={userData.personaldetails.description || ''} onChange={handleChange}></textarea><br />
-                    <select name="personaldetails.gender" value={userData.personaldetails.gender || ''} onChange={handleChange} required>
+                    <input type="text" placeholder="Location*" name="personaldetails.location" value={userData.personaldetails?.location || ''} onChange={handleChange} required /><br />
+                    <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} onChange={handleChange} /><br />
+                    <textarea placeholder="Description" name="personaldetails.description" value={userData.personaldetails?.description || ''} onChange={handleChange}></textarea><br />
+                    <select name="personaldetails.gender" value={userData.personaldetails?.gender || ''} onChange={handleChange} required>
                         <option value="">Gender*</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>

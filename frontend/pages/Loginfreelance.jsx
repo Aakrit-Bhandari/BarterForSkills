@@ -52,7 +52,7 @@ const Loginfreelance = () => {
             if (otpVerResponse.data.otpverified) {
                 if (otpVerResponse.data.existinguser) {
                     localStorage.setItem("response-userdata",JSON.stringify(otpVerResponse.data));
-                    navigate(`/welcome/freelance/${encodeURIComponent(otpVerResponse.data.userData.username)}`);
+                    navigate(`/welcome/freelance/in23x/${encodeURIComponent(otpVerResponse.data.userData.username)}`);
                 } else {
                     localStorage.setItem("response-userdata",JSON.stringify(otpVerResponse.data));
                     navigate(`/signup/${userData.email}`);

@@ -1,7 +1,7 @@
 import React from "react";
 import Joboption from "./Joboption";
 
-const Jobdisplay = ({projectdata,filtercount})=>{
+const Jobdisplay = ({projectdata,filtercount,worker})=>{
     const jobsdata = projectdata.length===0?[]:projectdata;
     return(
         <>
@@ -11,7 +11,7 @@ const Jobdisplay = ({projectdata,filtercount})=>{
             </div>
             <div className="jobs">
                 {jobsdata.length>0 && jobsdata.map((data,index)=>(
-                    <Joboption data={data} key={index}/>
+                    <Joboption data={data} key={index} worker={worker}/>
                 ))}
             </div>
         </>

@@ -33,7 +33,22 @@ const login = async(req,res)=>{
                 }
                 else{
                     resData.existinguser = false;
-                    // resData.userData = userData;
+                    resData.userData = resData.userData = {
+                        username: '',
+                        usertype: userData.usertype,
+                        email: userData.email,
+                        personaldetails: {
+                            name: '',
+                            conatactno: '',
+                            skills: [],
+                            location: '',
+                            description: '',
+                            linkedinid: '',
+                            gender: '',
+                            rating: '',
+                            projectsworkedon: '',
+                            profilephoto: ''
+                        }};
                     resData.otpverified = true;
                     resData.anothertypeuser = true;
                     resData.message = "This email is already used as another category at our website.";

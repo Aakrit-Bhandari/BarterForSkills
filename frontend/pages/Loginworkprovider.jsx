@@ -54,7 +54,7 @@ const Loginworkprovider = () => {
             if (otpVerResponse.data.otpverified) {
                 if (otpVerResponse.data.existinguser) {
                     localStorage.setItem("response-userdata",JSON.stringify(otpVerResponse.data));
-                    navigate(`/welcome/workprovider/${encodeURIComponent(otpVerResponse.data.userData.username)}`);
+                    navigate(`/welcome/workprovider/wpd78x/${encodeURIComponent(otpVerResponse.data.userData.username)}`);
                 } else {
                     if(otpVerResponse.data.anothertypeuser){
                         setanotherusererror(true);

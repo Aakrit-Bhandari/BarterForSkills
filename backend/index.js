@@ -24,6 +24,7 @@ import checkUsername from './Routes/checkUsername.js';
 import uploadimage from './Routes/uploadimage.js';
 import mult from './Utils/Multer.js';
 import getprojectuserid from './Routes/getprojectuserid.js';
+import getprojectsbyid from './Routes/getprojectsbyid.js';
 
 //config dotenv
 dotenv.config();
@@ -51,6 +52,7 @@ app.post('/addprojectentry',newprojectentry);
 app.get('/user/:username',userProfile);
 app.post('/editproject/:id',editproject);
 app.get('/getproject-userdetails/:projectid/:userid',getuserdetails);
+app.get('/getprojects-all/:userid',getprojectsbyid);
 app.get('/getprojects/:userid',getprojectuserid);
 app.get('/getworks',getWorks);
 app.get('/getwork/:skill/:barter',getspecialWork);

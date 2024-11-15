@@ -5,11 +5,17 @@ import Jobdisplay from "../components/Jobdisplay";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Setsearchbar from "../components/Setsearchbar";
+import Projectsadded from "../components/Projectsadded";
 
 const Welcome = ()=>{
     const navigate = useNavigate();
     const [projectdata,setprojectdata] = useState([]);
     const [filtercount,setfiltercount] = useState(0);
+
+    const [uploadprojects,setuploaded] = useState([]);
+    const [uploadcount,setuploadcount] = useState(0);
+
+    const[worker,setworker] = useState(true);
 
     const [localstoragedata, setLocalstoragedata] = useState(() => {
         try {
@@ -35,16 +41,23 @@ const Welcome = ()=>{
     console.log(localstoragedata);
     return(
         <>
-            <button onClick={()=>navigate(`/add-project/${localstoragedata?.userData?._id}/${localstoragedata?.userData?.username}`)}>add new project temp</button>
-            {/* navbar */}
-            {/* search console */}
-            <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
-            {/* setsearchbar */}
-            <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
-            <Jobdisplay projectdata={projectdata} filtercount={filtercount}/>
-            {/* data for serached */}
-            {/* latest data regarding jobs */}
-            {/* footer */}
+            {
+                localstoragedata?.userData?.usertype === 'freelance' && 
+                <div>
+                    <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
+                    <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
+                    <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker}/>
+                </div>
+            }
+            {
+                localstoragedata?.userData?.usertype === 'workprovider' && 
+                <div>
+                    <button onClick={()=>navigate(`/add-project/${localstoragedata?.userData?._id}/${localstoragedata?.userData?.username}`)}>add new project temp</button>
+                    {/* display jobs that are posted by this user */}
+                    <Projectsadded setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/>
+                    <Jobdisplay projectdata={uploadprojects} filtercount={filtercount} worker={!worker}/>
+                </div>
+            }
         </>
     )
 }
