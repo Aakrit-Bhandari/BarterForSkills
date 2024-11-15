@@ -4,11 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const generatejwttoken = async(userData) => {
-    // Convert Mongoose document to plain JavaScript object if necessary
-    const id = userData._id.toString();  // Ensure _id is in string format
+    
+    const id = userData._id.toString();  
 
     const token = await jsonwebtoken.sign({
-        id: id,  // Use the _id field
+        id: id,  
         username: userData.username,
         email: userData.email,
         userData : userData

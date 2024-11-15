@@ -1,64 +1,63 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const IdeaproviderSchema = new mongoose.Schema({
-    username:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+    username: {
+        type: String,
+        required: true,
+        unique : true
     },
     usertype:{
         type:String,
-        required:true,
-        enum:["Freelance","Workprovider"]
+        required:true
+    },
+    email:{
+        type:String,
+        required: true,
+        unique: true
     },
     personaldetails:{
-        name:{
+        name: {
             type:String,
-            required:true
+            required: true
         },
         conatactno:{
-            type:Number,
-            required:true
+            type:String,
+            required: true,
         },
         skills:{
-            type:[String],
-            required:true,
-            enum: ["coding","c++","java","frontend","backend","reactjs","nodejs"]
+            type: [String],
+            required:true
         },
         location:{
             type:String,
-            required:true,
-            enum: ['Chandigarh','Delhi','Mumbai']
+        required: true,
         },
         description:{
-            type:String
+            type:String,
+        required: true,
         },
         linkedinid:{
-            type:String
+            type:String,
+        required: true,
         },
         gender:{
             type:String,
-            required:true,
-            enum:['male','female','other']
+        required: true,
         },
-        rating:{
-            type:Number,
-            enum:[0,1,2,3,4,5],
-            required:true,
-            default:0
-        },
-        projectsworkedon:{
-            type:Number,
-            requried:true,
-            default:0
+        profilephoto:{
+            type:String,
+            required:true
         }
     },
-    ideaspresented:[
+    projectsworkedon:[
+        {
+            projectid:{
+                type:String,
+                required:true
+            }
+        }
+    ],
+    projectsworkapplied:[
         {
             projectid:{
                 type:String,
@@ -66,7 +65,8 @@ const IdeaproviderSchema = new mongoose.Schema({
             }
         }
     ]
-},{timestamps:true});
+
+})
 
 const IdeaproviderModel = mongoose.model("freelance",IdeaproviderSchema);
 

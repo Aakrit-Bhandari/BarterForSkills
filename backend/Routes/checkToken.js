@@ -16,8 +16,10 @@ const checkToken = async (req, res) => {
             try 
             {
                 const checkJwtToken = await jsonwebtoken.verify(cookieToken, process.env.SECRET);
-                userResponse.validtoken = true;
+                console.log("checked");
+                userResponse.tokenalreadypresent = true;
                 userResponse.datafetched = checkJwtToken;
+                userResponse.userData = checkJwtToken;
                 userResponse.totaldatapresent = true;
                 return res.status(200).json(userResponse);
             } 
@@ -39,7 +41,7 @@ const checkToken = async (req, res) => {
         } else {
             userResponse.tokenalreadypresent = false;
             userResponse.message = "token not found";
-            return res.status(404).json(userResponse);
+            return res.status(200).json(userResponse);
         }
     }
     catch(error)

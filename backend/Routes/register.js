@@ -12,14 +12,18 @@ const register = async(req, res) => {
         });
 
         if (dbresponse === null) {
+            console.log(userData);
+            console.log('Hello im here')
             const newuser = new IdeaproviderModel(userData);
             await newuser.save();
+            console.log(userData);
             const token = await generatejwttoken(newuser); 
-
+            userResponse.userAdded = true;
             userResponse.tokengenerated = true;
             userResponse.token = token.token;
             res.cookie('freelance_cookie', token.token, token.options);
             userResponse.datafetched = newuser;
+            userResponse.userData = newuser; 
             userResponse.totaldatapresent = true;
             sendwelcomeemail(userData.email);
             return res.status(200).json(userResponse);

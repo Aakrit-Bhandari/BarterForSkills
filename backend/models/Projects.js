@@ -20,16 +20,27 @@ const Projectschema = new mongoose.Schema({
         ]
     },
     projectdetails:{
-        basicidea:{
+        position:{
+            type:String,
+            required:true
+        },
+        projectdesc:{
+            type:String,
+            required:true
+        },
+        yearexp:{
+            type: String,
+            required:true
+        },
+        amounttobepaid:{
             type:String,
             required:true
         },
         skillsreq:{
-            type: [String],
-            required:true,
-            enum:["coding"]
+            type:[String],
+            required:true
         },
-        descriptionofidea:{
+        location:{
             type:String,
             required:true
         },
@@ -37,22 +48,6 @@ const Projectschema = new mongoose.Schema({
             type:String,
             required:true,
             enum: ['yes','no']
-        },
-        estimatedmoney:{
-            type:Number,
-            default: 0
-        },
-        negotiable:{
-            type:String,
-            enum: ['yes','no']
-        },
-        reqdeadline:{
-            type:String,
-            enum: ['yes','no']
-        },
-        deadline:{
-            type:String,
-            default: "no"
         },
         projectstatusstatus:{
             type:String,
@@ -67,6 +62,6 @@ const Projectschema = new mongoose.Schema({
     }
 },{timestamps:true});
 
-const Projectsmodel = mongoose.model("freelancedata",Projectschema);
+const Projectsmodel = mongoose.model("projectdata",Projectschema);
 
 export default Projectsmodel;

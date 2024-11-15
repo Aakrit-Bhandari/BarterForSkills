@@ -5,6 +5,11 @@ const response = {
     totaldatapresent:false,
     existinguser:false,
     editedprofile:false,
+    anothertypeuser: false,
+    usernameavailable: false,
+    imageuploaded:false,
+    userAdded: false,
+    imageurl: false,
     otpsent:false,
     otpverified:false,
     existingusername:false,
@@ -24,8 +29,12 @@ const response = {
     projectentry:false,
     message:"",
     error:"",
+    projectfound: false,
+    projectapplied: {
+
+    },
     logoutdone:false,
-    userProfiledata:{
+    userData:{
 
     },
     userprofilefound:false

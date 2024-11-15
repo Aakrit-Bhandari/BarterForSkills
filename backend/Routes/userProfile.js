@@ -8,7 +8,7 @@ const userProfile = async(req,res)=>{
         const usermongoosedata = await IdeaproviderModel.findOne({
             username: userData
         });
-        if(userData!=null)
+        if(usermongoosedata!=null)
         {
             userResponse.userprofilefound = true;
             userResponse.userProfiledata = usermongoosedata;

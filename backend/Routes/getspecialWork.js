@@ -4,11 +4,13 @@ import response from "../response.js";
 const getspecialWork = async (req, res) => {
     const resData = { ...response };
     const userSkill = req.params.skill;
+    const bartertrue = req.params.barter;
 
     try {
 
         const getskillData = await Projectsmodel.find({
-            'projectdetails.skillsreq': { $in: [userSkill] }
+            'projectdetails.skillsreq': { $in: [userSkill] },
+            'projectdetails.bartarsystem': bartertrue
         });
 
         if (getskillData.length > 0) {
@@ -18,7 +20,7 @@ const getspecialWork = async (req, res) => {
         } else {
             resData.projectdatapresent = false;
             resData.message = "Data not found";
-            return res.status(404).json(resData);
+            return res.status(200).json(resData);
         }
     } catch (error) {
         resData.projectdatapresent = false;

@@ -5,9 +5,12 @@ const newproject = async(req,res)=>{
     const userResponse = {...response};
 
     const projectdata = req.body;
+    console.log(projectdata);
     try{
         const newprojectdata = new Projectsmodel(projectdata);
+        console.log(newprojectdata);
         await newprojectdata.save();
+        console.log("not adding");
         userResponse.newprojectadded = true;
         return res.status(200).json(userResponse);
     }
@@ -16,7 +19,7 @@ const newproject = async(req,res)=>{
         userResponse.newprojectadded = false;
         userResponse.error = error.message;
         userResponse.message = "Project not added";
-        return res.status(404).json(userResponse);
+        return res.status(200).json(userResponse);
     }
 }
 

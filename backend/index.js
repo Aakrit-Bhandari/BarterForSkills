@@ -20,6 +20,10 @@ import getuserdetails from './Routes/getuserdetails.js';
 import logout from './Routes/logout.js';
 import userProfile from './Routes/userProfile.js';
 import editProfile from './Routes/editProfile.js';
+import checkUsername from './Routes/checkUsername.js';
+import uploadimage from './Routes/uploadimage.js';
+import mult from './Utils/Multer.js';
+import getprojectuserid from './Routes/getprojectuserid.js';
 
 //config dotenv
 dotenv.config();
@@ -37,6 +41,8 @@ connectDb();
 //
 app.post('/send-otp',sendOtp);
 app.post('/login',login);
+app.get('/check-username/:username',checkUsername);
+app.post('/upload-image',mult.single('image'),uploadimage);
 app.post('/register',register);
 app.get('/check-token',checkToken);
 app.post('/editprofile/:username',editProfile);
@@ -45,12 +51,13 @@ app.post('/addprojectentry',newprojectentry);
 app.get('/user/:username',userProfile);
 app.post('/editproject/:id',editproject);
 app.get('/getproject-userdetails/:projectid/:userid',getuserdetails);
+app.get('/getprojects/:userid',getprojectuserid);
 app.get('/getworks',getWorks);
-app.get('/getwork/:skill',getspecialWork);
+app.get('/getwork/:skill/:barter',getspecialWork);
 app.get('/logout',logout);
 
 
-//listen at 3000
+//listen at 300
 const startapp = async()=>{
     try{
         await app.listen(process.env.PORT,()=>{
