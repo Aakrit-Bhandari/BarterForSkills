@@ -143,3 +143,71 @@
     background-color: #007bff; /* Blue color for active button */
     color: white;
 }
+
+
+.hiddenbox-makingchanges{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+    /* margin-top: 45px; */
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.people-applied{
+  width: 100%;
+  text-align: center;
+}
+
+.small-divs-applied{
+  width: 40%;
+  height: 160px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(252, 249, 249);
+}
+.left-applied{
+  width: 40%;
+  height: 100%;
+  float: left;
+  
+}
+.img-logo{
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+  margin-top: 5px;
+}
+.left-applied img{
+  margin-top: 5px;
+  width: 45%;
+  height: 90%;
+  border-radius: 150px;
+}
+.right-applied{
+  width: 50%;
+  height: 100%;
+  float: right;
+  text-align: left;
+}
+.text-right{
+  margin-top: 5px;
+  line-height: 23px;
+}
+
+.right-applied button{
+  margin-top: 5px;
+  width: 100px;
+  background-color: rgb(92, 92, 255);
+  color: white;
+  border: 0px;
+  border-radius: 100px;
+  font-size: 12px;
+  height: 30px;
+  cursor: pointer;
+}

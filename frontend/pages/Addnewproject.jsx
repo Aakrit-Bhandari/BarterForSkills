@@ -68,7 +68,8 @@ const Addnewproject = ()=>{
             console.log(addProject);
             if(addProject.data.newprojectadded){
                 alert("Project was added successfully... 😃");
-                navigate(`/welcome/${localstoragedata?.userData?.usertype}/${localstoragedata?.userData?.username}`);
+                const logic = localstoragedata?.userData?.usertype === 'workprovider'? 'wpd78x':'in23x';
+                navigate(`/welcome/${localstoragedata?.userData?.usertype}/${logic}/${localstoragedata?.userData?.username}`);
                 return;
             }
             else{

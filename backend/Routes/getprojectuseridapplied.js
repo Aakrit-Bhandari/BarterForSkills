@@ -2,7 +2,7 @@ import IdeaproviderModel from "../models/IdeaproviderSchema.js";
 import Projectsmodel from "../models/Projects.js";
 import response from "../response.js";
 
-const getprojectuserid = async (req, res) => {
+const getprojectuseridapplied = async (req, res) => {
     const userResponse = { ...response };
     const userid = req.params.userid;
 
@@ -18,12 +18,12 @@ const getprojectuserid = async (req, res) => {
         }
 
         // Check if user has any projects applied
-        if (getuser.projectsworkapplied && getuser.projectsworkapplied.length > 0) {
+        if (getuser.projectsworkedon && getuser.projectsworkedon.length > 0) {
             userResponse.projectfound = true;
 
             // Fetch all project details using Promise.all
             const projectsdata = await Promise.all(
-                getuser.projectsworkapplied.map(async (proj) => {
+                getuser.projectsworkedon.map(async (proj) => {
                     return await Projectsmodel.findById(proj.projectid);
                 })
             );
@@ -43,4 +43,4 @@ const getprojectuserid = async (req, res) => {
     }
 };
 
-export default getprojectuserid;
+export default getprojectuseridapplied;

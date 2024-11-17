@@ -6,10 +6,14 @@ const Projectschema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required:true
         },
-        clientid:{
-            type: mongoose.Schema.Types.ObjectId,
-            default: null
-        },
+        clientid:[
+            {
+                cliendid:{
+                    type: mongoose.Schema.Types.ObjectId,
+                    required:true
+                }
+            }
+        ],
         clientsapplied:[
             {
                 cliendid:{

@@ -12,8 +12,10 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
                 withCredentials:true
             });
             if(projectdata.data.projectdatapresent){
-                setprojectdata(projectdata.data.projectdatafetched);
-                setfiltercount(projectdata.data.projectdatafetched.length);
+                //only finding people wors find
+                const projectsss = projectdata.data.projectdatafetched.filter(pro=>pro.projectdetails.projectstatusstatus==='findingpeople');
+                setprojectdata(projectsss);
+                setfiltercount(projectsss.length);
             }
         }
         getdata();
@@ -26,13 +28,29 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
             const projectdata = await axios.get(`http://localhost:5000/getprojects/${userid}`,{
                 withCredentials:true
             });
-            console.log(projectdata);
             if(projectdata.data.projectfound){
                 setprojectdata(projectdata.data.projectapplied);
                 setfiltercount(projectdata.data.projectapplied.length);
             }else{
                 setprojectdata([]);
                     setfiltercount(0);
+            }
+        }
+        getdata();
+    }
+    const onshortlisted = async()=>{
+        setActiveTab("shortlisted");
+        //get jobs
+        const getdata = async()=>{
+            const projectdata = await axios.get(`http://localhost:5000/getprojectuseridapplied/${userid}`,{
+                withCredentials:true
+            });
+            if(projectdata.data.projectfound){
+                setprojectdata(projectdata.data.projectapplied);
+                setfiltercount(projectdata.data.projectapplied.length);
+            }else{
+                setprojectdata([]);
+                setfiltercount(0);
             }
         }
         getdata();
@@ -51,6 +69,12 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
                 onClick={onactiveclick}
             >
                 Applied jobs
+            </button>
+            <button
+                className={activeTab === "shortlisted" ? "active" : ""}
+                onClick={onshortlisted}
+            >
+                Shortlisted
             </button>
         </div>
     );

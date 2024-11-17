@@ -11,6 +11,7 @@ import Loginworkprovider from '../pages/Loginworkprovider';
 import Welcome from '../pages/Welcome';
 import Signup from '../pages/Signup';
 import Addnewproject from '../pages/Addnewproject';
+import Peopleapplied from '../pages/Peopleapplied';
 
 function App() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
         <Route path='/signup/:email' element={<Signup />} />
         <Route path='/welcome/:usertype/:logic/:username' element={<Welcome />} />
         <Route path='/add-project/:userid/:username' element={<Addnewproject/>} />
+        <Route path='/applied/:userid/:projectid/barter4skills/console' element={<Peopleapplied />} />
       </Routes>
     </>
   );

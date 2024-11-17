@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Setsearchbar from "../components/Setsearchbar";
 import Projectsadded from "../components/Projectsadded";
+import SetWorkprovderbar from "../components/SetWorkprovderbar";
 
 const Welcome = ()=>{
     const navigate = useNavigate();
@@ -32,7 +33,9 @@ const Welcome = ()=>{
                 withCredentials:true
             });
             if(projectdata.data.projectdatapresent){
-                setprojectdata(projectdata.data.projectdatafetched);
+                //only finding people wors find
+                const projectsss = projectdata.data.projectdatafetched.filter(pro=>pro.projectdetails.projectstatusstatus==='findingpeople');
+                setprojectdata(projectsss);
             }
         }
         getdata();
@@ -46,7 +49,7 @@ const Welcome = ()=>{
                 <div>
                     <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
                     <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
-                    <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker}/>
+                    <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker} userid={localstoragedata?.userData?._id}/>
                 </div>
             }
             {
@@ -54,8 +57,9 @@ const Welcome = ()=>{
                 <div>
                     <button onClick={()=>navigate(`/add-project/${localstoragedata?.userData?._id}/${localstoragedata?.userData?.username}`)}>add new project temp</button>
                     {/* display jobs that are posted by this user */}
-                    <Projectsadded setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/>
-                    <Jobdisplay projectdata={uploadprojects} filtercount={filtercount} worker={!worker}/>
+                    {/* <Projectsadded setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/> */}
+                    <SetWorkprovderbar setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/>
+                    <Jobdisplay projectdata={uploadprojects} filtercount={uploadcount} worker={!worker} userid={localstoragedata?.userData?._id}/>
                 </div>
             }
         </>

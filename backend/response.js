@@ -37,7 +37,9 @@ const response = {
     userData:{
 
     },
-    userprofilefound:false
+    userprofilefound:false,
+    userApplied:false,
+    userAlreadyapplied:false
 }
 
 export default response;

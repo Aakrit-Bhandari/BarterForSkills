@@ -25,6 +25,11 @@ import uploadimage from './Routes/uploadimage.js';
 import mult from './Utils/Multer.js';
 import getprojectuserid from './Routes/getprojectuserid.js';
 import getprojectsbyid from './Routes/getprojectsbyid.js';
+import applyproject from './Routes/applyproject.js';
+import getprojectbyprojectid from './Routes/getprojectbyprojectid.js';
+import getUser from './Routes/getUser.js';
+import getprojectuseridapplied from './Routes/getprojectuseridapplied.js';
+import shortlistuser from './Routes/shortlistuser.js';
 
 //config dotenv
 dotenv.config();
@@ -47,15 +52,20 @@ app.post('/upload-image',mult.single('image'),uploadimage);
 app.post('/register',register);
 app.get('/check-token',checkToken);
 app.post('/editprofile/:username',editProfile);
+app.get('/apply-project/:userid/:projectid',applyproject);
 app.post('/createnewproject',newproject);
 app.post('/addprojectentry',newprojectentry);
+app.get('/user/:userid',getUser);
 app.get('/user/:username',userProfile);
 app.post('/editproject/:id',editproject);
 app.get('/getproject-userdetails/:projectid/:userid',getuserdetails);
 app.get('/getprojects-all/:userid',getprojectsbyid);
 app.get('/getprojects/:userid',getprojectuserid);
+app.get('/getprojectuseridapplied/:userid',getprojectuseridapplied);
+app.get('/getproject/:projectid',getprojectbyprojectid);
 app.get('/getworks',getWorks);
 app.get('/getwork/:skill/:barter',getspecialWork);
+app.get('/shortlist/:userid/:projectid',shortlistuser);
 app.get('/logout',logout);
 
 
