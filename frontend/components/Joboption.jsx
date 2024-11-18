@@ -32,6 +32,18 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid})=>{
         setvisited(true);
         setprojectdata(data);
     }
+    const deleteproject = async()=>{
+        const deletingtask = await axios.get(`http://localhost:5000/delete-task/${data._id}`,{
+            withCredentials:true
+        });
+        if(deletingtask.data.projectdeleted){
+            alert("Project Deleted Succesfully... Refresh website..");
+            return;
+        }
+        else{
+            alert("Some Error occured try after some time");
+        }
+    }
     return(
         <>
             <div className="jobcomponent">
@@ -55,9 +67,10 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid})=>{
                     <div className="jobfoot" style={{color:'gray',fontSize:'8px',marginTop:'14px'}}>
                         <span style={{fontSize:'11px'}}>{date}Days ago</span>
                         {worker && <button onClick={performapplytask}>Apply</button>}
-                        {!worker && <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>}
+                        {!worker && <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>}
                         {!worker && <button onClick={performedittask} style={{width:'120px'}}>Edit Project</button>}
                         {!worker && <button onClick={peopleapplied} style={{width:'150px'}}>People Applied</button>}
+                        {!worker && <button onClick={deleteproject} style={{width:'150px'}}>Delete Project</button>}
                     </div>
                 </div>
             </div>

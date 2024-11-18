@@ -3,10 +3,20 @@ import Joboption from "../components/Joboption";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import PersonApplied from "../components/PersonApplied";
+import JobApplied from "../components/JobApplied";
 
 const Peopleapplied = () => {
     const { userid, projectid } = useParams(); // Get URL parameters
-    const [datapro, setDatapro] = useState(null); // State for storing project data
+    const [datapro, setDatapro] = useState(null); // State for storing project 
+    const [people,setPeople] = useState(null);
+
+    const[mailsection,setmailsection] = useState(false);
+    const [usermaildata,setmailuserdata] = useState(null);
+    const [usermailData , setusermaildata] = useState({
+        email: usermaildata?.email,
+        title: '',
+        description: ''
+    })
 
     // Fetch project data based on project ID
     useEffect(() => {
@@ -18,6 +28,7 @@ const Peopleapplied = () => {
 
                 if (response.data.projectdatapresent) {
                     setDatapro(response.data.projectdatafetched);
+                    setPeople(response.data.projectdatafetched.projectofficials.clientsapplied);
                     console.log(datapro);
                 }
             } catch (error) {
@@ -28,19 +39,44 @@ const Peopleapplied = () => {
         getProjectData();
     }, [projectid]);
 
+    const performtask = async()=>{
+        const mailsending = await axios.post('http://localhost:5000/sendmail',usermailData,{
+            withCredentials:true
+        });
+        if(mailsending.data.mailsent){
+            alert("Mail was successfully sent");
+            setmailsection(false);
+            return;
+        }
+        else{
+            alert("Some Error occured sending mail");
+            return;
+        }
+    }
+
     return (
         <>
+            {mailsection && <div className="mail-section"><br />
+                    <input type="email" value={usermaildata?.email} readOnly/>
+                    <input type="text" placeholder="Title*" name="title" id="title"/>
+                    <textarea name="description" id="description" placeholder="Enter the content..."></textarea><br />
+                    <button onClick={performtask}>Send Mail</button>
+            </div>}
             <br/>
             {datapro ? (
                 <Joboption data={datapro} userid={userid} />
             ) : (
                 <p>Loading project data...</p>
             )}
+
+            {/* pop up for sending mail */}
+
             <div className="people-applied">
-                <span style={{color:'red',textAlign: 'center'}}>{datapro?.projectofficials?.clientsapplied.length} Person Applied</span>
-                {datapro?.projectofficials?.clientsapplied.length>0 && 
-                datapro?.projectofficials?.clientsapplied.map((data,index)=>(
-                    <PersonApplied clientid={data?.cliendid} projectid={projectid}/>
+                <JobApplied projectid={projectid} setDatapro={setPeople}/>
+                <span style={{color:'red',textAlign: 'center'}}>{people===null?0:people.length} Person Applied</span>
+                {people&&people.length>0 && 
+                people.map((data,index)=>(
+                    <PersonApplied clientid={data?.cliendid} projectid={projectid} setmailsection={setmailsection} setmailuserdata={setmailuserdata}/>
                 ))}
             </div>
         </>

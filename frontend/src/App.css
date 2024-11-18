@@ -211,3 +211,36 @@
   height: 30px;
   cursor: pointer;
 }
+
+.mail-section{
+  width: 50%;
+  height: 50%;
+  border: 1px solid gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+.mail-section input{
+  width: 85%;
+  padding: 7px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.mail-section textarea{
+  width: 87%;
+  height: 48%;
+  margin-top: 5px;
+}
+.mail-section button{
+  width: 50%;
+    margin-top: 9px;
+    padding: 7px;
+    border: 0px;
+    background-color: rgb(184, 219, 251);
+    height: 35px;
+    box-shadow: 0px 0px 2px 0px;
+    cursor: pointer;
+}

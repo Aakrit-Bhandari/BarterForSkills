@@ -39,7 +39,8 @@ const response = {
     },
     userprofilefound:false,
     userApplied:false,
-    userAlreadyapplied:false
+    userAlreadyapplied:false,
+    projectdeleted:false
 }
 
 export default response;

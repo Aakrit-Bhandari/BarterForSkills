@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const PersonApplied = ({clientid,projectid})=>{
+const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata})=>{
     const [userdata,setuserdata] = useState(null);
     useEffect(()=>{
         const performtask = async()=>{
@@ -26,6 +26,10 @@ const PersonApplied = ({clientid,projectid})=>{
         alert("User Already Shortlisted...");
         return;
     }
+    const sendEmailtouser = async()=>{
+        setmailsection(true);
+        setmailuserdata(userdata);
+    }
     return(
         <>
             <div className="small-divs-applied">
@@ -46,7 +50,8 @@ const PersonApplied = ({clientid,projectid})=>{
                         <span style={{color:'gray'}}>Gender: {userdata?.personaldetails?.gender}</span><br />
                         <span style={{color:'gray'}}>Rating: {userdata?.personaldetails?.rating===null?0:userdata?.personaldetails?.rating}</span><br />
                         <div style={{textAlign:'center'}}>
-                            <button onClick={shortlistuser}>Shortlist</button>
+                            <button onClick={shortlistuser}>Shortlist</button>&emsp;
+                            <button onClick={sendEmailtouser}>Send Mail</button>
                         </div>
                     </div>
                 </div>
