@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata})=>{
+const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating,setRate,setUser,setid})=>{
     const [userdata,setuserdata] = useState(null);
     useEffect(()=>{
         const performtask = async()=>{
@@ -30,6 +30,12 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata})=>{
         setmailsection(true);
         setmailuserdata(userdata);
     }
+    const rateUser = async()=>{
+        setRate(true);
+        setUser(userdata);
+        setid(userdata._id);
+        console.log(userdata._id);
+    }
     return(
         <>
             <div className="small-divs-applied">
@@ -50,8 +56,10 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata})=>{
                         <span style={{color:'gray'}}>Gender: {userdata?.personaldetails?.gender}</span><br />
                         <span style={{color:'gray'}}>Rating: {userdata?.personaldetails?.rating===null?0:userdata?.personaldetails?.rating}</span><br />
                         <div style={{textAlign:'center'}}>
-                            <button onClick={shortlistuser}>Shortlist</button>&emsp;
+                            {!rating && <button onClick={shortlistuser}>Shortlist</button>}&emsp;
                             <button onClick={sendEmailtouser}>Send Mail</button>
+                            {rating && <span>&emsp;</span>}
+                            {rating && <button onClick={rateUser}>Rate User</button>}
                         </div>
                     </div>
                 </div>

@@ -114,9 +114,9 @@ const Signup = () => {
 
     return (
         <div className="mainbox-login">
-            <div className="loginform">
-                <b>Signup</b>
-                <form onSubmit={addUserToDatabase}>
+            <div className="signupform">
+                <b className="b">Signup</b>
+                <form onSubmit={addUserToDatabase} style={{marginTop:'10px'}}>
                     <input type="email" value={userData.email || ''} readOnly required /><br />
                     <input type="text" value={userData.usertype || ''} readOnly required /><br />
                     <input type="text" placeholder="Username*" name="username" value={userData.username || ''} onChange={handleChange} required /><br />

@@ -70,7 +70,7 @@ const IdeaproviderSchema = new mongoose.Schema({
         }
     ]
 
-})
+},{timestamps:true})
 
 const IdeaproviderModel = mongoose.model("freelance",IdeaproviderSchema);
 

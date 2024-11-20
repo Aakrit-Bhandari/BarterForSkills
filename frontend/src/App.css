@@ -244,3 +244,20 @@
     box-shadow: 0px 0px 2px 0px;
     cursor: pointer;
 }
+
+.rating-inc{
+  width: 20%;
+  height: 210px;
+  position: absolute;
+  border: 1px solid;
+  background-color: #f8f6f6;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.top-rating img{
+  width: 50%;
+  height: 20%;
+  border-radius: 150px;
+}

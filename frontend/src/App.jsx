@@ -12,6 +12,8 @@ import Welcome from '../pages/Welcome';
 import Signup from '../pages/Signup';
 import Addnewproject from '../pages/Addnewproject';
 import Peopleapplied from '../pages/Peopleapplied';
+import Userprofile from '../pages/Userprofile';
+import Rating from '../pages/Rating';
 
 function App() {
   const location = useLocation();
@@ -58,8 +60,9 @@ function App() {
     // Check token only for protected routes
     const protectedRoutes = ['/login'];
     const routespro = location.pathname.startsWith('/signup');
+    const proroute = location.pathname.startsWith('/barter4skills');
 
-    if (!protectedRoutes.includes(location.pathname) && !routespro) {
+    if (!protectedRoutes.includes(location.pathname) && !routespro && !proroute) {
       checkToken();
     }
   }, [location.pathname, navigate]);
@@ -75,6 +78,8 @@ function App() {
         <Route path='/welcome/:usertype/:logic/:username' element={<Welcome />} />
         <Route path='/add-project/:userid/:username' element={<Addnewproject/>} />
         <Route path='/applied/:userid/:projectid/barter4skills/console' element={<Peopleapplied />} />
+        <Route path='/barter4skills/:username' element={<Userprofile />} />
+        <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
       </Routes>
     </>
   );

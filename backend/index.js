@@ -31,6 +31,7 @@ import getUser from './Routes/getUser.js';
 import getprojectuseridapplied from './Routes/getprojectuseridapplied.js';
 import shortlistuser from './Routes/shortlistuser.js';
 import deleteproject from './Routes/deleteproject.js';
+import rateProject from './Routes/rateProject.js';
 
 //config dotenv
 dotenv.config();
@@ -57,7 +58,7 @@ app.get('/apply-project/:userid/:projectid',applyproject);
 app.post('/createnewproject',newproject);
 app.post('/addprojectentry',newprojectentry);
 app.get('/user/:userid',getUser);
-app.get('/user/:username',userProfile);
+app.get('/user/username/:username',userProfile);
 app.post('/editproject/:id',editproject);
 app.get('/getproject-userdetails/:projectid/:userid',getuserdetails);
 app.get('/getprojects-all/:userid',getprojectsbyid);
@@ -68,6 +69,7 @@ app.get('/getworks',getWorks);
 app.get('/getwork/:skill/:barter',getspecialWork);
 app.get('/shortlist/:userid/:projectid',shortlistuser);
 app.get('/delete-task/:projectid',deleteproject);
+app.post('/rateproject/:clientid',rateProject);
 app.get('/logout',logout);
 
 

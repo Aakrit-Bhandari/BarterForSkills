@@ -29,7 +29,6 @@ const Peopleapplied = () => {
                 if (response.data.projectdatapresent) {
                     setDatapro(response.data.projectdatafetched);
                     setPeople(response.data.projectdatafetched.projectofficials.clientsapplied);
-                    console.log(datapro);
                 }
             } catch (error) {
                 console.error("Error fetching project data:", error);

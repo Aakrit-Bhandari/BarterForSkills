@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react"
 import { useNavigate } from "react-router-dom";
 
-const Joboption = ({data,key,worker,setvisited,setprojectdata,userid})=>{
+const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser})=>{
     const navigate = useNavigate();
     const date = new Date().getDate()-new Date(data.createdAt).getDate();
     const performapplytask = async()=>{
@@ -67,10 +67,11 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid})=>{
                     <div className="jobfoot" style={{color:'gray',fontSize:'8px',marginTop:'14px'}}>
                         <span style={{fontSize:'11px'}}>{date}Days ago</span>
                         {worker && <button onClick={performapplytask}>Apply</button>}
-                        {!worker && <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>}
+                        {!worker && <div>&emsp;&emsp;&emsp;&emsp;</div>}
                         {!worker && <button onClick={performedittask} style={{width:'120px'}}>Edit Project</button>}
                         {!worker && <button onClick={peopleapplied} style={{width:'150px'}}>People Applied</button>}
                         {!worker && <button onClick={deleteproject} style={{width:'150px'}}>Delete Project</button>}
+                        {!worker && data?.projectdetails?.projectstatusstatus === 'completed' && <button onClick={()=>navigate(`/rate/${userid}/${data._id}`)}>Rate⭐</button>}
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@ const JobApplied = ({projectid,setDatapro}) => {
 
                 if (response.data.projectdatapresent) {
                     const changeddata = response.data.projectdatafetched.projectofficials.clientid;
-                    console.log(changeddata);
+                    console.log("data",changeddata);
                     setDatapro(changeddata);
                 }
             } catch (error) {

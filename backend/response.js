@@ -40,7 +40,8 @@ const response = {
     userprofilefound:false,
     userApplied:false,
     userAlreadyapplied:false,
-    projectdeleted:false
+    projectdeleted:false,
+    ratingmade: false
 }
 
 export default response;

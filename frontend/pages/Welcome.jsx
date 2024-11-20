@@ -41,9 +41,21 @@ const Welcome = ()=>{
         getdata();
     },[])
 
-    console.log(localstoragedata);
+    const performlogout = async()=>{
+        const logout = await axios.get('http://localhost:5000/logout',{
+            withCredentials:true
+        })
+        if(logout.data.logoutdone){
+            navigate('/');
+        }
+        else{
+            alert("Logout not done... Some Error occured..");
+        }
+    }
+    
     return(
         <>
+            <button onClick={performlogout}>Logout</button>
             {
                 localstoragedata?.userData?.usertype === 'freelance' && 
                 <div>
