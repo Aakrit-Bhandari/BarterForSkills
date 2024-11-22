@@ -1,5 +1,4 @@
-
-/* navbarpage */
+* navbarpage */
 .mainbox-login{
     width: 100%;
     /* height: 100%; */
@@ -7,7 +6,7 @@
     /* margin-top: 45px; */
     min-height: 100vh;
     overflow: hidden;
-    background-color: #FEF7FF;
+    background-image:   linear-gradient(to bottom, #E0E7FF, #C7D0FF);
 }
 .loginform{
     width: 25%;
@@ -18,11 +17,192 @@
     margin-top: 60px;
     background-color: white;
     box-shadow: 0px 0px 5px 0px;
+    text-align: center;
 }
 .loginform input{
     width: 85%;
     padding: 7px;
     margin-bottom: 5px;
+}
+/*.signupform{
+    
+        width: 30%;
+        border: 1px solid;
+        margin: 40px auto;
+        height: 680px;
+        background-color: rgb(236, 236, 239);
+        box-shadow: 0 0 5px 0;
+        border-radius: 15px;
+    
+   
+}
+.b{
+    font-size: 26px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 30px;
+}
+.signupform input,.signupform textarea{
+    width: 90%;
+    padding:10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+*/
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(135deg, #f0f0f0, #ffffff); /* Subtle gradient background */
+    overflow: hidden; /*Prevent any scrollbars*/
+    margin: 0; /* Remove any external margin */
+    
+}
+
+.signup-content {
+    display: flex;
+    flex-direction: row;
+    width: 1000px; /* Increased width */
+    height: 600px; /* Adjust height to fit the content */
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.welcome-back {
+    flex: 1;
+    background: #5e819d;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem; /* Increased padding for a more spacious look */
+    text-align: center;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.welcome-back h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem; /* Increased font size */
+    font-weight: bold;
+}
+
+.welcome-back p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.sign-in-button {
+    background: white;
+    color: #5e819d;
+    padding: 0.6rem 2.5rem; /* Adjusted padding */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sign-in-button:hover {
+    background: #27ae60;
+    color: white;
+}
+
+.create-account {
+    flex: 2; /* Increased flex ratio for more space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.create-account h2 {
+    
+    text-align: center; 
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+
+
+.create-account p {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.create-account form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* Adjusted gap for better spacing */
+}
+
+.create-account form input,
+.create-account form select,
+.create-account form textarea,
+.create-account form button {
+    padding: 0.5rem; /* Increased padding for comfort */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    
+}
+
+.create-account form input:focus,
+.create-account form select:focus,
+.create-account form textarea:focus {
+    border-color: #5e819d;
+    outline: none;
+}
+
+.create-account form button {
+    background: #5e819d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.create-account form button:hover {
+    background: #27ae60;
+}
+
+.create-account label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.create-account form textarea {
+    resize: none;
+    
+}
+
+.addform
+{
+    width: 30%;
+    border: 1px solid;
+    margin: 40px auto;
+    height: 500px;
+    background-color: rgb(236, 236, 239);
+    box-shadow: 0 0 5px 0;
+    border-radius: 15px;
+}
+.addform input,.signupform textarea
+{
+    width:90%;
+    padding:10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 #btn {
     width: 89%;
@@ -64,64 +244,127 @@
 }
 
 
-/* user profile */
 
-.userprofile{
-    width: 25%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 500px;
-    border: 1px solid gray;
-    border-radius: 30px;
-    margin-top: 40px;
-    background-color: rgb(248, 247, 246);
-}
-.signupform{
-    
-    width: 30%;
-    border: 1px solid;
-    margin: 40px auto;
-    height: 680px;
-    background-color: rgb(236, 236, 239);
-    box-shadow: 0 0 5px 0;
-    border-radius: 15px;
-
-
-}
-.b{
-font-size: 26px;
-font-weight: bold;
-color: black;
-margin-bottom: 30px;
-}
-.signupform input,.signupform textarea{
-width: 90%;
-padding:10px;
-margin-bottom: 10px;
-border: 1px solid #ccc;
-border-radius: 5px;
-}
-.upperside{
+/* add project */
+.add-project{
     width: 100%;
-    height: 35%;
-    /* background-color: rgb(111, 6, 111); */
     text-align: center;
-    margin-top: 20px;
-    overflow: visible;
+    height: 100%;
 }
-.upperside img{
-    width: 47%;
-    height: 95%;
-    border-radius: 1px solid gray;
-    border-radius: 150px;
+
+.add-project input{
+    width: 100%;
 }
-.downside{
-    margin-top: 45px;
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
+/* General Page Styles */
+.signup-containe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(135deg, #f0f0f0, #ffffff); /* Subtle gradient background */
+    padding: 0;
+    margin: 0;
 }
-.downside span{
-    line-height: 20px;
-    color: rgb(75, 75, 75);
+
+.signup-conten {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px; /* Limit the width for better readability */
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    height: 90%;
+}
+
+/* Add Project Heading */
+.add-project b {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #333;
+    margin-top: 0px;
+}
+
+/* Form Inputs and Selects */
+.signup-conten input[type="text"],
+.signup-conten select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.signup-conten input[type="text"]:focus,
+.signup-conten select:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    outline: none;
+}
+
+/* Error Message */
+.signup-conten p {
+    color: red;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+/* Button Styling */
+.signup-conten button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    overflow: hidden;
+    height: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.signup-conten button:hover {
+    background-color: #45a049;
+}
+
+/* Make the form more responsive */
+@media (max-width: 768px) {
+    .signup-containe {
+        padding: 20px;
+    }
+
+    .signup-conten {
+        padding: 1rem;
+    }
+
+    .add-project b {
+        font-size: 1.5rem;
+    }
+
+    .signup-conten button {
+        font-size: 0.875rem;
+    }
+}
+
+/* Spacing and Aligning */
+.signup-conten select {
+    margin-top: 0px;
+}
+
+.signup-conten input[type="text"] {
+    margin-top: 0px;
+}
+
+/* Remove Scrollbars */
+body, html {
+    overflow-x: hidden;
 }

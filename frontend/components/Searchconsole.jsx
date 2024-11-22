@@ -55,7 +55,7 @@ const Searchconsole = ({ setprojectdata,setfiltercount }) => {
                     <option value="4-5">4-5 years</option>
                 </select>
                 <select name="barter" onChange={handlechange} style={{width:'9%'}}>
-                    <option value="*">Barter</option>
+                    <option value="*">Barter*</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>

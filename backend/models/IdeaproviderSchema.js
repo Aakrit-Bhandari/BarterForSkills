@@ -22,19 +22,19 @@ const IdeaproviderSchema = new mongoose.Schema({
         },
         conatactno:{
             type:String,
-            required: true,
+            required: false,
         },
         skills:{
             type: [String],
-            required:true
+            required:false
         },
         location:{
             type:String,
-        required: true,
+        required: false,
         },
         description:{
             type:String,
-        required: true,
+        required: false,
         },
         linkedinid:{
             type:String,

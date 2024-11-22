@@ -7,10 +7,10 @@ const getspecialWork = async (req, res) => {
     const bartertrue = req.params.barter;
 
     try {
-
+        // Use $regex with 'i' for case-insensitive matching
         const getskillData = await Projectsmodel.find({
-            'projectdetails.skillsreq': { $in: [userSkill] },
-            'projectdetails.bartarsystem': bartertrue
+            'projectdetails.skillsreq': { $regex: new RegExp(`^${userSkill}$`, 'i') },
+            'projectdetails.bartarsystem': { $regex: new RegExp(`^${bartertrue}$`, 'i') }
         });
 
         if (getskillData.length > 0) {
@@ -28,6 +28,6 @@ const getspecialWork = async (req, res) => {
         resData.error = error.message;
         return res.status(500).json(resData);
     }
-}
+};
 
 export default getspecialWork;

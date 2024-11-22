@@ -7,6 +7,7 @@ import axios from 'axios';
 import Setsearchbar from "../components/Setsearchbar";
 import Projectsadded from "../components/Projectsadded";
 import SetWorkprovderbar from "../components/SetWorkprovderbar";
+import EmployeeNavbar from "../navbars/EmployeeNavbar";
 
 const Welcome = ()=>{
     const navigate = useNavigate();
@@ -55,25 +56,28 @@ const Welcome = ()=>{
     
     return(
         <>
-            <button onClick={performlogout}>Logout</button>
-            {
-                localstoragedata?.userData?.usertype === 'freelance' && 
-                <div>
-                    <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
-                    <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
-                    <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker} userid={localstoragedata?.userData?._id}/>
-                </div>
-            }
-            {
-                localstoragedata?.userData?.usertype === 'workprovider' && 
-                <div>
-                    <button onClick={()=>navigate(`/add-project/${localstoragedata?.userData?._id}/${localstoragedata?.userData?.username}`)}>add new project temp</button>
-                    {/* display jobs that are posted by this user */}
-                    {/* <Projectsadded setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/> */}
-                    <SetWorkprovderbar setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/>
-                    <Jobdisplay projectdata={uploadprojects} filtercount={uploadcount} worker={!worker} userid={localstoragedata?.userData?._id}/>
-                </div>
-            }
+            <div className="welcome-box">
+                {/* <button onClick={performlogout}>Logout</button> */}
+                {
+                    localstoragedata?.userData?.usertype === 'freelance' && 
+                    <div>
+                        <EmployeeNavbar userdata={localstoragedata} performlogout={performlogout}/>
+                        <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
+                        <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
+                        <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker} userid={localstoragedata?.userData?._id}/>
+                    </div>
+                }
+                {
+                    localstoragedata?.userData?.usertype === 'workprovider' && 
+                    <div>
+                        <EmployeeNavbar userdata={localstoragedata} performlogout={performlogout} worker={worker}/>
+                        {/* display jobs that are posted by this user */}
+                        {/* <Projectsadded setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/> */}
+                        <SetWorkprovderbar setprojectdata={setuploaded} setfiltercount={setuploadcount} userid={localstoragedata?.userData?._id}/>
+                        <Jobdisplay projectdata={uploadprojects} filtercount={uploadcount} worker={!worker} userid={localstoragedata?.userData?._id}/>
+                    </div>
+                }
+            </div>
         </>
     )
 }
