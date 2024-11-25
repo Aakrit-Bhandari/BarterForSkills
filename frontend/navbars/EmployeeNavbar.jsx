@@ -31,7 +31,7 @@ export default function EmployeeNavbar({userdata,performlogout,worker})
                 <div className="NavEmp_Page_Registration">
                     <div className="NavEmp_Page_Buttons">
                         {data && <span>Welcome <b style={{color:'purple'}}>{data?.username}😊</b></span>}
-                        {data && <img src={data?.personaldetails?.profilephoto} alt="" onClick={()=>navigate(`/barter4skills/${data?.username}`)}/>}
+                        {data && <img src={data?.personaldetails?.profilephoto} alt="" onClick={()=>navigate(`/barter4skills/${data?.username}`)} style={{borderRadius:'150px',width:'40px',height:'40px'}}/>}
                     </div>
                     <div className="NavEmp_Page_Register" style={{width: worker?'300px':'200px'}}>
                         {<button className="NavPage_buttons" onClick={()=>navigate(`/editprofile/${data?._id}/${data?.username}`)}>Edit Profile</button>}

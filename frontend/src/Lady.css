@@ -1,0 +1,122 @@
+.LandingPage_Comp_Success
+{
+    display:flex;
+    justify-content: center;
+    width:100%;
+    height:600px;
+    /* border:1px solid red;     */
+    margin-top:2rem;
+    margin-bottom: 2rem;
+}
+.LandingPage_Comp_Success_div
+{
+    width:90%;
+    display:flex;
+    justify-content: space-between;
+    /* margin-top:2rem; */
+    border-radius: 10px;
+
+
+    
+}
+.LandingPage_Success_Left
+{
+    border-radius: 10px;
+    background-color: rgb(234, 234, 234);
+    /* border:1px solid gray; */
+    width:63%;
+    display:flex;
+    justify-content: center;
+    padding-top:29px;
+    overflow: hidden;
+
+}
+.LandingPage_Success_Right
+{
+    border-radius: 10px;
+    background-color: #015cbdfa;
+    color:white;
+    display:flex;
+    align-items: flex-end;
+    /* border:1px solid green; */
+    justify-content: center;
+    width:35%;
+}
+.LandingPage_left_heading
+{
+    width:400px;
+    /* border:1px solid green; */
+    font-size:45px;    
+    
+}
+.LandingPage_Success_left{
+    /* border:1px solid blue; */
+    width:90%;
+}
+.LandingPage_left_div_Container
+{
+    margin-top:-15px;
+    /* border:1px solid violet; */
+    width:55%;
+    display:flex;
+    justify-content: flex-end;
+}
+.LandingPage_left_div_comp
+{
+    /* border:1px solid yellow; */
+    width:95%;
+}
+.LandingPage_left_div
+{
+}
+.LandingPage_left_div_heading
+{
+    font-size:30px;
+    margin-top:1rem;
+}
+.LandingPage_left_div_para
+{
+    font-size:16px;
+    width:390px;
+}
+.LandingPage_img
+{
+    position: absolute;
+    right:400px;
+
+}
+.LandingPage_img img{
+    height:550px;
+
+}
+.LandingPage_Success_right
+{
+    display:flex;
+    flex-direction: column;
+    width:75%;
+    /* border:1px solid red; */
+}
+.LandingPage_right_heading
+{
+    /* border:1px solid red; */
+    width:250px;
+}
+.LandingPage_Success_heading
+{
+    font-size:29px;
+}
+.LandingPage_right_div_Container
+{
+    /* border:1px solid blue; */
+    display:flex;
+    justify-content: flex-end;
+}
+.LandingPage_right_comp
+{
+    /* border:1px solid red; */
+    width:93%;   
+}
+.LandingPage_award
+{
+    font-size:30px;
+}
