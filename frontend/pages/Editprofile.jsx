@@ -75,6 +75,21 @@ const Editprofile = ()=>{
         setNewSkill(skillToEdit.skill); 
         setExperience(skillToEdit.experience);
     };
+    const deleteUserSkill = async(skillId) =>
+        {
+            console.log("I am here");
+            try{
+                await axios.delete(`http://localhost:5000/profile/qualification/deleteSkill/${skillId}`,{
+                    data:{userId:userId},
+                })
+                setSkills(skills.filter((skill)=>skill.id!==skillId))
+                alert("skill deleted successfulyy");
+            }
+            catch(err)
+            {
+                alert("error delete skill:",err);
+            }
+        }
     const updateSkill = async () => {
         // if(!newSkill||!experience)
         // {
@@ -280,30 +295,31 @@ const Editprofile = ()=>{
         <section className="Profile_Qualification_Main Profile_Design">
             {isModalSkills && (
                     <div className="Profile_modal-overlay">
-                        <div className="Profile_modal-content" onClick={(e) => e.stopPropagation()}>
-                            <h2 className="Profile_modal_Heading">Add Skills</h2>
-                            <div className="Profile_modal_Inputs">
-                                <input type="text" value={newSkill} onChange={(e)=>setNewSkill(e.target.value)} placeholder="Enter your skills" />
-                                <input type="number" value={experience} onChange={(e)=>setExperience(e.target.value)} placeholder="Years of Experience"></input>
-                            </div>
-                            <div className="Profile_modal_display">
-                                {skills.map((mp,id)=>(
-                                    <div key={mp.id} className="Profile_modal_display_flowlist">
-                                        <p style={{marginBottom:'0px'}}>{mp.skill}-{mp.experience} years</p>
-                                        <button onClick={()=>editSkill(id)}>Edit</button>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="Profile_modal_buttons">
-                                {currentEditIndex !== null ? (
-                                    <button onClick={updateSkill}>Update</button>
-                                ) : (
-                                    <button onClick={addSkill}>Add</button>
-                                )}
-                                <button onClick={() => setIsModalSkills(false)}>Close</button>
-                            </div>
+                    <div className="Profile_modal-content" onClick={(e) => e.stopPropagation()}>
+                        <h2 className="Profile_modal_Heading">Add Skills</h2>
+                        <div className="Profile_modal_Inputs">
+                            <input type="text" value={newSkill} onChange={(e)=>setNewSkill(e.target.value)} placeholder="Enter your skills" />
+                            <input type="number" value={experience} onChange={(e)=>setExperience(e.target.value)} placeholder="Years of Experience"></input>
+                        </div>
+                        <div className="Profile_modal_display">
+                            {skills.map((mp,id)=>(
+                                <div key={mp.id} className="Profile_modal_display_flowlist">
+                                    <p style={{marginBottom:'0px',color:'purple'}}>{mp.skill} - <span>{mp.experience} years</span></p>
+                                    <button onClick={()=>editSkill(id)}>Edit</button>
+                                    <button onClick={()=>deleteUserSkill(mp.id)} >Delete</button>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="Profile_modal_buttons">
+                            {currentEditIndex !== null ? (
+                                <button onClick={updateSkill}>Update</button>
+                            ) : (
+                                <button onClick={addSkill}>Add</button>
+                            )}
+                            <button onClick={() => setIsModalSkills(false)}>Close</button>
                         </div>
                     </div>
+                </div>
                 )}
                 {isModalCertificate&&(
                     <div className="Profile_modal-overlay">

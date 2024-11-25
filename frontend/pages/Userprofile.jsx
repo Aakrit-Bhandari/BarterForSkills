@@ -88,8 +88,8 @@ export default function Userprofile() {
 
         {/* Profile Details Card */}
         <div className="profile-details-card">
-          <h3 className="profile-title">Profile</h3>
-          <ul className="profile-menu">
+          <h3 className="profile-title" style={{overflow:'hidden'}}>Profile</h3>
+          <ul className="profile-menu" style={{overflow:"hidden"}}>
             {!workprovider&&<li>
               <span className="menu-icon">Skills: &nbsp;</span>
               <span className="menu-skill">{skill || "No skills available"}</span>
@@ -114,7 +114,7 @@ export default function Userprofile() {
             </li>}
             <li>
               <span className="menu-icon">Description: &nbsp;</span>
-              <span className="menu-skill">{userdata?.personaldetails?.description}</span>
+              <span className="menu-skill">{userdata?.personaldetails?.description===""?"No Description Available":userdata?.personaldetails?.description}</span>
             </li>
             {!workprovider&&<li>
               <span className="menu-icon">Tasks Done: &nbsp;</span>
@@ -126,11 +126,11 @@ export default function Userprofile() {
             </li>}
             <li>
               <span className="menu-icon">Joined On: &nbsp;</span>
-              <span className="menu-skill">{userdata?.createdAt}</span>
+              <span className="menu-skill">{new Date(userdata?.createdAt).getDate()+"-"+(new Date(userdata?.createdAt).getMonth()+1)+"-"+new Date(userdata?.createdAt).getFullYear()}</span>
             </li>
           </ul>
-          {!workprovider && <div style={{width:'100%',textAlign:'center'}}>
-            <button className="primary-btn" style={{marginTop:'75px',padding:'8px',borderRadius:'5px',backgroundColor:'purple'}}>Download CV</button>
+          {!workprovider && <div style={{width:'100%',textAlign:'center',overflow:'hidden'}}>
+            <button className="primary-btn" style={{marginTop:'30px',padding:'8px',borderRadius:'5px',backgroundColor:'purple'}}>Download CV</button>
           </div>}
 
         </div>

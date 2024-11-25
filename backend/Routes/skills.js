@@ -74,4 +74,30 @@ const editUserSkills = async(req,res)=>{
         return res.status(500).json(userResponse);
     }
 }
-export {getUserSkills,addUserSkills,editUserSkills};
+const deleteUserSkill = async(req,res)=>{
+    const {userId} = req.body;
+    const skillId = req.params.skillId;
+    const userResponse ={...response};
+    try{
+        const user = await IdeaproviderModel.findById(userId);
+        if(!user)
+        {
+            userResponse.userprofilefound = false;
+            userResponse.message = "User not found"
+            return res.status(404).json(userResponse);
+        }
+        user.personaldetails.skills = user.personaldetails.skills.filter(
+            (skill)=>skill._id.toString()!==skillId
+        );
+        await user.save();
+        userResponse.editedprofile = true;
+        userResponse.message = "Skill si now deleted successfully";
+        userResponse.datafetched.skills = user.personaldetails.skills;
+        return res.status(200).json(userResponse);
+    }
+    catch(err){
+        userResponse.error = err.message;
+        return res.status(500).json(userResponse);
+    }
+}
+export {getUserSkills,addUserSkills,editUserSkills,deleteUserSkill};

@@ -33,7 +33,7 @@ import shortlistuser from './Routes/shortlistuser.js';
 import deleteproject from './Routes/deleteproject.js';
 import rateProject from './Routes/rateProject.js';
 import getAlldata from './Routes/getAlldata.js';
-import { getUserSkills,addUserSkills,editUserSkills } from './Routes/skills.js';
+import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Routes/skills.js';
 import getcount from './Routes/getcount.js';
 
 //config dotenv
@@ -78,7 +78,7 @@ app.get('/profile/qualification/skills/:userId',getUserSkills);
 app.post('/profile/qualification/addskill',addUserSkills);
 app.put('/profile/qualification/editskills',editUserSkills);
 app.get('/getCount/:userid',getcount);
-
+app.delete('/profile/qualification/deleteSkill/:skillId',deleteUserSkill);
 app.get('/logout',logout);
 
 
