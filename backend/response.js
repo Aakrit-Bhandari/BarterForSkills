@@ -41,7 +41,11 @@ const response = {
     userApplied:false,
     userAlreadyapplied:false,
     projectdeleted:false,
-    ratingmade: false
+    ratingmade: false,
+
+    totaldata: {},
+    gottotaldata: false,
+    count: 0
 }
 
 export default response;

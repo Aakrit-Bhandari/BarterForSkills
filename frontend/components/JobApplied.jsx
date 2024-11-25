@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const JobApplied = ({projectid,setDatapro}) => {
+const JobApplied = ({projectid,setDatapro,setshortlistedusers}) => {
     const [activeTab, setActiveTab] = useState("all");
 
     const onallclick = ()=>{
@@ -15,6 +15,7 @@ const JobApplied = ({projectid,setDatapro}) => {
 
                 if (response.data.projectdatapresent) {
                     setDatapro(response.data.projectdatafetched.projectofficials.clientsapplied);
+                    setshortlistedusers(false);
                 }
             } catch (error) {
                 console.error("Error fetching project data:", error);
@@ -35,6 +36,7 @@ const JobApplied = ({projectid,setDatapro}) => {
                     const changeddata = response.data.projectdatafetched.projectofficials.clientid;
                     console.log("data",changeddata);
                     setDatapro(changeddata);
+                    setshortlistedusers(true);
                 }
             } catch (error) {
                 console.error("Error fetching project data:", error);

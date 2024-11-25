@@ -1,9 +1,9 @@
 import { useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import NavPageEmployee from "./NavPageEmployee";
-import "../../CSS/Navigations/NavPageRecruiter.css"
-import logo from "../../Images/LogoBarter.png"
+
+
+import logo from "../Public/Images/barter.png"
 export default function WorkproviderNavbar()
 {
     const navigate = useNavigate();

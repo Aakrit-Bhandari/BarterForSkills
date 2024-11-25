@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import Lottie from "lottie-react"
+import animationdata from "../public/Images/login.json";
+import {Player} from "@lottiefiles/react-lottie-player"
 
 const Signup = () => {
     const [file, setFile] = useState(null);
@@ -138,14 +140,7 @@ const Signup = () => {
         <div className="signup-container">
             <div className="signup-content">
                 <div className="welcome-back">
-                    <h2>Welcome Back!</h2>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button
-                        className="sign-in-button"
-                        onClick={() => navigate("/login")}
-                    >
-                        Sign In
-                    </button>
+                    <Lottie animationdata={animationdata}/>
                 </div>
                 <div className="create-account">
                     <h2>Create Account</h2>
@@ -175,13 +170,21 @@ const Signup = () => {
                             placeholder="Name*"
                         />
                         <input
-                            type="text"
+                            type="Number"
                             name="personaldetails.conatactno"
                             value={userData.personaldetails.conatactno}
                             onChange={handleChange}
                             required
                             placeholder="Contact No*"
                         />
+                        {userData.usertype === "workprovider" &&<input
+                            type="text"
+                            name="personaldetails.location"
+                            value={userData.personaldetails.location}
+                            onChange={handleChange}
+                            required
+                            placeholder="Location*"
+                        />}
                          <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} onChange={handleChange} />
                          <select name="personaldetails.gender" value={userData.personaldetails?.gender || ''} onChange={handleChange} required>
                         <option value="">Gender*</option>

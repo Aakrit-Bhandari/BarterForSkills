@@ -1,0 +1,192 @@
+/* General container styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #8d88e4, #a1dbef);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Login box styling */
+.login-box {
+    background: #fff;
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+}
+
+/* Title styling */
+.login-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Subtitle styling */
+.login-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Button container */
+.login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Button styling */
+.login-button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+/* Freelancer button specific styles */
+.freelance-button {
+    background: #6c63ff;
+    color: #fff;
+}
+
+.freelance-button:hover {
+    background: #5548c8;
+}
+
+/* Work provider button specific styles */
+.workprovider-button {
+    background: #48c6ef;
+    color: #fff;
+}
+
+.workprovider-button:hover {
+    background: #36a7cc;
+}
+
+
+/* login freelance page */
+/* General container styling */
+.mainbox-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #8d88e4, #a1dbef);
+    font-family: 'Arial', sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Login form container */
+.loginform {
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 300px;
+    max-width: 500px;
+    overflow: hidden; /* Prevent overflowing content */
+    box-sizing: border-box;
+    transition: height 0.3s ease;
+    height: 600px;
+     /* Smooth height adjustment */
+}
+
+/* Title styling */
+.loginform b {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Input field styling */
+.loginform input[type="email"],
+.loginform input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.loginform input[type="email"]:focus,
+.loginform input[type="number"]:focus {
+    border-color: #8d88e4;
+}
+
+/* Button styling */
+#btn {
+    background: #7a6be4;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent button text overflow */
+    white-space: nowrap; /* Prevent wrapping */
+    text-overflow: ellipsis; /* Add ellipsis for long text */
+}
+
+#btn:hover {
+    background: #6656c4;
+}
+
+/* Error message styling */
+.loginform span {
+    display: block;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}
+
+/* OTP Center container */
+.otpcentre {
+    margin-top: 0px;
+    overflow: hidden; /* Prevent overflow issues */
+}
+
+.otpcentre b {
+    font-size: 18px;
+    color: #333333;
+}
+
+.otpcentre input[type="number"] {
+    margin-top: 10px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .loginform {
+        padding: 20px;
+    }
+
+    .loginform b {
+        font-size: 20px;
+    }
+
+    #btn {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}

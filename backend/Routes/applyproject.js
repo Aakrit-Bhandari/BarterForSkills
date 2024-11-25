@@ -29,8 +29,11 @@ const applyproject = async (req, res) => {
         const alreadyApplied = getuser.projectsworkapplied.some(
             (proj) => proj.projectid.toString() === projectid
         );
+        const alreadyshortlisted = getuser.projectsworkedon.some(
+            (proj) => proj.projectid.toString() === projectid
+        );
 
-        if (alreadyApplied) {
+        if (alreadyApplied || alreadyshortlisted) {
             userResponse.userApplied = false;
             userResponse.userAlreadyapplied = true;
             return res.status(200).json(userResponse);

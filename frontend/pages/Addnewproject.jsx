@@ -88,13 +88,13 @@ const Addnewproject = ()=>{
             <div className="signup-containe">
             <div className="signup-conten" >
             {/* <div className=""></div> */}
-                <div className="add-project">
+                <div className="add-project" >
                     <b className="b">Add New Project</b>
                     <form onSubmit={addproject}>
                         <input type="text" name="projectdetails.position" value={projectdata.projectdetails.position || ''} onChange={handleChange} placeholder="Job Position*" required /><br />
                         <input type="text" name="projectdetails.projectdesc" value={projectdata.projectdetails.projectdesc || ''} placeholder="Project Desc.*" onChange={handleChange} required /><br />
                         <input type="text" placeholder="Year Exp.* i.e. 2-3 years" name="projectdetails.yearexp" value={projectdata.projectdetails.yearexp || ''} onChange={handleChange} required /><br />
-                        <input type="text" placeholder="Amount*" name="projectdetails.amounttobepaid" value={projectdata.projectdetails?.amounttobepaid || '₹'} onChange={handleChange} required /><br />
+                        <input type="Number" placeholder="Amount*" name="projectdetails.amounttobepaid" value={projectdata.projectdetails?.amounttobepaid || '₹'} onChange={handleChange} required /><br />
                         <input type="text" placeholder="skillsreq (comma separated)*" onChange={handleskillsreqChange} required /><br />
                         <input type="text" placeholder="Location*" name="projectdetails.location" value={projectdata.projectdetails.location || ''} onChange={handleChange} required /><br />
                         <select name="projectdetails.bartarsystem" value={projectdata.projectdetails.bartarsystem || ''} onChange={handleChange} required style={{marginTop:'10px'}}>
@@ -109,7 +109,9 @@ const Addnewproject = ()=>{
                         </select><br />
                         
                         {errorMessage && <p style={{ color: 'red'}}>{errorMessage}</p>}
-                        <button type="submit" style={{marginTop:'10px',height:'30px',width:'50%',}}>Continue</button>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                            <button type="submit" style={{marginTop:'10px',height:'30px',width:'50%',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',backgroundColor:'rgb(92, 92, 255)'}}>Continue</button>
+                        </div>
                     </form>
                 </div>
             </div>

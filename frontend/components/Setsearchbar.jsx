@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
+const Setsearchbar = ({setprojectdata,setfiltercount,userid,setstatus}) => {
     const [activeTab, setActiveTab] = useState("all");
 
     const onallclick = ()=>{
         setActiveTab("all");
+        setstatus("all");
         //get all jobs
         const getdata = async()=>{
             const projectdata = await axios.get('http://localhost:5000/getworks',{
@@ -23,6 +24,7 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
 
     const onactiveclick = ()=>{
         setActiveTab("applied");
+        setstatus("applied");
         //get jobs
         const getdata = async()=>{
             const projectdata = await axios.get(`http://localhost:5000/getprojects/${userid}`,{
@@ -40,6 +42,7 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid}) => {
     }
     const onshortlisted = async()=>{
         setActiveTab("shortlisted");
+        setstatus("shortlisted");
         //get jobs
         const getdata = async()=>{
             const projectdata = await axios.get(`http://localhost:5000/getprojectuseridapplied/${userid}`,{

@@ -8,6 +8,7 @@ import Setsearchbar from "../components/Setsearchbar";
 import Projectsadded from "../components/Projectsadded";
 import SetWorkprovderbar from "../components/SetWorkprovderbar";
 import EmployeeNavbar from "../navbars/EmployeeNavbar";
+import WorkproviderNavbar from "../navbars/WorkproviderNavbar";
 
 const Welcome = ()=>{
     const navigate = useNavigate();
@@ -16,6 +17,8 @@ const Welcome = ()=>{
 
     const [uploadprojects,setuploaded] = useState([]);
     const [uploadcount,setuploadcount] = useState(0);
+
+    const [status,setstatus] = useState("all");
 
     const[worker,setworker] = useState(true);
 
@@ -61,10 +64,11 @@ const Welcome = ()=>{
                 {
                     localstoragedata?.userData?.usertype === 'freelance' && 
                     <div>
+                        
                         <EmployeeNavbar userdata={localstoragedata} performlogout={performlogout}/>
                         <Searchconsole setprojectdata={setprojectdata} setfiltercount={setfiltercount}/>
-                        <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id}/>
-                        <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker} userid={localstoragedata?.userData?._id}/>
+                        <Setsearchbar setprojectdata={setprojectdata} setfiltercount={setfiltercount} userid={localstoragedata?.userData?._id} setstatus={setstatus}/>
+                        <Jobdisplay projectdata={projectdata} filtercount={filtercount} worker={worker} userid={localstoragedata?.userData?._id} status={status}/>
                     </div>
                 }
                 {

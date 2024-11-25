@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating,setRate,setUser,setid})=>{
+const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating,setRate,setUser,setid,shortlistedusers})=>{
+    const navigate = useNavigate();
     const [userdata,setuserdata] = useState(null);
+    const [shortlistedtab,setshortlistedtab] = useState(false);
     useEffect(()=>{
         const performtask = async()=>{
             const getuserData = await axios.get(`http://localhost:5000/user/${clientid}`,{
@@ -12,6 +15,7 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating
             if(getuserData.data.userprofilefound){
                 setuserdata(getuserData.data.userProfiledata)
             }
+            
         }
         performtask();
     },[])
@@ -56,10 +60,11 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating
                         <span style={{color:'gray'}}>Gender: {userdata?.personaldetails?.gender}</span><br />
                         <span style={{color:'gray'}}>Rating: {userdata?.personaldetails?.rating===null?0:userdata?.personaldetails?.rating}</span><br />
                         <div style={{textAlign:'center'}}>
-                            {!rating && <button onClick={shortlistuser}>Shortlist</button>}&emsp;
-                            <button onClick={sendEmailtouser}>Send Mail</button>
-                            {rating && <span>&emsp;</span>}
-                            {rating && <button onClick={rateUser}>Rate User</button>}
+                            {!rating && !shortlistedusers &&<button onClick={shortlistuser}>Shortlist</button>}
+                            {rating && <button onClick={rateUser}>Rate User</button>}{!rating && !shortlistedusers && <span>&emsp;</span>}
+                            <button onClick={()=>navigate(`/barter4skills/${userdata?.username}`)}>User Profile</button>
+                            &emsp;
+                            {!rating && shortlistedusers &&<button onClick={shortlistuser}>Project Cont.</button>}
                         </div>
                     </div>
                 </div>

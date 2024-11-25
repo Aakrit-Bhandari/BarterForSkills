@@ -10,6 +10,8 @@ const Peopleapplied = () => {
     const [datapro, setDatapro] = useState(null); // State for storing project 
     const [people,setPeople] = useState(null);
 
+    const [shortlistedusers,setshortlistedusers] = useState(false);
+
     const[mailsection,setmailsection] = useState(false);
     const [usermaildata,setmailuserdata] = useState(null);
     const [usermailData , setusermaildata] = useState({
@@ -71,11 +73,11 @@ const Peopleapplied = () => {
             {/* pop up for sending mail */}
 
             <div className="people-applied">
-                <JobApplied projectid={projectid} setDatapro={setPeople}/>
+                <JobApplied projectid={projectid} setDatapro={setPeople} setshortlistedusers={setshortlistedusers}/>
                 <span style={{color:'red',textAlign: 'center'}}>{people===null?0:people.length} Person Applied</span>
                 {people&&people.length>0 && 
                 people.map((data,index)=>(
-                    <PersonApplied clientid={data?.cliendid} projectid={projectid} setmailsection={setmailsection} setmailuserdata={setmailuserdata}/>
+                    <PersonApplied clientid={data?.cliendid} projectid={projectid} setmailsection={setmailsection} setmailuserdata={setmailuserdata} shortlistedusers={shortlistedusers}/>
                 ))}
             </div>
         </>

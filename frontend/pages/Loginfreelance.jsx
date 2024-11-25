@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import "../src/Login.css";
 
 
 const Loginfreelance = () => {
@@ -92,17 +93,15 @@ const Loginfreelance = () => {
     return (
         <>
             <div className="mainbox-login">
-                <div className="loginform">
-                    <br />
+                <div className="loginform"><br />
                     <b>Login/Signup</b>
                     <form onSubmit={checkData}>
                         <input type="email" placeholder="email*" value={userData.email} onChange={manageChanges} name="email" readOnly={hiddenOtpBox} />
                         <span style={{color:'red',fontSize:'12px',display: error?'block':'none'}}>Enter a valid email Address</span>
-                        <button onClick={sendOtp} id="btn">Send OTP</button><br />
+                        <button onClick={sendOtp} id="btn">Send OTP</button>
                         {hiddenOtpBox && (
                             <div className="otpcentre">
-                                <br />
-                                <b>Verify with OTP</b><br /><br />
+                                <b>Verify with OTP</b>
                                 <input type="number" placeholder="otp" name="otp" value={otp} onChange={handleOtpChange} />
                                 <span style={{color:'red',fontSize:'12px',display: otperror?'block':'none'}}>Wrong OTP</span>
                                 <button type="submit" id="btn">Continue</button>

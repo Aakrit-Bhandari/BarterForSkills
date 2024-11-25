@@ -1,5 +1,25 @@
 import mongoose from "mongoose"
 
+const WorkExp = new mongoose.Schema({
+    title:{type:String,required:false},
+    company:{type:String, required:false}
+})
+const Education = new mongoose.Schema({
+    levelofedu:{type:String,required:false},
+    fieldofstudy:{type:String,required:false}
+})
+const Language= new mongoose.Schema({
+    langName:{type:String,required:false},
+    proficiency:{type:String,enum:["Expert","Fluent","Native","Beginner","Intermediate"],required:false}
+})
+const Licence = new mongoose.Schema({
+    licenceName:{type:String,required:false},
+    year:{type:Number,required:true},
+})
+const Skill = new mongoose.Schema({
+    skill:{type:String,required:false},
+    experience:{type:Number,required:false}
+})
 const IdeaproviderSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -22,10 +42,66 @@ const IdeaproviderSchema = new mongoose.Schema({
         },
         conatactno:{
             type:String,
-            required: false,
+            required: true,
         },
-        skills:{
-            type: [String],
+        //qualification
+        skills:[Skill],
+        certification:
+        {
+            type:[String]
+        },
+        licence:[Licence],
+        language:[Language],
+        education:[Education],
+        workexperience:[WorkExp],
+        //preferences
+        jobtitle:
+        {
+            type:String,
+            required:false
+        },
+        jobtype:{
+            type:String,
+            enum:["Full-time","Permanent","Fresher","Part-time","Internship","Contractual/Temporary","Freelance","Volunteer"]
+        },
+        workschedule:{
+            days:{
+                type:String,
+                enum:["Monday to Friday","Weekend availability","weekend only"],
+                required:false
+            },
+            shifts:{
+                type:String,
+                enum:["Day shifts","Morning shift","Rotational shift","Night shift","Evening shift"],
+                required:false
+            }
+        },
+        pay:{
+            pay:{
+                type:Number,
+                required:false
+            },
+            period:
+            {
+                type:String,
+                enum:["perhour","per day","per week","per month","per year"],
+                required:false
+            }
+        },
+        relocation:
+        {
+            type:Boolean,
+            required:false
+        },
+        remote:
+        {
+            type:{String},
+            enum:["Remote","Hybrid work","In-person","Temporarily remote"]
+        },
+        //ready to work
+        willwork:
+        {
+            type:Boolean,
             required:false
         },
         location:{

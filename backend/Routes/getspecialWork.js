@@ -7,10 +7,10 @@ const getspecialWork = async (req, res) => {
     const bartertrue = req.params.barter;
 
     try {
-        // Use $regex with 'i' for case-insensitive matching
+        // Use $regex with 'i' for case-insensitive matching of prefixes
         const getskillData = await Projectsmodel.find({
-            'projectdetails.skillsreq': { $regex: new RegExp(`^${userSkill}$`, 'i') },
-            'projectdetails.bartarsystem': { $regex: new RegExp(`^${bartertrue}$`, 'i') }
+            'projectdetails.skillsreq': { $regex: new RegExp(`^${userSkill}`, 'i') },
+            'projectdetails.bartarsystem': { $regex: new RegExp(`^${bartertrue}`, 'i') }
         });
 
         if (getskillData.length > 0) {

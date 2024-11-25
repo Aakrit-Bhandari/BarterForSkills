@@ -108,8 +108,7 @@ const Loginworkprovider = () => {
                         <button onClick={sendOtp} id="btn">Send OTP</button><br />
                         {hiddenOtpBox && (
                             <div className="otpcentre">
-                                <br />
-                                <b>Verify with OTP</b><br /><br />
+                                <b>Verify with OTP</b>
                                 <input type="number" placeholder="otp" name="otp" value={otp} onChange={handleOtpChange} />
                                 <span style={{color:'red',fontSize:'12px',display: otperror?'block':'none'}}>Wrong OTP</span>
                                 <span style={{color:'red',fontSize:'12px',display: anotherusererror?'block':'none'}}>{errormsg}</span>

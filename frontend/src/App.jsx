@@ -14,6 +14,8 @@ import Addnewproject from '../pages/Addnewproject';
 import Peopleapplied from '../pages/Peopleapplied';
 import Userprofile from '../pages/Userprofile';
 import Rating from '../pages/Rating';
+import Admin from '../pages/Admin';
+import Editprofile from '../pages/Editprofile';
 
 function App() {
   const location = useLocation();
@@ -47,7 +49,7 @@ function App() {
           }
         } else {
           // If token is not valid, redirect to login
-          if(!(['/login/freelance','/login/workprovider'].includes(location.pathname))){
+          if(!(['/login/freelance','/login/workprovider','/'].includes(location.pathname))){
             navigate('/login');
           }
         }
@@ -80,6 +82,8 @@ function App() {
         <Route path='/applied/:userid/:projectid/barter4skills/console' element={<Peopleapplied />} />
         <Route path='/barter4skills/:username' element={<Userprofile />} />
         <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
+        <Route path='/admin/barter4skills' element={<Admin/>}/>
+        <Route path='/editprofile/:userId/:username' element={<Editprofile/>} />
       </Routes>
     </>
   );

@@ -32,6 +32,9 @@ import getprojectuseridapplied from './Routes/getprojectuseridapplied.js';
 import shortlistuser from './Routes/shortlistuser.js';
 import deleteproject from './Routes/deleteproject.js';
 import rateProject from './Routes/rateProject.js';
+import getAlldata from './Routes/getAlldata.js';
+import { getUserSkills,addUserSkills,editUserSkills } from './Routes/skills.js';
+import getcount from './Routes/getcount.js';
 
 //config dotenv
 dotenv.config();
@@ -70,6 +73,12 @@ app.get('/getwork/:skill/:barter',getspecialWork);
 app.get('/shortlist/:userid/:projectid',shortlistuser);
 app.get('/delete-task/:projectid',deleteproject);
 app.post('/rateproject/:clientid',rateProject);
+app.get('/getAlldata/barter4skills',getAlldata);
+app.get('/profile/qualification/skills/:userId',getUserSkills);
+app.post('/profile/qualification/addskill',addUserSkills);
+app.put('/profile/qualification/editskills',editUserSkills);
+app.get('/getCount/:userid',getcount);
+
 app.get('/logout',logout);
 
 

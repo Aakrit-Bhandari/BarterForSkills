@@ -1,10 +1,11 @@
 import axios from "axios";
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser})=>{
+const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,status,admin})=>{
     const navigate = useNavigate();
     const date = new Date().getDate()-new Date(data.createdAt).getDate();
+    const [admindata,setadmindata]= useState(null);
     const performapplytask = async()=>{
         //add that data to the user
         const apply = await axios.get(`http://localhost:5000/apply-project/${userid}/${data?._id}`,{
@@ -44,6 +45,17 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser})=>
             alert("Some Error occured try after some time");
         }
     }
+    useEffect(()=>{
+        const getAdmindata = async()=>{
+            const useData = await axios.get(`http://localhost:5000/user/${data?.projectofficials?.ideaproviderid}`,{
+                withCredentials:true
+            })
+            if(useData.data.userprofilefound){
+                setadmindata(useData.data.userProfiledata);
+            }
+        }
+        getAdmindata();
+    },[])
     return(
         <>
             <div className="jobcomponent">
@@ -54,7 +66,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser})=>
                     </div>
                     <div className="jobsdesc" style={{color:'gray',fontSize:'8px',marginTop:'10px'}}>
                         <div className="data1" style={{marginBottom:'3px',fontSize:'7px'}}>
-                            <span style={{fontSize:'14px'}}>{data?.projectdetails?.yearexp}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>{data.projectdetails?.amounttobepaid}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>{data.projectdetails?.location}</span>
+                            <span style={{fontSize:'14px'}}>{data?.projectdetails?.yearexp}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>₹{data.projectdetails?.amounttobepaid}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>{data.projectdetails?.location}</span>
                             &emsp;| &emsp; <span style={{fontSize:'14px'}}>Barter: {data.projectdetails?.bartarsystem}</span>
                         </div>
                         <div className="data2" style={{marginBottom:'3px',fontSize:'1px'}}>
@@ -66,12 +78,17 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser})=>
                     </div>
                     <div className="jobfoot" style={{color:'gray',fontSize:'8px',marginTop:'14px'}}>
                         <span style={{fontSize:'11px'}}>{date}Days ago</span>
-                        {worker && <button onClick={performapplytask}>Apply</button>}
-                        {!worker && <div>&emsp;&emsp;&emsp;&emsp;</div>}
-                        {!worker && <button onClick={performedittask} style={{width:'120px'}}>Edit Project</button>}
-                        {!worker && <button onClick={peopleapplied} style={{width:'150px'}}>People Applied</button>}
-                        {!worker && <button onClick={deleteproject} style={{width:'150px'}}>Delete Project</button>}
-                        {!worker && data?.projectdetails?.projectstatusstatus === 'completed' && <button onClick={()=>navigate(`/rate/${userid}/${data._id}`)}>Rate⭐</button>}
+                        <div>
+                            
+                        </div>
+                        {!admin &&worker && status==="all"&& <button onClick={performapplytask}>Apply</button>}
+                        {!admin &&worker && status==="applied" && <a href={`mailto:${admindata.email}`}>Client Email Id</a>}
+                        {!admin &&worker && status==="shortlisted" && <button onClick={()=>navigate(`/barter4skills/${admindata.username}`)}>Connect</button>}
+                        {!admin &&!worker && <div>&emsp;&emsp;&emsp;&emsp;</div>}
+                        {!admin &&!worker && <button onClick={performedittask} style={{width:'120px'}}>Edit Project</button>}
+                        {!admin &&!worker && <button onClick={peopleapplied} style={{width:'150px'}}>People Applied</button>}
+                        {!admin &&!worker && <button onClick={deleteproject} style={{width:'150px'}}>Delete Project</button>}
+                        {!admin &&!worker && data?.projectdetails?.projectstatusstatus === 'completed' && <button onClick={()=>navigate(`/rate/${userid}/${data._id}`)}>Rate⭐</button>}
                     </div>
                 </div>
             </div>

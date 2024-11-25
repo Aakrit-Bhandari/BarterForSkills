@@ -1,0 +1,115 @@
+.Profile_Design
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+.Profile_Desig_Comp
+{
+    /* border:1px solid gray; */
+    width:500px;
+}
+.Profile_Design_Heading
+{
+    text-align: center;
+    margin-top: 80px
+}
+.Profile_Design_cont
+{
+    border-bottom:1px solid gray;
+    border-top:1px solid gray;
+    height:100px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.Profile_Design_context
+{
+    display:flex;
+    align-items: center;
+    width:300px;
+}
+.Profile_fafa_div
+{
+    padding:0px 10px 0px 0px;
+}
+.Profile_Design_context img{
+    width:20px;
+    height:20px;
+}
+.Profile_Design_context2
+{
+    padding:0 15px 0px 0px;
+}
+.Profile_Design_context2 span
+{
+    font-size:30px;
+    cursor:pointer;
+}
+/* qualification adding */
+.Profile_modal-overlay
+{
+    border:2px solid black;
+    border-radius:10px;
+    width:600px;
+    display:flex;
+    flex-direction: column;;
+    text-align: center;
+    background-color: rgb(239, 239, 239);
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+    height:400px;
+}
+.Profile_modal_buttons
+{
+    width:450px;
+    padding:20px;
+    /* border:1px solid red; */
+    display:flex;
+    justify-content: flex-end;
+}
+.Profile_modal_buttons button{
+    padding:10px 25px;
+    margin-left:10px;
+}
+.Profile_modal_Inputs
+{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:20px;
+    /* border:1px solid red; */
+}
+.Profile_modal_Inputs input
+{
+    width:440px;
+    padding:10px 15px;
+}
+.Profile_modal_Inputs select{
+    width:470px;
+    padding:10px 15px;
+}
+.Profile_modal_display
+{
+    height:80px;
+    overflow-y: scroll;
+}
+.Profile_modal_display_flowlist
+{
+    margin-top:5px;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.Profile_modal_display_flowlist button
+{
+    height:30px;
+}
+.skill-item button
+{
+    width:100px;
+    height:20px;
+}

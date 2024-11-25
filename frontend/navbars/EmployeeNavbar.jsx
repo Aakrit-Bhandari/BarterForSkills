@@ -19,7 +19,7 @@ export default function EmployeeNavbar({userdata,performlogout,worker})
             <div className="NavEmp_Page_Main_ContComp">
                 <div className="NavEmp_Page_Logo_Industry">
                     <div className="NavEmp_Page_Logo">
-                        <img src={logo} alt="Company_logo"></img>
+                        <img src={logo} alt="Company_logo" onClick={()=>navigate('/')}></img>
                     </div>
                     <div className="NavEmp_Page_Industry">
                         <span>Jobs</span>
@@ -31,9 +31,10 @@ export default function EmployeeNavbar({userdata,performlogout,worker})
                 <div className="NavEmp_Page_Registration">
                     <div className="NavEmp_Page_Buttons">
                         {data && <span>Welcome <b style={{color:'purple'}}>{data?.username}😊</b></span>}
-                        {data && <img src={data?.personaldetails?.profilephoto} alt="" />}
+                        {data && <img src={data?.personaldetails?.profilephoto} alt="" onClick={()=>navigate(`/barter4skills/${data?.username}`)}/>}
                     </div>
-                    <div className="NavEmp_Page_Register">
+                    <div className="NavEmp_Page_Register" style={{width: worker?'300px':'200px'}}>
+                        {<button className="NavPage_buttons" onClick={()=>navigate(`/editprofile/${data?._id}/${data?.username}`)}>Edit Profile</button>}
                         {worker && <button className="NavPage_buttons" onClick={()=>navigate(`/add-project/${data?._id}/${data?.username}`)}>Add Task</button>}
                         <button onClick={performlogout} className="NavPage_buttons">Logout</button>
                     </div>
