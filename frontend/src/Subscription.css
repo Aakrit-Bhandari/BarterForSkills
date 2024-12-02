@@ -1,0 +1,165 @@
+/* General Styling */
+.timepass {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #f8f9fd, #eef2f7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+  
+  .subscription-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensures the content is vertically centered */
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .content-container {
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  /* Title Styling */
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+  
+  /* Plans Container - Row Layout */
+  .plans-container {
+    display: flex;
+    justify-content: center; /* Align cards in a row horizontally */
+    gap: 2rem; /* Spacing between cards */
+  }
+  
+  /* Plan Card Styles */
+  .plan-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 2rem;
+    text-align: left;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 8px solid transparent; /* Default border */
+  }
+  
+  .plan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .plan-card.featured {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .plan-card.featured .choose-button {
+    background: #ffffff;
+    color: #0d6efd;
+  }
+  
+ /* Featured Badge Styling */
+.featured-badge {
+    position: absolute;
+    top: 15px; /* Slightly down from the top */
+    right: 15px; /* Offset to the right, popping out of the card */
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Vibrant gradient */
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.6rem 1rem;
+    border-radius: 20px; /* Rounded badge */
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Creates depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    z-index: 2; /* Ensures it appears above the card */
+    letter-spacing: 1px; /* Adds spacing between letters */
+  }
+  
+ 
+  
+  
+  /* Plan Header */
+  .plan-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .plan-price {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: inherit;
+  }
+  
+  .plan-price span {
+    font-size: 1rem;
+    color: inherit;
+  }
+  
+  /* Features List */
+  .plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+  }
+  
+  .feature-items {
+    font-size: 1rem;
+    color: inherit;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .feature-items::before {
+    content: "✔";
+    color: #4caf50;
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  
+  /* Button Styling */
+  .choose-button {
+    background: linear-gradient(to right, #4caf50, #81c784);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .choose-button:hover {
+    background: linear-gradient(to right, #388e3c, #66bb6a);
+    transform: scale(1.05);
+  }
+  
+  /* Plan-Specific Top Borders */
+  .normal-plan {
+    border-top: 8px solid #6c757d; /* Gray border for Normal Plan */
+  }
+  
+  .premium-plan {
+    border-top: 8px solid #ff9800; /* Orange border for Premium Plan */
+  }
+  
+  .advanced-plan {
+    border-top: 8px solid #2196f3; /* Blue border for Advanced Plan */
+  }

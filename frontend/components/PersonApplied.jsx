@@ -54,7 +54,7 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating
                 </div>
                 <div className="right-applied">
                     <div className="text-right">
-                        <span style={{color:'gray'}}>Skills: {userdata?.personaldetails?.skills.join(', ')}</span><br />
+                        <span style={{color:'gray'}}>Skills: {userdata?.personaldetails?.skills?.map(skill => skill.skill)?.join(', ')}</span><br />
                         <span style={{color:'gray'}}>Description: {userdata?.personaldetails?.description}</span><br />
                         <span style={{color:'gray'}}>Linkedin: {userdata?.personaldetails?.linkedinid}</span><br />
                         <span style={{color:'gray'}}>Gender: {userdata?.personaldetails?.gender}</span><br />

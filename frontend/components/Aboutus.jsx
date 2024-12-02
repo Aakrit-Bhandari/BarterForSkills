@@ -6,7 +6,7 @@ import image1 from '../public/Images/barter.png'
 
 const AboutUs = () => {
   return (
-    <div className="about-us">
+    <div className="about-us" id="about">
       {/* Hero Section */}
       <section className="about-hero">
         <h1 className="hero-title">
@@ -22,7 +22,7 @@ const AboutUs = () => {
         <div className="about-container">
           <h2 className="section-title">Our Mission</h2>
           <p className="section-description">
-            At <span className="highlight">Barter4Skills</span>, we strive to empower independent 
+            At <span className="highlight" style={{fontSize:'18px'}}>Barter4Skills</span>, we strive to empower independent 
             professionals by connecting them with global opportunities. Our platform is built 
             to enable seamless collaboration, fair payments, and mutual growth.
           </p>
@@ -60,18 +60,23 @@ const AboutUs = () => {
         <div className="team-members">
           <div className="team-member">
             <img src={image1} alt="Team Member" />
-            <h3>Jane Doe</h3>
-            <p>CEO & Founder</p>
+            <h3>Aakrit Bhandari</h3>
+            <p>Coder</p>
           </div>
           <div className="team-member">
             <img src={image1} alt="Team Member" />
-            <h3>John Smith</h3>
-            <p>Head of Product</p>
+            <h3>Aastha</h3>
+            <p>Coder</p>
           </div>
           <div className="team-member">
             <img src={image1} alt="Team Member" />
-            <h3>Sarah Lee</h3>
-            <p>Marketing Lead</p>
+            <h3>Panchi</h3>
+            <p>Coder</p>
+          </div>
+          <div className="team-member">
+            <img src={image1} alt="Team Member" />
+            <h3>Abhishek</h3>
+            <p>Coder</p>
           </div>
         </div>
       </section>

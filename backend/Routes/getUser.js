@@ -4,10 +4,11 @@ import response from "../response.js";
 const getUser = async (req, res) => {
     const userResponse = { ...response };
     const { userid } = req.params;
+    console.log(userid);
     try {
         // Fetch user data by ID
         const usermongoosedata = await IdeaproviderModel.findById(userid);
-    
+        console.log(usermongoosedata);
         // Check if user is found
         if (usermongoosedata) {
             userResponse.userprofilefound = true;

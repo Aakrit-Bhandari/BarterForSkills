@@ -52,8 +52,12 @@ const shortlistuser = async (req, res) => {
             (client) => client.cliendid.toString() === userid
         );
 
+
         if (clientAlreadyExists) {
             // Add user ID to project's clients applied list if not already present
+            getproject.projectofficials.clientsapplied = getproject.projectofficials.clientsapplied.filter(
+                (item) => item.cliendid.toString() !== userid
+            );
             getproject.projectofficials.clientid.push({ cliendid: userid });
             await getproject.save();
         }

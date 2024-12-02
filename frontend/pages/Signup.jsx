@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Lottie from "lottie-react"
-import animationdata from "../public/Images/login.json";
-import {Player} from "@lottiefiles/react-lottie-player"
+
+import Lottie from 'lottie-react';
+import { Player } from '@lottiefiles/react-lottie-player';
+import signup from "../public/Images/sign.json"
 
 const Signup = () => {
     const [file, setFile] = useState(null);
@@ -138,9 +139,9 @@ const Signup = () => {
 
     return (
         <div className="signup-container">
-            <div className="signup-content">
-                <div className="welcome-back">
-                    <Lottie animationdata={animationdata}/>
+            <div className="signup-content" >
+                <div className="welcome-back" >
+                    <Lottie animationData={signup} style={{height:'800px',overflow:'hidden', width:'330px'}}/>
                 </div>
                 <div className="create-account">
                     <h2>Create Account</h2>

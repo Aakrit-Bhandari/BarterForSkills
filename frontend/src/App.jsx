@@ -16,6 +16,9 @@ import Userprofile from '../pages/Userprofile';
 import Rating from '../pages/Rating';
 import Admin from '../pages/Admin';
 import Editprofile from '../pages/Editprofile';
+import SubscriptionPage from '../pages/Subscriptionpage';
+import Contactus from '../pages/Contactus';
+
 
 function App() {
   const location = useLocation();
@@ -63,8 +66,9 @@ function App() {
     const protectedRoutes = ['/login'];
     const routespro = location.pathname.startsWith('/signup');
     const proroute = location.pathname.startsWith('/barter4skills');
+    const proroutee = location.pathname.startsWith('/subscription');
 
-    if (!protectedRoutes.includes(location.pathname) && !routespro && !proroute) {
+    if (!protectedRoutes.includes(location.pathname) && !routespro && !proroute && !proroutee) {
       checkToken();
     }
   }, [location.pathname, navigate]);
@@ -84,6 +88,8 @@ function App() {
         <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
         <Route path='/admin/barter4skills' element={<Admin/>}/>
         <Route path='/editprofile/:userId/:username' element={<Editprofile/>} />
+        <Route path='/subscription' element={<SubscriptionPage/>} />
+        <Route path='/contactus' element={<Contactus/>}/>
       </Routes>
     </>
   );

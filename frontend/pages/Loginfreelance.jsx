@@ -74,7 +74,7 @@ const Loginfreelance = () => {
                 const response = await axios.post('http://localhost:5000/send-otp', { email: userData.email }, {
                     withCredentials: true
                 });
-                console.log('Send OTP Response:', response.data);
+                // console.log('Send OTP Response:', response.data);
                 if (response.data.otpsent) {
                     setHiddenOtpBox(true);
                 } else {

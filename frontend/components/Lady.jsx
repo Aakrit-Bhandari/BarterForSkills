@@ -27,9 +27,9 @@ export default function Lady()
                         </div>
                     </div>
                 </div>
-                <div className="LandingPage_img" >
+                {/* <div className="LandingPage_img" >
                     <img src="https://res.cloudinary.com/dyerj85ll/image/upload/v1732472461/girl_ao6z1g.png"/>
-                </div>
+                </div> */}
                 <div className="LandingPage_Success_Right">
                     <div className="LandingPage_Success_right">
                         <div className="LandingPage_right_heading">

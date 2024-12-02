@@ -1,4 +1,7 @@
 * navbarpage */
+body{
+    scroll-behavior: smooth;
+}
 .mainbox-login{
     width: 100%;
     /* height: 100%; */
@@ -84,6 +87,7 @@
     text-align: center;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    
 }
 
 .welcome-back h2 {

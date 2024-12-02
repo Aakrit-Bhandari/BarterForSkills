@@ -35,17 +35,18 @@ const Home = () => {
         <div className="navbar-left">
           <img src={image} alt="Pixelia Logo" className="logo" />
         </div>
-
+        
         <ul className="navbar-menu">
           <li><a href="/">Home</a></li>
-          <li><a href="/profile">Contact</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="#for-clients">For Clients</a></li>
-          <li><a href="#for-talents">For Talents</a></li>
+          <li><a href='mailto:utinder1@gmail.com'>Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a onClick={()=>navigate('/login/workprovider')}>For Clients</a></li>
+          <li><a onClick={()=>navigate('/login/freelance')}>For Talents</a></li>
+          <li><a onClick={()=>navigate('/subscription')}>Plans</a></li>
         </ul>
 
         <div className="navbar-right">
-          <span className="location-time">Sleman, 1:29pm</span>
+          <span className="location-time"></span>
           <button className="menu-icon" onClick={toggleMenu}>
             <i className="fas fa-bars"></i> {/* Font Awesome icon */}
           </button>
@@ -60,8 +61,9 @@ const Home = () => {
             <li><a href="/">Home</a></li>
             <li><a href="#services">Contact</a></li>
             <li><a href="#how-it-works">About</a></li>
-            <li><a href="#for-clients">For Clients</a></li>
-            <li><a href="#for-talents">For Talents</a></li>
+            <li><a onClick={()=>navigate('/login/workprovider')}>For Clients</a></li>
+            <li><a onClick={()=>navigate('/login/freelance')}>For Talents</a></li>
+            <li><a>Pricing</a></li>
           </ul>
         </div>
       )} 
@@ -99,20 +101,9 @@ const Home = () => {
             <h1>Search Icon</h1>
           </div> */}
 
-    <div class="upper" >
-    <div class="joinUs">
-        <h2>Join us for free</h2>
-        <div class="pics" >
-            {/* <!-- Add Lottie animation components here --> */}
-            <div class="lottie-container" style={{overflow:'hidden',border:'0px'}}>
-                <Lottie animationData={animationData2} style={{overflow:'hidden'}}/>
-            </div>
-            <div class="lottie-container" style={{overflow:'hidden',border:'0px'}}>
-                <Lottie animationData={animationData1} style={{overflow:'hidden', border:'0px'}}/>
-                </div>
-        </div>
-       
-        <button class="account">Create account</button>
+    <div class="upper" style={{border:'0px'}}>
+    <div class="joinUs" style={{marginTop:'0px',overflow:'hidden'}}>
+      <Lottie animationData={animationData1} style={{overflow:'hidden', border:'0px',width:'500px',height:'400px'}}/>
     </div>
 </div>
 </div>

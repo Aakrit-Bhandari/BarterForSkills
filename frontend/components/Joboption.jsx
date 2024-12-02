@@ -47,9 +47,11 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
     }
     useEffect(()=>{
         const getAdmindata = async()=>{
+            console.log("thisdata",data?.projectofficials?.ideaproviderid);
             const useData = await axios.get(`http://localhost:5000/user/${data?.projectofficials?.ideaproviderid}`,{
                 withCredentials:true
             })
+            console.log("useData",useData);
             if(useData.data.userprofilefound){
                 setadmindata(useData.data.userProfiledata);
             }
@@ -82,8 +84,8 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
                             
                         </div>
                         {!admin &&worker && status==="all"&& <button onClick={performapplytask}>Apply</button>}
-                        {!admin &&worker && status==="applied" && <a href={`mailto:${admindata.email}`}>Client Email Id</a>}
-                        {!admin &&worker && status==="shortlisted" && <button onClick={()=>navigate(`/barter4skills/${admindata.username}`)}>Connect</button>}
+                        {!admin &&worker && status==="applied" && <a href={`mailto:${admindata?.email}`}>Client Email Id</a>}
+                        {!admin &&worker && status==="shortlisted" && <button onClick={()=>navigate(`/barter4skills/${admindata?.username}`)}>Connect</button>}
                         {!admin &&!worker && <div>&emsp;&emsp;&emsp;&emsp;</div>}
                         {!admin &&!worker && <button onClick={performedittask} style={{width:'120px'}}>Edit Project</button>}
                         {!admin &&!worker && <button onClick={peopleapplied} style={{width:'150px'}}>People Applied</button>}
