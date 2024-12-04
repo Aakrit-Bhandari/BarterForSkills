@@ -36,6 +36,7 @@ import getAlldata from './Routes/getAlldata.js';
 import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Routes/skills.js';
 import getcount from './Routes/getcount.js';
 import { getQueries,addQuery } from './Routes/contact.js';
+import verifyPassword from './Routes/verifyPassword.js';
 
 //config dotenv
 dotenv.config();
@@ -70,7 +71,7 @@ app.get('/getprojects/:userid',getprojectuserid);
 app.get('/getprojectuseridapplied/:userid',getprojectuseridapplied);
 app.get('/getproject/:projectid',getprojectbyprojectid);
 app.get('/getworks',getWorks);
-app.get('/getwork/:skill/:barter',getspecialWork);
+app.get('/getwork/:skill/:type/:barter',getspecialWork);
 app.get('/shortlist/:userid/:projectid',shortlistuser);
 app.get('/delete-task/:projectid',deleteproject);
 app.post('/rateproject/:clientid',rateProject);
@@ -81,6 +82,7 @@ app.put('/profile/qualification/editskills',editUserSkills);
 app.get('/getCount/:userid',getcount);
 app.delete('/profile/qualification/deleteSkill/:skillId',deleteUserSkill);
 app.get('/contactPage/queries/:id',getQueries);
+app.post('/verify-password',verifyPassword);
 app.post("/contactPage/queries/addQuery",addQuery);
 app.get('/logout',logout);
 

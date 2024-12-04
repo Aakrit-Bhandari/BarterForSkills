@@ -4,12 +4,17 @@ import response from "../response.js";
 const getspecialWork = async (req, res) => {
     const resData = { ...response };
     const userSkill = req.params.skill;
+    const userTypereq = req.params.type;
     const bartertrue = req.params.barter;
 
     try {
         // Use $regex with 'i' for case-insensitive matching of prefixes
         const getskillData = await Projectsmodel.find({
-            'projectdetails.skillsreq': { $regex: new RegExp(`^${userSkill}`, 'i') },
+            $or:[
+                {'projectdetails.position':{$regex: new RegExp(`^${userSkill}`, 'i')}},
+                {'projectdetails.skillsreq': { $regex: new RegExp(`^${userSkill}`, 'i')}}
+            ],
+            'projectdetails.usertypereq': { $regex: new RegExp(`^${userTypereq}`, 'i') },
             'projectdetails.bartarsystem': { $regex: new RegExp(`^${bartertrue}`, 'i') }
         });
 

@@ -19,7 +19,7 @@ const Jobdisplay = ({projectdata,filtercount,worker,userid,status})=>{
             location: '',
             bartarsystem: '',
             projectstatusstatus: 'findingpeople',
-            preferedlocation: ''
+            usertypereq: ''
         }
     });
     const [errorMessage, setErrorMessage] = useState('');
@@ -103,7 +103,7 @@ const Jobdisplay = ({projectdata,filtercount,worker,userid,status})=>{
                             <input
                                 type="number"
                                 name="projectdetails.amounttobepaid"
-                                value={Number(project.projectdetails.amounttobepaid) || ''}
+                                value={(project.projectdetails.amounttobepaid) || ''}
                                 onChange={handleChange}
                                 placeholder="Amount*"
                                 required
@@ -138,14 +138,15 @@ const Jobdisplay = ({projectdata,filtercount,worker,userid,status})=>{
                             </select>
                             <br />
                             <select
-                                name="projectdetails.preferedlocation"
-                                value={project.projectdetails.preferedlocation || ''}
+                                name="projectdetails.usertypereq"
+                                value={project.projectdetails.usertypereq || ''}
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="">Preferred Location*</option>
-                                <option value="remote">Remote</option>
-                                <option value="onsite">Onsite</option>
+                                <option value="">Preferred Usertype*</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="intern">Intern</option>
+                                <option value="fulltime">Full Time</option>
                             </select>
                             <br />
                             <select

@@ -72,8 +72,11 @@ export default function Userprofile() {
           <h3 className="profile-name">{userdata?.personaldetails?.name}</h3>
           <p className="profile-email">{userdata?.username}</p>
           <p className="profile-email"><a style={{color:'black',textDecoration:'none'}} href={`mailto:${userdata?.email}`}>{userdata?.email}</a></p>
-          <p style={{ color: 'purple' }}>
+          <p style={{ color: 'purple',marginBottom:'2px' }}>
             {userdata?.usertype === "freelance" ? "Freelancer" : "Work Provider"}
+          </p>
+          <p style={{ color: 'purple',marginBottom:'2px'  }}>
+            {userdata?.subscription === "freelance-basic" ? "Basic" : (userdata?.subscription === "freelance-mid")?"Premium":"Pro Premium"}
           </p>
           {/* Rating Section */}
           <div className="profile-rating">

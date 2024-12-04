@@ -24,6 +24,8 @@ const Signup = () => {
         username: "",
         usertype: "",
         email: "",
+        password: "",
+        subscription: userData.usertype+"-basic", // Added password field here
         personaldetails: {
             name: "",
             conatactno: "",
@@ -75,10 +77,24 @@ const Signup = () => {
             },
         }));
     };
+    function isValidPassword(password) {
+        // Regex to check for at least one uppercase letter, one special character, and length > 8
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+        return passwordRegex.test(password);
+    }
+    
 
     const addUserToDatabase = async (e) => {
         e.preventDefault();
         setErrorMessage("");
+
+        if(!isValidPassword(userData.password)){
+            alert("Enter a valid password. Password must contain:\n" + 
+                "1. At least one uppercase letter (A-Z)\n" + 
+                "2. At least one special character (e.g., !, @, #, $, %, etc.)\n" + 
+                "3. A minimum length of 8 characters");
+            return;
+        }
 
         if (!file) {
             alert("Please upload your profile image.");
@@ -145,15 +161,10 @@ const Signup = () => {
                 </div>
                 <div className="create-account">
                     <h2>Create Account</h2>
-                    {/* <div className="social-login">
-                        <button>f</button>
-                        <button>G+</button>
-                        <button>in</button>
-                    </div> */}
                     
                     <form onSubmit={addUserToDatabase}>
-                    <input type="email" value={userData.email || ''} readOnly required />
-                     <input type="text" value={userData.usertype || ''} readOnly required />
+                        <input type="email" value={userData.email || ''} readOnly required />
+                        <input type="text" value={userData.usertype || ''} readOnly required />
                         <input
                             type="text"
                             name="username"
@@ -186,19 +197,30 @@ const Signup = () => {
                             required
                             placeholder="Location*"
                         />}
-                         <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} onChange={handleChange} />
-                         <select name="personaldetails.gender" value={userData.personaldetails?.gender || ''} onChange={handleChange} required>
-                        <option value="">Gender*</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select >
+                        <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} onChange={handleChange} />
+                        <select name="personaldetails.gender" value={userData.personaldetails?.gender || ''} onChange={handleChange} required>
+                            <option value="">Gender*</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                         <label style={{overflow:'hidden'}}>Upload Profile Photo*</label>
                         <input
                             type="file"
                             onChange={(e) => setFile(e.target.files[0])}
                             required
                         />
+                        
+                        {/* Password Input */}
+                        <input
+                            type="password"
+                            name="password"
+                            value={userData.password}
+                            onChange={handleChange}
+                            required
+                            placeholder="Password*"
+                        />
+                        
                         {errorMessage && (
                             <p style={{ color: "red" }}>{errorMessage}</p>
                         )}

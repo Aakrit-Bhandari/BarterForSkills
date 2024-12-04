@@ -45,7 +45,8 @@ const response = {
 
     totaldata: {},
     gottotaldata: false,
-    count: 0
+    count: 0,
+    passverified:false
 }
 
 export default response;

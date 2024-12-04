@@ -19,12 +19,14 @@ export default function EmployeeNavbar({userdata,performlogout,worker})
             <div className="NavEmp_Page_Main_ContComp">
                 <div className="NavEmp_Page_Logo_Industry">
                     <div className="NavEmp_Page_Logo">
-                        <img src={logo} alt="Company_logo" onClick={()=>navigate('/')}></img>
+                        <img src={logo} alt="Company_logo" onClick={()=>navigate('/')} style={{cursor:'pointer'}}></img>
                     </div>
                     <div className="NavEmp_Page_Industry">
-                        <span>Jobs</span>
-                        <span>Services</span>
-                        <span>Compaines</span>
+                        {/* {worker && <span style={{color:'purple'}}><span style={{color:'black'}}>{data?.subscription === "workprovider-basic" ? "Basic" : (data?.subscription === "workprovider-mid")?"Premium":"Pro Premium"}</span></span>}
+                        {!worker&&<span style={{color:'purple'}}>{data?.subscription === "freelance-basic" ? "Basic" : (data?.subscription === "freelance-mid")?"Premium":"Pro Premium"}</span>} */}
+                        &emsp;&emsp;
+                        <span onClick={()=>navigate(`/subscription/${data?.usertype}/wpd78x/${data?.username}/${data?._id}`)}>Subscription</span>
+                        <span></span>
                     </div>
                 </div>
                 {/* this is the second protion */}

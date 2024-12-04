@@ -33,7 +33,7 @@ const Home = () => {
       {/* Navbar Section */}  
       <nav className="navbar">
         <div className="navbar-left">
-          <img src={image} alt="Pixelia Logo" className="logo" />
+          <img src={image} alt="Pixelia Logo" className="logo" style={{cursor:'pointer'}}/>
         </div>
         
         <ul className="navbar-menu">
@@ -42,7 +42,7 @@ const Home = () => {
           <li><a href="#about">About</a></li>
           <li><a onClick={()=>navigate('/login/workprovider')}>For Clients</a></li>
           <li><a onClick={()=>navigate('/login/freelance')}>For Talents</a></li>
-          <li><a onClick={()=>navigate('/subscription')}>Plans</a></li>
+          {/* <li><a onClick={()=>navigate('/subscription')}>Plans</a></li> */}
         </ul>
 
         <div className="navbar-right">
@@ -124,7 +124,7 @@ const Home = () => {
     </div>
   </div>
   <div class="actions">
-    <button class="btn sign-up">Sign up for free</button>
+    <button class="btn sign-up" onClick={()=>navigate('/login')}>Sign up for free</button>
     <button class="btn learn-more">Learn how to hire</button>
   </div>
   </div>

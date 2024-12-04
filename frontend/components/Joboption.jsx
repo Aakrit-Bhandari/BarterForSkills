@@ -70,6 +70,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
                         <div className="data1" style={{marginBottom:'3px',fontSize:'7px'}}>
                             <span style={{fontSize:'14px'}}>{data?.projectdetails?.yearexp}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>₹{data.projectdetails?.amounttobepaid}</span>&emsp;| &emsp; <span style={{fontSize:'14px'}}>{data.projectdetails?.location}</span>
                             &emsp;| &emsp; <span style={{fontSize:'14px'}}>Barter: {data.projectdetails?.bartarsystem}</span>
+                            &emsp;| &emsp; <span style={{fontSize:'14px'}}>Usertype req: {data.projectdetails?.usertypereq}</span>
                         </div>
                         <div className="data2" style={{marginBottom:'3px',fontSize:'1px'}}>
                             <span style={{fontSize:'14px'}}>{data.projectdetails?.projectdesc}</span>

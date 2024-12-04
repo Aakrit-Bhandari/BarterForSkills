@@ -9,7 +9,7 @@ const Searchconsole = ({ setprojectdata,setfiltercount }) => {
     });
 
     const performfilter = async () => {
-        const filterjobs = await axios.get(`http://localhost:5000/getwork/${filtervalue.skills[0]}/${filtervalue.barter}`,{
+        const filterjobs = await axios.get(`http://localhost:5000/getwork/${filtervalue.skills[0]}/${filtervalue.exp}/${filtervalue.barter}`,{
             withCredentials:true
         });
         if(filterjobs.data.projectdatapresent){
@@ -42,17 +42,15 @@ const Searchconsole = ({ setprojectdata,setfiltercount }) => {
             <div className="search">
                 <input
                     type="text"
-                    placeholder="Enter skills keywords separated by commas i.e. c++, java"
+                    placeholder="Enter skills keywords separated by commas i.e. c++, java or Postion i.e. Software eng."
                     style={{ width: '50%' }}
                     onChange={handleskillchange}
                 />
                 <select name="exp" onChange={handlechange} style={{width:'18%'}}>
-                    <option value="">Select experience</option>
-                    <option value="fresher">Fresher</option>
-                    <option value="0-1">0-1 year</option>
-                    <option value="2-3">2-3 years</option>
-                    <option value="3-4">3-4 years</option>
-                    <option value="4-5">4-5 years</option>
+                    <option value="">Select type</option>
+                    <option value="intern">Intern</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="fulltime">Full time</option>
                 </select>
                 <select name="barter" onChange={handlechange} style={{width:'9%'}}>
                     <option value="*">Barter*</option>

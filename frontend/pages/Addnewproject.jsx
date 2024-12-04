@@ -27,7 +27,7 @@ const Addnewproject = ()=>{
             location: '',
             bartarsystem: '',
             projectstatusstatus: 'findingpeople',
-            preferedlocation: ''
+            usertypereq: ''
         }
     });
     const handleChange = (e) => {
@@ -102,10 +102,11 @@ const Addnewproject = ()=>{
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select><br />
-                        <select name="projectdetails.preferedlocation" value={projectdata.projectdetails.preferedlocation || ''} onChange={handleChange} required style={{marginTop:'10px'}}>
-                            <option value="">preferedlocation*</option>
-                            <option value="remote">Remote</option>
-                            <option value="onsite">Onsite</option>
+                        <select name="projectdetails.usertypereq" value={projectdata.projectdetails.usertypereq || ''} onChange={handleChange} required style={{marginTop:'10px'}}>
+                            <option value="">preferedusertype*</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="fulltime">Full Time</option>
+                            <option value="intern">Intern</option>
                         </select><br />
                         
                         {errorMessage && <p style={{ color: 'red'}}>{errorMessage}</p>}

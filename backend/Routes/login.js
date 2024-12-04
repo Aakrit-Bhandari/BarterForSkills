@@ -37,6 +37,7 @@ const login = async(req,res)=>{
                         username: '',
                         usertype: userData.usertype,
                         email: userData.email,
+                        subscription: userData.usertype+"-basic",
                         personaldetails: {
                             name: '',
                             conatactno: '',
@@ -62,6 +63,7 @@ const login = async(req,res)=>{
                     username: '',
                     usertype: userData.usertype,
                     email: userData.email,
+                    subscription: userData.usertype+"-basic",
                     personaldetails: {
                         name: '',
                         conatactno: '',

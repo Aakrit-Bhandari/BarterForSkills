@@ -58,10 +58,10 @@ const Projectschema = new mongoose.Schema({
             required:true,
             enum: ['findingpeople','inprogress','completed']
         },
-        preferedlocation:{
+        usertypereq:{
             type:String,
             required:true,
-            enum: ['remote','onsite']
+            enum: ['freelance','intern','fulltime']
         }
     }
 },{timestamps:true});

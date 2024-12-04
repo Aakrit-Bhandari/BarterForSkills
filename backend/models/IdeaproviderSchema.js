@@ -35,6 +35,15 @@ const IdeaproviderSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    password:{
+        type:String,
+        required:true
+    },
+    subscription:{
+        type:String,
+        required:true,
+        enum: ["freelance-basic","freelance-mid","freelance-adv","workprovider-basic","workprovider-mid","workprovider-adv"]
+    },
     personaldetails:{
         name: {
             type:String,

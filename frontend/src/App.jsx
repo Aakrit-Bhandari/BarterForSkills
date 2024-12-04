@@ -18,6 +18,8 @@ import Admin from '../pages/Admin';
 import Editprofile from '../pages/Editprofile';
 import SubscriptionPage from '../pages/Subscriptionpage';
 import Contactus from '../pages/Contactus';
+import Error from '../pages/Error';
+import SubscriptionPageFreelance from '../pages/SubscriptionPageFreelance';
 
 
 function App() {
@@ -88,8 +90,10 @@ function App() {
         <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
         <Route path='/admin/barter4skills' element={<Admin/>}/>
         <Route path='/editprofile/:userId/:username' element={<Editprofile/>} />
-        <Route path='/subscription' element={<SubscriptionPage/>} />
+        <Route path='/subscription/workprovider/wpd78x/:username/:userid' element={<SubscriptionPage/>} />
+        <Route path='/subscription/freelance/wpd78x/:username/:userid' element={<SubscriptionPageFreelance/>} />
         <Route path='/contactus' element={<Contactus/>}/>
+        <Route path='*' element={<Error/>}/>
       </Routes>
     </>
   );
