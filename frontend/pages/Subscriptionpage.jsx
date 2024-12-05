@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import '../src/Subscription.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import BackButton from "../components/Backbutton";
 
 const SubscriptionPage = () => {
   const { username, userid } = useParams();
+  const navigate = useNavigate();
 
   // State for storing plan details
   const [plans, setPlans] = useState([
@@ -73,6 +74,28 @@ const SubscriptionPage = () => {
 
     getUserData();
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
+  
+  const makeChangestodb = async(userid,subscriptiontype)=>{
+    const getResponse = await axios.get(`http://localhost:5000/subscription/${userid}/${subscriptiontype}`,{
+      withCredentials:true
+    })
+    if(getResponse.data.subscriptionchanged){
+      alert(`Success🎉. You upgraded your plan to ${subscriptiontype}. Redirecting back to home page....`);
+      navigate(`/welcome/workprovider/wpd78x/${username}`);
+      return;
+    }
+    else{
+      alert(`Some error occured. Try after sometime or contact us.`);
+      return;
+    }
+  }
+
+  const handleClick = async(e)=>{
+    //if payment success
+    const subscriptiontype = (e.target.value==="Basic")?"workprovider-basic":(e.target.value==="Premium")?"workprovider-mid":"workprovider-adv";
+
+    
+  }
 
   return (
     <>
@@ -101,6 +124,8 @@ const SubscriptionPage = () => {
                     cursor: (plan.buttonText === "Current Plan") ? 'not-allowed' : 'pointer'
                   }} 
                   disabled={plan.buttonText === "Current Plan"}
+                  onClick={handleClick}
+                  value={plan.name}
                 >
                   {plan.buttonText}
                 </button>

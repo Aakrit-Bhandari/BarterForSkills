@@ -20,6 +20,7 @@ import SubscriptionPage from '../pages/Subscriptionpage';
 import Contactus from '../pages/Contactus';
 import Error from '../pages/Error';
 import SubscriptionPageFreelance from '../pages/SubscriptionPageFreelance';
+import Success from '../pages/Success';
 
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
         <Route path='/subscription/workprovider/wpd78x/:username/:userid' element={<SubscriptionPage/>} />
         <Route path='/subscription/freelance/wpd78x/:username/:userid' element={<SubscriptionPageFreelance/>} />
         <Route path='/contactus' element={<Contactus/>}/>
+        <Route path='/success/:id/:userId/:subscriptiontype/:username' element={<Success/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
     </>

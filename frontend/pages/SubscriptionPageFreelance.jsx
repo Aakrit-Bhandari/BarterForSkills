@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
 import '../src/Subscription.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import BackButton from "../components/Backbutton";
 
 const SubscriptionPageFreelance = () => {
   const { username, userid } = useParams();
+  const navigate = useNavigate();
 
   // State for storing plan details
   const [plans, setPlans] = useState([
     {
       name: "Basic",
-      price: "₹0/Lifetime",
+      price: 0,
       features: ["Apply upto 7 jobs", "Limited Acess to Jobs", "Basic Support"],
       buttonText: "Choose Normal",
       className: "normal-plan",
     },
     {
       name: "Premium",
-      price: "₹6000/Lifetime",
+      price: 6000,
       features: [
         "Apply for up to 15 jobs",
         "Moderate Job access available",
@@ -30,7 +31,7 @@ const SubscriptionPageFreelance = () => {
     },
     {
       name: "Pro Premium",
-      price: "₹9000/Lifetime",
+      price: 9000,
       features: [
         "Unlimited Jobs",
         "Unlimted Job access available",
@@ -74,6 +75,54 @@ const SubscriptionPageFreelance = () => {
     getUserData();
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
 
+  const makeChangestodb = async(userid,subscriptiontype)=>{
+    const getResponse = await axios.get(`http://localhost:5000/subscription/${userid}/${subscriptiontype}`,{
+      withCredentials:true
+    })
+    if(getResponse.data.subscriptionchanged){
+      alert(`Success🎉. You upgraded your plan to ${subscriptiontype}. Redirecting back to home page....`);
+      navigate(`/welcome/freelance/in23x/${username}`);
+      return;
+    }
+    else{
+      alert(`Some error occured. Try after sometime or contact us.`);
+      return;
+    }
+  }
+
+  const paymentmethod = async (plan,subscriptiontype) => {
+    try {
+        const response = await axios.post('http://localhost:5000/create-checkout-session', {
+            planName: plan.name,
+            price: plan.price,
+            userId: userid,
+            subscriptiontype:subscriptiontype,
+            username: username
+        });
+
+        if (response.data?.url) {
+            window.location.href = response.data.url;
+        } else {
+            throw new Error("Invalid response from server.");
+        }
+    } catch (error) {
+        console.error('Error redirecting to Stripe Checkout:', error);
+        alert("An error occurred while processing your payment. Please try again.");
+    }
+};
+
+
+  const handleClick = async(plan)=>{
+    //if payment success
+    const subscriptiontype = (plan.name==="Basic")?"freelance-basic":(plan.name==="Premium")?"freelance-mid":"freelance-adv";
+    console.log(subscriptiontype);
+
+    await paymentmethod(plan,subscriptiontype);
+    
+    // makeChangestodb(userid,subscriptiontype);
+    
+  }
+
   return (
     <>
     <BackButton/>
@@ -101,6 +150,8 @@ const SubscriptionPageFreelance = () => {
                     cursor: (plan.buttonText === "Current Plan") ? 'not-allowed' : 'pointer'
                   }} 
                   disabled={plan.buttonText === "Current Plan"}
+                  onClick={()=>handleClick(plan)}
+                  value={plan.name}
                 >
                   {plan.buttonText}
                 </button>

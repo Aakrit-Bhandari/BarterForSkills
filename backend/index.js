@@ -37,6 +37,8 @@ import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Ro
 import getcount from './Routes/getcount.js';
 import { getQueries,addQuery } from './Routes/contact.js';
 import verifyPassword from './Routes/verifyPassword.js';
+import performSubscription from './Routes/performSubscription.js';
+import checkout from './Routes/checkout.js';
 
 //config dotenv
 dotenv.config();
@@ -84,6 +86,8 @@ app.delete('/profile/qualification/deleteSkill/:skillId',deleteUserSkill);
 app.get('/contactPage/queries/:id',getQueries);
 app.post('/verify-password',verifyPassword);
 app.post("/contactPage/queries/addQuery",addQuery);
+app.get("/subscription/:userid/:subscriptiontype",performSubscription);
+app.post("/create-checkout-session",checkout);
 app.get('/logout',logout);
 
 

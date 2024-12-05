@@ -47,7 +47,8 @@ const response = {
     gottotaldata: false,
     count: 0,
     passverified:false,
-    planmaxreach:false
+    planmaxreach:false,
+    subscriptionchanged:false
 }
 
 export default response;
