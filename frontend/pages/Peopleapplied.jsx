@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import PersonApplied from "../components/PersonApplied";
 import JobApplied from "../components/JobApplied";
+import BackButton from "../components/Backbutton";
 
 const Peopleapplied = () => {
     const { userid, projectid } = useParams(); // Get URL parameters
@@ -57,6 +58,7 @@ const Peopleapplied = () => {
 
     return (
         <>
+            <BackButton/>
             {mailsection && <div className="mail-section"><br />
                     <input type="email" value={usermaildata?.email} readOnly/>
                     <input type="text" placeholder="Title*" name="title" id="title"/>

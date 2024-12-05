@@ -46,7 +46,8 @@ const response = {
     totaldata: {},
     gottotaldata: false,
     count: 0,
-    passverified:false
+    passverified:false,
+    planmaxreach:false
 }
 
 export default response;

@@ -3,6 +3,7 @@ import StatsGrid from "../components/StatsGrid.jsx";
 import axios from "axios";
 import Tasks from "../components/Tasks.jsx";
 import Joboption from "../components/Joboption.jsx";
+import BackButton from "../components/Backbutton.jsx";
 
 const Admin = () => {
   const [data,setdata] = useState(null);
@@ -73,6 +74,7 @@ const Admin = () => {
 
   return (
     <>
+        <BackButton/>
         <div className="back-dashboard">
             <br />
             <div className="dashboard-container">

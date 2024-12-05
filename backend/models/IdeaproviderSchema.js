@@ -44,6 +44,14 @@ const IdeaproviderSchema = new mongoose.Schema({
         required:true,
         enum: ["freelance-basic","freelance-mid","freelance-adv","workprovider-basic","workprovider-mid","workprovider-adv"]
     },
+    tasksapplied:{
+        type: Number,
+        default: 0
+    },
+    tasksposted:{
+        type: Number,
+        default: 0
+    },
     personaldetails:{
         name: {
             type:String,

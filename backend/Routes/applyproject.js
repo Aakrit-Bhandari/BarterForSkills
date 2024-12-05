@@ -39,7 +39,15 @@ const applyproject = async (req, res) => {
             return res.status(200).json(userResponse);
         }
 
+        //now check whether plan is basic whaterver
+        if((getuser.subscription === "freelance-basic" && getuser.tasksapplied>=7) || (getuser.subscription === "freelance-mid" && getuser.tasksapplied>=15)){
+            userResponse.userApplied = false;
+            userResponse.planmaxreach = true;
+            return res.status(200).json(userResponse);
+        }
+
         // Add project ID to user's applied projects
+        getuser.tasksapplied += 1;
         getuser.projectsworkapplied.push({ projectid });
         await getuser.save();
 

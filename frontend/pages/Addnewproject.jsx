@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Backbutton from "../components/Backbutton.jsx"
 
 const Addnewproject = ()=>{
     const [errorMessage, setErrorMessage] = useState('');
@@ -62,10 +63,14 @@ const Addnewproject = ()=>{
     const addproject = async(e)=>{
         e.preventDefault();
         try{
-            const addProject = await axios.post('http://localhost:5000/createnewproject',projectdata,{
+            const addProject = await axios.post(`http://localhost:5000/createnewproject/${localstoragedata?.userData?._id}`,projectdata,{
                 withCredentials:true
             })
             console.log(addProject);
+            if(addProject.data.planmaxreach){
+                alert("You reached max amount to apply. Upgrade to Pro Premium for unlimited jobs postings.");
+                return;
+            }
             if(addProject.data.newprojectadded){
                 alert("Project was added successfully... 😃");
                 const logic = localstoragedata?.userData?.usertype === 'workprovider'? 'wpd78x':'in23x';
@@ -85,6 +90,7 @@ const Addnewproject = ()=>{
     return(
         <>
             {/* navbar */}
+            <Backbutton/>
             <div className="signup-containe">
             <div className="signup-conten" >
             {/* <div className=""></div> */}

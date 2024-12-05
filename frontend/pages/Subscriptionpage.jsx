@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../src/Subscription.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import BackButton from "../components/Backbutton";
 
 const SubscriptionPage = () => {
   const { username, userid } = useParams();
@@ -10,18 +11,18 @@ const SubscriptionPage = () => {
   const [plans, setPlans] = useState([
     {
       name: "Basic",
-      price: "₹0/month",
-      features: ["Basic support", "Access to standard content", "1 user"],
+      price: "₹0/Lifetime",
+      features: ["Add upto 5 jobs", "Limited Profile Access", "Basic Support"],
       buttonText: "Choose Normal",
       className: "normal-plan",
     },
     {
       name: "Premium",
-      price: "₹6000/month",
+      price: "₹6000/Lifetime",
       features: [
-        "Priority support",
-        "Access to premium content",
-        "Up to 5 users",
+        "Add upto 10 jobs",
+        "Moderate Profile Access",
+        "Priority Support",
       ],
       buttonText: "Choose Premium",
       className: "premium-plan",
@@ -29,15 +30,15 @@ const SubscriptionPage = () => {
     },
     {
       name: "Pro Premium",
-      price: "₹9000/month",
+      price: "₹9000/Lifetime",
       features: [
-        "24/7 VIP support",
-        "All content access",
-        "Unlimited users",
+        "Add Unlimited Jobs",
+        "Full Profile Access",
+        "24/7 Support",
       ],
-      buttonText: "Choose Advanced",
-      className: "advanced-plan",
-    },
+      buttonText: "Choose Premium",
+      className: "premium-plan"
+    }
   ]);
 
   useEffect(() => {
@@ -74,6 +75,8 @@ const SubscriptionPage = () => {
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
 
   return (
+    <>
+    <BackButton/>
     <div className="timepass">
       <div className="subscription-page">
         <div className="content-container">
@@ -107,6 +110,7 @@ const SubscriptionPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

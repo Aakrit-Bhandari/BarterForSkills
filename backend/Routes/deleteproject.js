@@ -1,12 +1,16 @@
+import IdeaproviderModel from "../models/IdeaproviderSchema.js";
 import Projectsmodel from "../models/Projects.js";
 import response from "../response.js";
 
 const deleteproject = async(req,res)=>{
-    const {projectid} = req.params;
+    const {projectid,userid} = req.params;
     const userResponse = {...response};
     try{
         const findproject = await Projectsmodel.findById(projectid);
+        const finduser = await IdeaproviderModel.findById(userid);
         if(findproject){
+            finduser.tasksposted -= 1;
+            await finduser.save();
             await Projectsmodel.findByIdAndDelete(projectid);
             userResponse.projectdeleted = true;
             userResponse.message = "Project deleted successfully";

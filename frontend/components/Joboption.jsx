@@ -15,6 +15,10 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
             alert("You already applied...");
             return;
         }
+        else if(apply.data.planmaxreach){
+            alert("You reached max amount to apply. Upgrade to Pro Premium for unlimited jobs apply.");
+            return;
+        }
         else if(apply.data.userApplied){
             alert("Applied Successfully...");
             return;
@@ -34,7 +38,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
         setprojectdata(data);
     }
     const deleteproject = async()=>{
-        const deletingtask = await axios.get(`http://localhost:5000/delete-task/${data._id}`,{
+        const deletingtask = await axios.get(`http://localhost:5000/delete-task/${data._id}/${userid}`,{
             withCredentials:true
         });
         if(deletingtask.data.projectdeleted){

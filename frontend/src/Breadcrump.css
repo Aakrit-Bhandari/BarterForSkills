@@ -1,0 +1,53 @@
+/* breadcrumb.css */
+
+/* Style for the breadcrumb container */
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  /* Style for individual breadcrumb items */
+  .breadcrumb-item {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #007bff; /* Link color */
+  }
+  
+  /* Style for the last breadcrumb item (active page) */
+  .breadcrumb-item.active {
+    color: #6c757d; /* Gray color for active item */
+    font-weight: bold;
+  }
+  
+  /* Style for breadcrumb links */
+  .breadcrumb-item a {
+    text-decoration: none;
+    color: #007bff; /* Link color */
+  }
+  
+  /* Hover effect for links */
+  .breadcrumb-item a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Style for separators */
+  .breadcrumb-item::after {
+    content: ">";
+    margin-left: 10px;
+    color: #6c757d; /* Light gray for the separator */
+  }
+  
+  /* Remove separator after the last breadcrumb item */
+  .breadcrumb-item.active::after {
+    content: "";
+  }
+  
+  /* Space between breadcrumb items */
+  .breadcrumb-item:not(:last-child) {
+    margin-right: 10px;
+  }
+  

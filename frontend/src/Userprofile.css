@@ -1,15 +1,15 @@
 /* Profile Container */
 .profile-container {
     display: flex;
-    justify-content: space-evenly; /* Balanced spacing */
-    align-items: center;
+    justify-content: space-around; /* Balanced spacing */
+    margin-left: 19%;
     gap: 0rem; /* Reduced gap for tighter layout */
     padding: 2rem;
     height: 100vh;
     width:60%;
     /* background: #f9fafb; */
-    margin-left: auto;
-    margin-right: auto; /* Subtle light gray background for contrast */
+    position: absolute;
+    top: 10%;
   }
   
   /* Photo Card Styling */

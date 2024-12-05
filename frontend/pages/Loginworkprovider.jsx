@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "../src/Login.css";
+import BackButton from "../components/Backbutton";
 
 const Loginworkprovider = () => {
     const [hiddenOtpBox, setHiddenOtpBox] = useState(false);
@@ -157,6 +158,7 @@ const Loginworkprovider = () => {
         <>
             <div className="mainbox-login">
                 <div className="loginform"><br />
+                    <BackButton/>
                     <b>Login</b>
                     <form onSubmit={checkData}>
                         <input type="email" placeholder="email*" value={userData.email} onChange={manageChanges} name="email" readOnly={hiddenOtpBox || hiddenPasswordBox} />

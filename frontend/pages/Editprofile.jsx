@@ -4,6 +4,8 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import img from "../public/Images/barter.png"
 import "../src/ProfileDetails.css"
+import Backbutton from "../components/Backbutton.jsx"
+import BackButton from "../components/Backbutton.jsx";
 
 const Editprofile = ()=>{
     const {userId,username} = useParams();
@@ -292,7 +294,10 @@ const Editprofile = ()=>{
 
 
     return(
+        <>
+        <BackButton/>
         <section className="Profile_Qualification_Main Profile_Design">
+            
             {isModalSkills && (
                     <div className="Profile_modal-overlay">
                     <div className="Profile_modal-content" onClick={(e) => e.stopPropagation()}>
@@ -476,6 +481,7 @@ const Editprofile = ()=>{
                 </div>
             </div>
         </section>
+        </>
     );
 }
 

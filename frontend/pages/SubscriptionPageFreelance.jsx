@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../src/Subscription.css';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import BackButton from "../components/Backbutton";
 
 const SubscriptionPageFreelance = () => {
   const { username, userid } = useParams();
@@ -10,18 +11,18 @@ const SubscriptionPageFreelance = () => {
   const [plans, setPlans] = useState([
     {
       name: "Basic",
-      price: "₹0/month",
-      features: ["Basic support", "Access to standard content", "1 user"],
+      price: "₹0/Lifetime",
+      features: ["Apply upto 7 jobs", "Limited Acess to Jobs", "Basic Support"],
       buttonText: "Choose Normal",
       className: "normal-plan",
     },
     {
       name: "Premium",
-      price: "₹6000/month",
+      price: "₹6000/Lifetime",
       features: [
-        "Priority support",
-        "Access to premium content",
-        "Up to 5 users",
+        "Apply for up to 15 jobs",
+        "Moderate Job access available",
+        "Priority Support",
       ],
       buttonText: "Choose Premium",
       className: "premium-plan",
@@ -29,15 +30,15 @@ const SubscriptionPageFreelance = () => {
     },
     {
       name: "Pro Premium",
-      price: "₹9000/month",
+      price: "₹9000/Lifetime",
       features: [
-        "24/7 VIP support",
-        "All content access",
-        "Unlimited users",
+        "Unlimited Jobs",
+        "Unlimted Job access available",
+        "24/7 Support",
       ],
-      buttonText: "Choose Advanced",
-      className: "advanced-plan",
-    },
+      buttonText: "Choose Premium",
+      className: "premium-plan",
+    }
   ]);
 
   useEffect(() => {
@@ -74,6 +75,8 @@ const SubscriptionPageFreelance = () => {
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
 
   return (
+    <>
+    <BackButton/>
     <div className="timepass">
       <div className="subscription-page">
         <div className="content-container">
@@ -107,6 +110,7 @@ const SubscriptionPageFreelance = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

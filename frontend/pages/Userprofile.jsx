@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../src/Userprofile.css';
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import BackButton from "../components/Backbutton";
 
 export default function Userprofile() {
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ export default function Userprofile() {
   return (
     <>
       {error && <span>{error}</span>}
-
+      <BackButton/>
       <div className="profile-container">
         {/* Photo Card with Rating */}
         <div className="profile-photo-card">
@@ -76,7 +77,7 @@ export default function Userprofile() {
             {userdata?.usertype === "freelance" ? "Freelancer" : "Work Provider"}
           </p>
           <p style={{ color: 'purple',marginBottom:'2px'  }}>
-            {userdata?.subscription === "freelance-basic" ? "Basic" : (userdata?.subscription === "freelance-mid")?"Premium":"Pro Premium"}
+            {userdata?.usertype === "freelance"?(userdata?.subscription === "freelance-basic" ? "Basic" : (userdata?.subscription === "freelance-mid")?"Premium":"Pro Premium"):(userdata?.subscription === "workprovider-basic" ? "Basic" : (userdata?.subscription === "workprovider-mid")?"Premium":"Pro Premium")}
           </p>
           {/* Rating Section */}
           <div className="profile-rating">
