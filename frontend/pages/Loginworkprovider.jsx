@@ -145,6 +145,7 @@ const Loginworkprovider = () => {
                 setpasserror(false); // Clear error if password is valid
                 // Continue with the login process
                 // navigate(`/welcome/freelance/in23x/${encodeURIComponent(userData.username)}`);
+                localStorage.setItem("response-userdata", JSON.stringify(passwordVerification.data));
                 navigate(`/welcome/workprovider/wpd78x/${encodeURIComponent(passwordVerification.data.userData.username)}`);
             } else {
                 setpasserror(true); // Set password error if verification fails

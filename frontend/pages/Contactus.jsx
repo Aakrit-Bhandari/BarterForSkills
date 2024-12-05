@@ -72,10 +72,6 @@ const Contactus = () => {
             break;
         }
       };
-      console.log(formData.firstName);
-      console.log(formData.lastName);
-      console.log(formData.phoneNumber);
-      console.log(formData.email);
       const addQueryy = async()=>{
         try{
             const { firstName, lastName, email, phoneNumber, message } = formData;
@@ -108,7 +104,6 @@ const Contactus = () => {
             alert("Query was not sent",err);
         }
       };
-      console.log(formData);
   return (
     <section className="contactus">
       <div className="contactus_comp_success">

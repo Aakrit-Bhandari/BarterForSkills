@@ -9,7 +9,6 @@ import BackButton from "../components/Backbutton.jsx";
 
 const Editprofile = ()=>{
     const {userId,username} = useParams();
-    console.log(username);
     
     const [isModalSkills,setIsModalSkills] = useState(false);
     const [isModalLicence,setisModalLicence]=useState(false);
@@ -29,7 +28,7 @@ const Editprofile = ()=>{
                     `http://localhost:5000/profile/qualification/skills/${userId}`
                 );
                 const rawSkills = response.data.datafetched.skills;
-                console.log("skills",rawSkills);
+                // console.log("skills",rawSkills);
                 const parsedSkills = rawSkills
                 .filter(skill=>skill.skill &&skill.experience)
                 .map(skill=>({
@@ -49,12 +48,10 @@ const Editprofile = ()=>{
     const addSkill = async()=>{
         if(!newSkill||!experience){alert("Empty skill or exp");return;}
         try{
-            console.log(userId);
             const response = await axios.post(
                 "http://localhost:5000/profile/qualification/addskill",
                 {userId:userId,skill:newSkill,experience}
             );
-            console.log(response);
             const addedSkill = {
                 id:response.data._id,
                 skill:response.data.skill||newSkill,

@@ -69,7 +69,7 @@ const Admin = () => {
     }
     getAlldata();
   },[])
-  console.log("rec",topfreelancers);
+//   console.log("rec",topfreelancers);
   
 
   return (

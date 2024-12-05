@@ -10,7 +10,7 @@ const Addnewproject = ()=>{
         try {
             return JSON.parse(localStorage.getItem("response-userdata")) || {};
         } catch (error) {
-            console.error("Error parsing localStorage data:", error);
+            // console.error("Error parsing localStorage data:", error);
             return {};
         }
     });
@@ -66,7 +66,7 @@ const Addnewproject = ()=>{
             const addProject = await axios.post(`http://localhost:5000/createnewproject/${localstoragedata?.userData?._id}`,projectdata,{
                 withCredentials:true
             })
-            console.log(addProject);
+            // console.log(addProject);
             if(addProject.data.planmaxreach){
                 alert("You reached max amount to apply. Upgrade to Pro Premium for unlimited jobs postings.");
                 return;
