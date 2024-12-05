@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const Searchconsole = ({ setprojectdata,setfiltercount }) => {
+const Searchconsole = ({ setprojectdata, setfiltercount }) => {
     const [filtervalue, setfiltervalue] = useState({
         skills: [],
         exp: '',
@@ -9,23 +9,47 @@ const Searchconsole = ({ setprojectdata,setfiltercount }) => {
     });
 
     const performfilter = async () => {
-        const filterjobs = await axios.get(`http://localhost:5000/getwork/${filtervalue.skills[0]}/${filtervalue.exp}/${filtervalue.barter}`,{
-            withCredentials:true
-        });
-        if(filterjobs.data.projectdatapresent){
-            setprojectdata(filterjobs.data.projectdatafetched);
-            setfiltercount(filterjobs.data.projectdatafetched.length);
+        // Validate required fields
+        if (filtervalue.skills.length <= 0) {
+            alert("Skill type/ Job type needs to be specified");
+            return;
         }
-        else{
-            setprojectdata([]);
-            setfiltercount(0);
+        if (!filtervalue.exp) {
+            alert("Experience type needs to be selected");
+            return;
         }
-    }
+        if (!filtervalue.barter) {
+            alert("Barter preference needs to be selected");
+            return;
+        }
+
+        try {
+            // Send the API request
+            const filterjobs = await axios.get(
+                `http://localhost:5000/getwork/${filtervalue.skills[0]}/${filtervalue.exp}/${filtervalue.barter}`,
+                {
+                    withCredentials: true
+                }
+            );
+
+            // Update the project data and filter count
+            if (filterjobs.data.projectdatapresent) {
+                setprojectdata(filterjobs.data.projectdatafetched);
+                setfiltercount(filterjobs.data.projectdatafetched.length);
+            } else {
+                setprojectdata([]);
+                setfiltercount(0);
+            }
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+            alert("An error occurred while fetching jobs. Please try again later.");
+        }
+    };
 
     const handlechange = (e) => {
         setfiltervalue((olddata) => ({
             ...olddata,
-            [e.target.name]: e.target.value // Update filter value for experience
+            [e.target.name]: e.target.value // Update filter value for experience or barter
         }));
     };
 
@@ -42,18 +66,18 @@ const Searchconsole = ({ setprojectdata,setfiltercount }) => {
             <div className="search">
                 <input
                     type="text"
-                    placeholder="Enter skills keywords separated by commas i.e. c++, java or Postion i.e. Software eng."
+                    placeholder="Enter skills keywords separated by commas i.e. c++, java or Position i.e. Software eng."
                     style={{ width: '50%' }}
                     onChange={handleskillchange}
                 />
-                <select name="exp" onChange={handlechange} style={{width:'18%'}}>
-                    <option value="">Select type</option>
+                <select name="exp" onChange={handlechange} style={{ width: '18%' }}>
+                    <option value="">Select type*</option>
                     <option value="intern">Intern</option>
                     <option value="freelance">Freelance</option>
                     <option value="fulltime">Full time</option>
                 </select>
-                <select name="barter" onChange={handlechange} style={{width:'9%'}}>
-                    <option value="*">Barter*</option>
+                <select name="barter" onChange={handlechange} style={{ width: '9%' }}>
+                    <option value="">Barter*</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
