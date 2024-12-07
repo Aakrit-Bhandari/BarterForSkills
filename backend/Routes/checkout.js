@@ -3,7 +3,7 @@ const stripe = new Stripe('sk_test_51QSBTmGCzwjZyjMRxquEBmEB4AHmAb5r7WBIuehNzK6b
 
 const checkout= async (req, res) => {
     try {
-        const { planName, price, userId,subscriptiontype,username } = req.body;
+        const { planName, price, userId,subscriptiontype,username,usertype } = req.body;
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -20,7 +20,7 @@ const checkout= async (req, res) => {
                     quantity: 1,
                 },
             ],
-            success_url: `${process.env.FRONTEND}/success/{CHECKOUT_SESSION_ID}/${userId}/${subscriptiontype}/${username}`,
+            success_url: `${process.env.FRONTEND}/success/{CHECKOUT_SESSION_ID}/${userId}/${subscriptiontype}/${username}/${usertype}`,
             cancel_url: `${process.env.FRONTEND}/cancel`,
         });
 

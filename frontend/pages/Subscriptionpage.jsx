@@ -12,14 +12,14 @@ const SubscriptionPage = () => {
   const [plans, setPlans] = useState([
     {
       name: "Basic",
-      price: "₹0/Lifetime",
+      price: 0,
       features: ["Add upto 5 jobs", "Limited Profile Access", "Basic Support"],
       buttonText: "Choose Normal",
       className: "normal-plan",
     },
     {
       name: "Premium",
-      price: "₹6000/Lifetime",
+      price: 6000,
       features: [
         "Add upto 10 jobs",
         "Moderate Profile Access",
@@ -31,7 +31,7 @@ const SubscriptionPage = () => {
     },
     {
       name: "Pro Premium",
-      price: "₹9000/Lifetime",
+      price: 9000,
       features: [
         "Add Unlimited Jobs",
         "Full Profile Access",
@@ -75,27 +75,39 @@ const SubscriptionPage = () => {
     getUserData();
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
   
-  const makeChangestodb = async(userid,subscriptiontype)=>{
-    const getResponse = await axios.get(`http://localhost:5000/subscription/${userid}/${subscriptiontype}`,{
-      withCredentials:true
-    })
-    if(getResponse.data.subscriptionchanged){
-      alert(`Success🎉. You upgraded your plan to ${subscriptiontype}. Redirecting back to home page....`);
-      navigate(`/welcome/workprovider/wpd78x/${username}`);
-      return;
-    }
-    else{
-      alert(`Some error occured. Try after sometime or contact us.`);
-      return;
-    }
-  }
+  const paymentmethod = async (plan,subscriptiontype) => {
+    try {
+        const response = await axios.post('http://localhost:5000/create-checkout-session', {
+            planName: plan.name,
+            price: plan.price,
+            userId: userid,
+            subscriptiontype:subscriptiontype,
+            username: username,
+            usertype: "freelance"
+        });
 
-  const handleClick = async(e)=>{
+        if (response.data?.url) {
+            window.location.href = response.data.url;
+        } else {
+            throw new Error("Invalid response from server.");
+        }
+    } catch (error) {
+        console.error('Error redirecting to Stripe Checkout:', error);
+        alert("An error occurred while processing your payment. Please try again.");
+    }
+};
+
+
+  const handleClick = async(plan)=>{
     //if payment success
-    const subscriptiontype = (e.target.value==="Basic")?"workprovider-basic":(e.target.value==="Premium")?"workprovider-mid":"workprovider-adv";
+    const subscriptiontype = (plan.name==="Basic")?"workprovider-basic":(plan.name==="Premium")?"workprovider-mid":"workprovider-adv";
 
+    await paymentmethod(plan,subscriptiontype);
+    
+    // makeChangestodb(userid,subscriptiontype);
     
   }
+
 
   return (
     <>
@@ -109,7 +121,7 @@ const SubscriptionPage = () => {
               <div key={index} className={`plan-card ${plan.className}`}>
                 {plan.badge && <div className="featured-badge">{plan.badge}</div>}
                 <h2 className="plan-name">{plan.name}</h2>
-                <p className="plan-price">{plan.price}</p>
+                <p className="plan-price">₹{plan.price}/Lifetime</p>
                 <ul className="plan-features">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="feature-items">
@@ -124,7 +136,7 @@ const SubscriptionPage = () => {
                     cursor: (plan.buttonText === "Current Plan") ? 'not-allowed' : 'pointer'
                   }} 
                   disabled={plan.buttonText === "Current Plan"}
-                  onClick={handleClick}
+                  onClick={()=>handleClick(plan)}
                   value={plan.name}
                 >
                   {plan.buttonText}

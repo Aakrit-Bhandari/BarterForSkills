@@ -21,6 +21,7 @@ import Contactus from '../pages/Contactus';
 import Error from '../pages/Error';
 import SubscriptionPageFreelance from '../pages/SubscriptionPageFreelance';
 import Success from '../pages/Success';
+import Subscriptionpage from '../pages/Subscriptionpage';
 
 
 function App() {
@@ -91,10 +92,10 @@ function App() {
         <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
         <Route path='/admin/barter4skills' element={<Admin/>}/>
         <Route path='/editprofile/:userId/:username' element={<Editprofile/>} />
-        <Route path='/subscription/workprovider/wpd78x/:username/:userid' element={<SubscriptionPage/>} />
+        <Route path='/subscription/workprovider/wpd78x/:username/:userid' element={<Subscriptionpage/>} />
         <Route path='/subscription/freelance/wpd78x/:username/:userid' element={<SubscriptionPageFreelance/>} />
         <Route path='/contactus' element={<Contactus/>}/>
-        <Route path='/success/:id/:userId/:subscriptiontype/:username' element={<Success/>}/>
+        <Route path='/success/:id/:userId/:subscriptiontype/:username/:usertype' element={<Success/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
     </>

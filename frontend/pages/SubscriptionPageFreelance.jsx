@@ -75,20 +75,20 @@ const SubscriptionPageFreelance = () => {
     getUserData();
   }, []); // Adding plans in the dependency array to avoid re-creating plans on each render
 
-  const makeChangestodb = async(userid,subscriptiontype)=>{
-    const getResponse = await axios.get(`http://localhost:5000/subscription/${userid}/${subscriptiontype}`,{
-      withCredentials:true
-    })
-    if(getResponse.data.subscriptionchanged){
-      alert(`Success🎉. You upgraded your plan to ${subscriptiontype}. Redirecting back to home page....`);
-      navigate(`/welcome/freelance/in23x/${username}`);
-      return;
-    }
-    else{
-      alert(`Some error occured. Try after sometime or contact us.`);
-      return;
-    }
-  }
+  // const makeChangestodb = async(userid,subscriptiontype)=>{
+  //   const getResponse = await axios.get(`http://localhost:5000/subscription/${userid}/${subscriptiontype}`,{
+  //     withCredentials:true
+  //   })
+  //   if(getResponse.data.subscriptionchanged){
+  //     alert(`Success🎉. You upgraded your plan to ${subscriptiontype}. Redirecting back to home page....`);
+  //     navigate(`/welcome/freelance/in23x/${username}`);
+  //     return;
+  //   }
+  //   else{
+  //     alert(`Some error occured. Try after sometime or contact us.`);
+  //     return;
+  //   }
+  // }
 
   const paymentmethod = async (plan,subscriptiontype) => {
     try {
@@ -97,7 +97,8 @@ const SubscriptionPageFreelance = () => {
             price: plan.price,
             userId: userid,
             subscriptiontype:subscriptiontype,
-            username: username
+            username: username,
+            usertype: "freelance"
         });
 
         if (response.data?.url) {
@@ -135,7 +136,7 @@ const SubscriptionPageFreelance = () => {
               <div key={index} className={`plan-card ${plan.className}`}>
                 {plan.badge && <div className="featured-badge">{plan.badge}</div>}
                 <h2 className="plan-name">{plan.name}</h2>
-                <p className="plan-price">{plan.price}</p>
+                <p className="plan-price">₹{plan.price}/Lifetime</p>
                 <ul className="plan-features">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="feature-items">

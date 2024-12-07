@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Success = ()=>{
-    const {userId,subscriptiontype,username} = useParams();
+    const {userId,subscriptiontype,username,usertype} = useParams();
     const navigate = useNavigate();
     useEffect(()=>{
         const makeChangestodb = async(userId,subscriptiontype)=>{
@@ -11,7 +11,12 @@ const Success = ()=>{
               withCredentials:true
             })
             if(getResponse.data.subscriptionchanged){
-              navigate(`/welcome/freelance/in23x/${username}`);
+              if(usertype === "freelance"){
+                navigate(`/welcome/freelance/in23x/${username}`);
+              }
+              else{
+                navigate(`/welcome/workprovider/wpd78x/${username}`);
+              }
               return;
             }
             else{

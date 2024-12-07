@@ -51,6 +51,7 @@ const Welcome = ()=>{
             withCredentials:true
         })
         if(logout.data.logoutdone){
+            localStorage.removeItem("response-userdata");
             navigate('/');
         }
         else{
