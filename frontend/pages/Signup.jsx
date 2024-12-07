@@ -187,6 +187,7 @@ const Signup = () => {
                             value={userData.personaldetails.conatactno}
                             onChange={handleChange}
                             required
+                            maxLength={10}
                             placeholder="Contact No*"
                         />
                         {userData.usertype === "workprovider" &&<input
@@ -197,7 +198,7 @@ const Signup = () => {
                             required
                             placeholder="Location*"
                         />}
-                        <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} onChange={handleChange} />
+                        <input type="text" placeholder="LinkedIn ID" name="personaldetails.linkedinid" value={userData.personaldetails?.linkedinid || ''} required onChange={handleChange} />
                         <select name="personaldetails.gender" value={userData.personaldetails?.gender || ''} onChange={handleChange} required>
                             <option value="">Gender*</option>
                             <option value="male">Male</option>
