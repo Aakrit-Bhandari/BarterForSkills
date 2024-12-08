@@ -95,6 +95,10 @@ const Signup = () => {
                 "3. A minimum length of 8 characters");
             return;
         }
+        if (!/^\d{10}$/.test(userData.personaldetails.conatactno)) {
+            alert("Please enter a valid 10-digit phone number.");
+            return;
+        }
 
         if (!file) {
             alert("Please upload your profile image.");
