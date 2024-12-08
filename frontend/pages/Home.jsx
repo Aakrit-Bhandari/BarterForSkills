@@ -125,7 +125,7 @@ const Home = () => {
   </div>
   <div class="actions">
     <button class="btn sign-up" onClick={()=>navigate('/login')}>Sign up for free</button>
-    <button class="btn learn-more">Learn how to hire</button>
+    <button class="btn learn-more" onClick={()=>navigate('/hire')}>Learn how to hire</button>
   </div>
   </div>
 

@@ -22,6 +22,7 @@ import Error from '../pages/Error';
 import SubscriptionPageFreelance from '../pages/SubscriptionPageFreelance';
 import Success from '../pages/Success';
 import Subscriptionpage from '../pages/Subscriptionpage';
+import HireFreelancerPage from '../pages/HireFreelancerPage';
 
 
 function App() {
@@ -71,8 +72,9 @@ function App() {
     const routespro = location.pathname.startsWith('/signup');
     const proroute = location.pathname.startsWith('/barter4skills');
     const proroutee = location.pathname.startsWith('/subscription');
+    const prorouteee = location.pathname.startsWith('/hire');
 
-    if (!protectedRoutes.includes(location.pathname) && !routespro && !proroute && !proroutee) {
+    if (!protectedRoutes.includes(location.pathname) && !routespro && !proroute && !proroutee && !prorouteee) {
       checkToken();
     }
   }, [location.pathname, navigate]);
@@ -96,6 +98,7 @@ function App() {
         <Route path='/subscription/freelance/wpd78x/:username/:userid' element={<SubscriptionPageFreelance/>} />
         <Route path='/contactus' element={<Contactus/>}/>
         <Route path='/success/:id/:userId/:subscriptiontype/:username/:usertype' element={<Success/>}/>
+        <Route path='/hire' element={<HireFreelancerPage/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
     </>

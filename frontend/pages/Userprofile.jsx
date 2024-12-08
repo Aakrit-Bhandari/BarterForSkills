@@ -133,9 +133,9 @@ export default function Userprofile() {
               <span className="menu-skill">{new Date(userdata?.createdAt).getDate()+"-"+(new Date(userdata?.createdAt).getMonth()+1)+"-"+new Date(userdata?.createdAt).getFullYear()}</span>
             </li>
           </ul>
-          {!workprovider && <div style={{width:'100%',textAlign:'center',overflow:'hidden'}}>
+          {/* {!workprovider && <div style={{width:'100%',textAlign:'center',overflow:'hidden'}}>
             <button className="primary-btn" style={{marginTop:'30px',padding:'8px',borderRadius:'5px',backgroundColor:'purple'}}>Download CV</button>
-          </div>}
+          </div>} */}
 
         </div>
       </div>
