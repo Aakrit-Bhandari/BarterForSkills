@@ -158,7 +158,7 @@ const Loginfreelance = () => {
     return (
         <>
             <div className="mainbox-login">
-                <div className="loginform"><br />
+                <div className="loginform">
                     <Backbutton/>
                     <b>Login</b>
                     <form onSubmit={checkData}>
