@@ -17,8 +17,8 @@ const generatejwttoken = async(userData) => {
     const options = {
         expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
         httpOnly: true,
-        sameSite: 'Lax',
-        secure: false 
+        sameSite: 'None',
+        secure: true 
     };
 
     const tokendata = { token, options };
