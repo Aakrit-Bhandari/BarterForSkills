@@ -5,8 +5,8 @@ const logout = async(req,res)=>{
     try{
         res.clearCookie('freelance_cookie',{
             httpOnly: true,
-            sameSite: 'Lax',
-            secure: false 
+            sameSite: 'None',
+            secure: true 
         });
         userResponse.logoutdone = true;
         return res.status(200).json(userResponse);
