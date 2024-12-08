@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom"
 import '../src/Home.css'; // Import the CSS file
 import AboutUs from '../components/Aboutus.jsx';
-import animationData from '../public/Images/card.json'
-import animationData1 from '../public/Images/women.json'
-import animationData2 from '../public/Images/client.json'
+import animationData from '../Images/card.json'
+import animationData1 from '../Images/women.json'
+import animationData2 from '../Images/client.json'
 import Lady from '../components/Lady.jsx';
 
 
 import Lottie from 'lottie-react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import image from '../public/Images/barter.png'
+import image from '..//Images/barter.png'
 
 
 // import client from '../../Images/client.jpg';

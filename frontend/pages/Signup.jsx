@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Lottie from 'lottie-react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import signup from "../public/Images/sign.json"
+import signup from "../Images/sign.json"
 
 const Signup = () => {
     const [file, setFile] = useState(null);

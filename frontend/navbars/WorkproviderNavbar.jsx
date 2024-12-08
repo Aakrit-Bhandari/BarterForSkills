@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-import logo from "../Public/Images/barter.png"
+import logo from "../Images/barter.png"
 export default function WorkproviderNavbar()
 {
     const navigate = useNavigate();

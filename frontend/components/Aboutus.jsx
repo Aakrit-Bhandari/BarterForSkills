@@ -2,7 +2,7 @@
 
 import React from "react";
 import "../src/About.css";
-import image1 from '../public/Images/barter.png'
+import image1 from '../Images/barter.png'
 
 const AboutUs = () => {
   return (

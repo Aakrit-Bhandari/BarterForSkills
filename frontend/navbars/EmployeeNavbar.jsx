@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../public/Images/barter.png"
+import logo from "../Images/barter.png"
 export default function EmployeeNavbar({userdata,performlogout,worker})
 {
     const data = userdata?.userData;

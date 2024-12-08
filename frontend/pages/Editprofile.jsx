@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
-import img from "../public/Images/barter.png"
+import img from "../Images/barter.png"
 import "../src/ProfileDetails.css"
 import Backbutton from "../components/Backbutton.jsx"
 import BackButton from "../components/Backbutton.jsx";
