@@ -188,7 +188,7 @@ const Signup = () => {
                         <input
                             type="Number"
                             name="personaldetails.conatactno"
-                            value={Math.abs(userData.personaldetails.conatactno)}
+                            value={userData.personaldetails.conatactno}
                             onChange={handleChange}
                             required
                             maxLength={10}
