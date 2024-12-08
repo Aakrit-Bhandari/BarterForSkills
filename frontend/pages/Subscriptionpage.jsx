@@ -46,7 +46,7 @@ const SubscriptionPage = () => {
     // Getting data from the backend about the user
     const getUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/user/${userid}`);
+        const response = await axios.get(`https://barter-5cky.onrender.com/user/${userid}`);
         const userdata = response.data;
         
         if (!userdata.userprofilefound) {
@@ -77,7 +77,7 @@ const SubscriptionPage = () => {
   
   const paymentmethod = async (plan,subscriptiontype) => {
     try {
-        const response = await axios.post('http://localhost:5000/create-checkout-session', {
+        const response = await axios.post('https://barter-5cky.onrender.com/create-checkout-session', {
             planName: plan.name,
             price: plan.price,
             userId: userid,

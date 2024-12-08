@@ -26,7 +26,7 @@ const Searchconsole = ({ setprojectdata, setfiltercount }) => {
         try {
             // Send the API request
             const filterjobs = await axios.get(
-                `http://localhost:5000/getwork/${filtervalue.skills[0]}/${filtervalue.exp}/${filtervalue.barter}`,
+                `https://barter-5cky.onrender.com/getwork/${filtervalue.skills[0]}/${filtervalue.exp}/${filtervalue.barter}`,
                 {
                     withCredentials: true
                 }

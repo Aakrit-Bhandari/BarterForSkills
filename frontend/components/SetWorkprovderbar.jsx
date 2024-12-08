@@ -7,7 +7,7 @@ const SetWorkProviderBar = ({ setprojectdata, setfiltercount, userid }) => {
     // Function to fetch and filter projects based on status
     const fetchProjects = async (status) => {
         try {
-            const projectdata = await axios.get(`http://localhost:5000/getprojects-all/${userid}`, {
+            const projectdata = await axios.get(`https://barter-5cky.onrender.com/getprojects-all/${userid}`, {
                 withCredentials: true,
             });
             if (projectdata.data.projectfound) {

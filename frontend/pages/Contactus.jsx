@@ -83,7 +83,7 @@ const Contactus = () => {
             message.trim() !== "")
             {
                 const response = await axios.post(
-                    "http://localhost:5000/contactPage/addQuery",
+                    "https://barter-5cky.onrender.com/contactPage/addQuery",
                     {
                         firstName:formData.firstName,
                         lastName:formData.lastName,

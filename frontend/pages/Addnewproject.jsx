@@ -63,7 +63,7 @@ const Addnewproject = ()=>{
     const addproject = async(e)=>{
         e.preventDefault();
         try{
-            const addProject = await axios.post(`http://localhost:5000/createnewproject/${localstoragedata?.userData?._id}`,projectdata,{
+            const addProject = await axios.post(`https://barter-5cky.onrender.com/createnewproject/${localstoragedata?.userData?._id}`,projectdata,{
                 withCredentials:true
             })
             // console.log(addProject);

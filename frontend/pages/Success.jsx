@@ -7,7 +7,7 @@ const Success = ()=>{
     const navigate = useNavigate();
     useEffect(()=>{
         const makeChangestodb = async(userId,subscriptiontype)=>{
-            const getResponse = await axios.get(`http://localhost:5000/subscription/${userId}/${subscriptiontype}`,{
+            const getResponse = await axios.get(`https://barter-5cky.onrender.com/subscription/${userId}/${subscriptiontype}`,{
               withCredentials:true
             })
             if(getResponse.data.subscriptionchanged){

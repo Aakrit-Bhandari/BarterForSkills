@@ -34,7 +34,7 @@ const Welcome = ()=>{
     //get project data
     useEffect(()=>{
         const getdata = async()=>{
-            const projectdata = await axios.get('http://localhost:5000/getworks',{
+            const projectdata = await axios.get('https://barter-5cky.onrender.com/getworks',{
                 withCredentials:true
             });
             if(projectdata.data.projectdatapresent){
@@ -47,7 +47,7 @@ const Welcome = ()=>{
     },[])
 
     const performlogout = async()=>{
-        const logout = await axios.get('http://localhost:5000/logout',{
+        const logout = await axios.get('https://barter-5cky.onrender.com/logout',{
             withCredentials:true
         })
         if(logout.data.logoutdone){

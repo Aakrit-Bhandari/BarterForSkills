@@ -25,7 +25,7 @@ const Editprofile = ()=>{
         const fetchSkills = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/skills/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/skills/${userId}`
                 );
                 const rawSkills = response.data.datafetched.skills;
                 // console.log("skills",rawSkills);
@@ -49,7 +49,7 @@ const Editprofile = ()=>{
         if(!newSkill||!experience){alert("Empty skill or exp");return;}
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addskill",
+                "https://barter-5cky.onrender.com/profile/qualification/addskill",
                 {userId:userId,skill:newSkill,experience}
             );
             const addedSkill = {
@@ -78,7 +78,7 @@ const Editprofile = ()=>{
         {
             console.log("I am here");
             try{
-                await axios.delete(`http://localhost:5000/profile/qualification/deleteSkill/${skillId}`,{
+                await axios.delete(`https://barter-5cky.onrender.com/profile/qualification/deleteSkill/${skillId}`,{
                     data:{userId:userId},
                 })
                 setSkills(skills.filter((skill)=>skill.id!==skillId))
@@ -106,7 +106,7 @@ const Editprofile = ()=>{
             clearInputs();
             setCurrentEditIndex(null);
     
-            await axios.put("http://localhost:5000/profile/qualification/editskills", {
+            await axios.put("https://barter-5cky.onrender.com/profile/qualification/editskills", {
                 userId: userId, 
                 skills: updatedSkills,
             });
@@ -128,7 +128,7 @@ const Editprofile = ()=>{
         const fetchWorkExp = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/workExp/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/workExp/${userId}`
                 );
                 setTitle(response.personaldetails.workexperience);
             }
@@ -142,7 +142,7 @@ const Editprofile = ()=>{
     const addWorkExp = async()=>{
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addWorkExp",
+                "https://barter-5cky.onrender.com/profile/qualification/addWorkExp",
                 {userId:userId,title:newTitle,company:company}
             );
             setTitle([...title,response.data]);
@@ -162,7 +162,7 @@ const Editprofile = ()=>{
         const fetchEducation = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/education/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/education/${userId}`
                 );
                 setEducation(response.personaldetails.education);
             }
@@ -176,7 +176,7 @@ const Editprofile = ()=>{
     const addEducation = async()=>{
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addEducation",
+                "https://barter-5cky.onrender.com/profile/qualification/addEducation",
                 {userId:userId,levelofedu:newEducation,fieldofstudy:field}
             );
             setEducation([...education,response.data]);
@@ -196,7 +196,7 @@ const Editprofile = ()=>{
         const fetchLicence = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/licence/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/licence/${userId}`
                 );
                 setLicence(response.personaldetails.licence);
             }
@@ -210,7 +210,7 @@ const Editprofile = ()=>{
     const addLicence = async()=>{
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addLicence",
+                "https://barter-5cky.onrender.com/profile/qualification/addLicence",
                 {userId:userId,licenceName:newLicence,year:year}
             );
             setLicence([...licence,response.data]);
@@ -229,7 +229,7 @@ const Editprofile = ()=>{
         const fetchCertificate = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/certificate/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/certificate/${userId}`
                 );
                 setCertificate(response.personaldetails.certification);
             }
@@ -243,7 +243,7 @@ const Editprofile = ()=>{
     const addCertificate = async()=>{
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addCertificate",
+                "https://barter-5cky.onrender.com/profile/qualification/addCertificate",
                 {userId:userId,certificate:newCertificate}
             );
             setCertificate([...certificate,response.data]);
@@ -262,7 +262,7 @@ const Editprofile = ()=>{
         const fetchLanguage = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/language/${userId}`
+                    `https://barter-5cky.onrender.com/profile/qualification/language/${userId}`
                 );
                 setLanguage(response.personaldetails.language);
             }
@@ -276,7 +276,7 @@ const Editprofile = ()=>{
     const addLanguage = async()=>{
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addLanguage",
+                "https://barter-5cky.onrender.com/profile/qualification/addLanguage",
                 {userId:userId,langName:newLanguage,proficiency:fluency}
             );
             setLanguage([...language,response.data]);

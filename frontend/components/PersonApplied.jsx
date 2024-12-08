@@ -9,7 +9,7 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating
     const [shortlistedtab,setshortlistedtab] = useState(false);
     useEffect(()=>{
         const performtask = async()=>{
-            const getuserData = await axios.get(`http://localhost:5000/user/${clientid}`,{
+            const getuserData = await axios.get(`https://barter-5cky.onrender.com/user/${clientid}`,{
                 withCredentials:true
             })
             if(getuserData.data.userprofilefound){
@@ -20,7 +20,7 @@ const PersonApplied = ({clientid,projectid,setmailsection,setmailuserdata,rating
         performtask();
     },[])
     const shortlistuser = async()=>{
-        const performshortlisting = await axios.get(`http://localhost:5000/shortlist/${clientid}/${projectid}`,{
+        const performshortlisting = await axios.get(`https://barter-5cky.onrender.com/shortlist/${clientid}/${projectid}`,{
             withCredentials:true
         })
         if(performshortlisting.data.userApplied){

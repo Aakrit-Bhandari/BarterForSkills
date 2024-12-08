@@ -52,7 +52,7 @@ const Jobdisplay = ({projectdata,filtercount,worker,userid,status})=>{
         }));
     };
     const performupate = async()=>{
-        const updated = await axios.post(`http://localhost:5000/editproject/${project?._id}`,project,{
+        const updated = await axios.post(`https://barter-5cky.onrender.com/editproject/${project?._id}`,project,{
             withCredentials: true
         })
    }

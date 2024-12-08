@@ -9,7 +9,7 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid,setstatus}) => {
         setstatus("all");
         //get all jobs
         const getdata = async()=>{
-            const projectdata = await axios.get('http://localhost:5000/getworks',{
+            const projectdata = await axios.get('https://barter-5cky.onrender.com/getworks',{
                 withCredentials:true
             });
             if(projectdata.data.projectdatapresent){
@@ -27,7 +27,7 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid,setstatus}) => {
         setstatus("applied");
         //get jobs
         const getdata = async()=>{
-            const projectdata = await axios.get(`http://localhost:5000/getprojects/${userid}`,{
+            const projectdata = await axios.get(`https://barter-5cky.onrender.com/getprojects/${userid}`,{
                 withCredentials:true
             });
             if(projectdata.data.projectfound){
@@ -45,7 +45,7 @@ const Setsearchbar = ({setprojectdata,setfiltercount,userid,setstatus}) => {
         setstatus("shortlisted");
         //get jobs
         const getdata = async()=>{
-            const projectdata = await axios.get(`http://localhost:5000/getprojectuseridapplied/${userid}`,{
+            const projectdata = await axios.get(`https://barter-5cky.onrender.com/getprojectuseridapplied/${userid}`,{
                 withCredentials:true
             });
             if(projectdata.data.projectfound){

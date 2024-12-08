@@ -103,7 +103,7 @@ const Signup = () => {
 
         try {
             const checkUsername = await axios.get(
-                `http://localhost:5000/check-username/${userData.username}`,
+                `https://barter-5cky.onrender.com/check-username/${userData.username}`,
                 { withCredentials: true }
             );
             if (checkUsername.data.usernameavailable) {
@@ -111,7 +111,7 @@ const Signup = () => {
                 formData.append("image", file);
 
                 const uploadResponse = await axios.post(
-                    "http://localhost:5000/upload-image",
+                    "https://barter-5cky.onrender.com/upload-image",
                     formData,
                     { withCredentials: true }
                 );
@@ -120,7 +120,7 @@ const Signup = () => {
                     userData.personaldetails.profilephoto = uploadResponse.data.imageurl;
 
                     const newUserResponse = await axios.post(
-                        "http://localhost:5000/register",
+                        "https://barter-5cky.onrender.com/register",
                         userData,
                         { withCredentials: true }
                     );

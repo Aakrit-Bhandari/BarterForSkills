@@ -9,7 +9,7 @@ const JobApplied = ({projectid,setDatapro,setshortlistedusers}) => {
         //get all jobs
         const getProjectData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/getproject/${projectid}`, {
+                const response = await axios.get(`https://barter-5cky.onrender.com/getproject/${projectid}`, {
                     withCredentials: true
                 });
 
@@ -28,7 +28,7 @@ const JobApplied = ({projectid,setDatapro,setshortlistedusers}) => {
         //get jobs
         const getProjectData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/getproject/${projectid}`, {
+                const response = await axios.get(`https://barter-5cky.onrender.com/getproject/${projectid}`, {
                     withCredentials: true
                 });
 

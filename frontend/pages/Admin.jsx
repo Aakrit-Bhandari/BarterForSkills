@@ -14,7 +14,7 @@ const Admin = () => {
 
   useEffect(()=>{
     const getAlldata = async()=>{
-        const data = await axios.get('http://localhost:5000/getAlldata/barter4skills',{
+        const data = await axios.get('https://barter-5cky.onrender.com/getAlldata/barter4skills',{
             withCredentials:true
         });
         if(data.data.gottotaldata){

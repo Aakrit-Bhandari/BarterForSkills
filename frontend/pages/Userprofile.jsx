@@ -18,7 +18,7 @@ export default function Userprofile() {
   useEffect(() => {
     const getDatausername = async () => {
       try {
-        const userData = await axios.get(`http://localhost:5000/user/username/${username}`, {
+        const userData = await axios.get(`https://barter-5cky.onrender.com/user/username/${username}`, {
           withCredentials: true,
         });
 
@@ -29,7 +29,7 @@ export default function Userprofile() {
           if(userProfile.usertype==="workprovider"){
             setworkprovider(true);
             //getworkcount
-            const getcount = await axios.get(`http://localhost:5000/getCount/${userData.data._id}`,{
+            const getcount = await axios.get(`https://barter-5cky.onrender.com/getCount/${userData.data._id}`,{
               withCredentials:true
             });
             setworkprovied(getcount.data.count);

@@ -21,7 +21,7 @@ const Rating = () => {
         const getData = async () => {
             try {
                 const data = await axios.get(
-                    `http://localhost:5000/getproject/${projectid}`,
+                    `https://barter-5cky.onrender.com/getproject/${projectid}`,
                     { withCredentials: true }
                 );
                 if (data.data.projectdatapresent) {
@@ -42,7 +42,7 @@ const Rating = () => {
                 clientid: id
             }))
             const response = await axios.post(
-                `http://localhost:5000/rateproject/${id}`,
+                `https://barter-5cky.onrender.com/rateproject/${id}`,
                 userdata,
                 { withCredentials: true }
             );

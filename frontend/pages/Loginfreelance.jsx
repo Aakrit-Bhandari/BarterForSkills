@@ -59,7 +59,7 @@ const Loginfreelance = () => {
         setotperror(false);
         setpasserror(false); // Reset password error on form submit
         try {
-            const otpVerResponse = await axios.post('http://localhost:5000/login', {
+            const otpVerResponse = await axios.post('https://barter-5cky.onrender.com/login', {
                 email: userData.email,
                 otp: otp,
                 usertype: 'freelance'
@@ -90,7 +90,7 @@ const Loginfreelance = () => {
         setpasserror(false); // Reset password error on OTP request
         if (isValidEmail(userData.email)) {
             try {
-                const response = await axios.post('http://localhost:5000/send-otp', { email: userData.email }, {
+                const response = await axios.post('https://barter-5cky.onrender.com/send-otp', { email: userData.email }, {
                     withCredentials: true
                 });
                 if (response.data.otpsent) {
@@ -133,7 +133,7 @@ const Loginfreelance = () => {
         // Proceed with password verification if valid
         try {
             // Make API call to verify password (this is just an example)
-            const passwordVerification = await axios.post('http://localhost:5000/verify-password', {
+            const passwordVerification = await axios.post('https://barter-5cky.onrender.com/verify-password', {
                 email: userData.email,
                 password: password,
                 usertype: userData.usertype

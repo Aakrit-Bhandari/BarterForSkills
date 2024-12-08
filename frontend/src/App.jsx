@@ -43,7 +43,7 @@ function App() {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/check-token', {
+        const response = await axios.get('https://barter-5cky.onrender.com/check-token', {
           withCredentials: true,
         });
         console.log(response);

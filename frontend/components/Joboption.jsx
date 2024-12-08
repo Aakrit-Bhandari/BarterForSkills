@@ -8,7 +8,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
     const [admindata,setadmindata]= useState(null);
     const performapplytask = async()=>{
         //add that data to the user
-        const apply = await axios.get(`http://localhost:5000/apply-project/${userid}/${data?._id}`,{
+        const apply = await axios.get(`https://barter-5cky.onrender.com/apply-project/${userid}/${data?._id}`,{
             withCredentials:true
         });
         if(apply.data.userAlreadyapplied){
@@ -38,7 +38,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
         setprojectdata(data);
     }
     const deleteproject = async()=>{
-        const deletingtask = await axios.get(`http://localhost:5000/delete-task/${data._id}/${userid}`,{
+        const deletingtask = await axios.get(`https://barter-5cky.onrender.com/delete-task/${data._id}/${userid}`,{
             withCredentials:true
         });
         if(deletingtask.data.projectdeleted){
@@ -52,7 +52,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
     useEffect(()=>{
         const getAdmindata = async()=>{
             console.log("thisdata",data?.projectofficials?.ideaproviderid);
-            const useData = await axios.get(`http://localhost:5000/user/${data?.projectofficials?.ideaproviderid}`,{
+            const useData = await axios.get(`https://barter-5cky.onrender.com/user/${data?.projectofficials?.ideaproviderid}`,{
                 withCredentials:true
             })
             console.log("useData",useData);
