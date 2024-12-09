@@ -66,7 +66,7 @@ const Searchconsole = ({ setprojectdata, setfiltercount }) => {
             <div className="search">
                 <input
                     type="text"
-                    placeholder="Enter skills keywords separated by commas i.e. c++, java or Position i.e. Software eng."
+                    placeholder="Enter skills keywords/Job Position"
                     style={{ width: '50%' }}
                     onChange={handleskillchange}
                 />
