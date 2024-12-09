@@ -67,7 +67,7 @@ const Peopleapplied = () => {
             </div>}
             <br/>
             {datapro ? (
-                <Joboption data={datapro} userid={userid} />
+                <Joboption data={datapro} userid={userid} appliedpage={true}/>
             ) : (
                 <p>Loading project data...</p>
             )}
