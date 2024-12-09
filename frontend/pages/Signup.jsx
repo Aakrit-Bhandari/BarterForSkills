@@ -209,7 +209,7 @@ const Signup = () => {
                             <option value="female">Female</option>
                             <option value="other">Other</option>
                         </select>
-                        <label style={{overflow:'hidden'}}>Upload Profile Photo*</label>
+                        {/* <label style={{overflow:'hidden'}}>Upload Profile Photo*</label> */}
                         <input
                             type="file"
                             onChange={(e) => setFile(e.target.files[0])}

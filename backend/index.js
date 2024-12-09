@@ -33,12 +33,20 @@ import shortlistuser from './Routes/shortlistuser.js';
 import deleteproject from './Routes/deleteproject.js';
 import rateProject from './Routes/rateProject.js';
 import getAlldata from './Routes/getAlldata.js';
-import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Routes/skills.js';
+// import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Routes/skills.js';
 import getcount from './Routes/getcount.js';
 import { getQueries,addQuery } from './Routes/contact.js';
 import verifyPassword from './Routes/verifyPassword.js';
 import performSubscription from './Routes/performSubscription.js';
 import checkout from './Routes/checkout.js';
+
+
+import { getUserSkills,addUserSkills,editUserSkills,deleteUserSkill } from './Routes/Profile/skills.js';
+import { getUserCertificate,addUserCertificate,editUserCertification,deleteUserCertificate } from './Routes/Profile/certificate.js';
+import { getUserLicence,addUserLicence,editUserLicence,deleteUserLicence } from './Routes/Profile/licence.js';
+import { getUserLanguage,addUserLanguage,editUserLanguage,deleteUserLanguage } from './Routes/Profile/language.js';
+import { getUserEducation,addUserEducation,editUserEducation,deleteUserEducation } from './Routes/Profile/education.js';
+import { getUserWorkExp,addUserWorkExp,editUserWorkExp,deleteUserWorkExp } from './Routes/Profile/workexp.js';
 
 //config dotenv
 dotenv.config();
@@ -89,6 +97,36 @@ app.post("/contactPage/queries/addQuery",addQuery);
 app.get("/subscription/:userid/:subscriptiontype",performSubscription);
 app.post("/create-checkout-session",checkout);
 app.get('/logout',logout);
+
+app.get('/profile/qualification/skills/:userId',getUserSkills);
+app.post('/profile/qualification/addskill',addUserSkills);
+app.delete('/profile/qualification/deleteSkill/:skillId',deleteUserSkill);
+app.put('/profile/qualification/editskills',editUserSkills);
+
+app.get('/profile/qualification/workExp/:userId',getUserWorkExp);
+app.post('/profile/qualification/addWorkExp',addUserWorkExp);
+app.put('/profile/qualification/editWorkExp',editUserWorkExp);
+app.delete('/profile/qualification/deleteUserWorkExp/:workExpId',deleteUserWorkExp);
+
+app.get('/profile/qualification/certificate/:userId',getUserCertificate);
+app.post('/profile/qualification/addCertificate',addUserCertificate);
+app.delete('/profile/qualification/deleteUserCertificate/:certifId',deleteUserCertificate)
+app.put('/profile/qualification/editUserCertificate',editUserCertification)
+
+app.get('/profile/qualification/licence/:userId',getUserLicence)
+app.post('/profile/qualification/addLicence',addUserLicence)
+app.delete('/profile/qualification/deleteUserLicence/:licenceId',deleteUserLicence)
+app.put('/profile/qualification/editUserLicence',editUserLicence)
+
+app.get('/profile/qualification/education/:userId',getUserEducation);
+app.post('/profile/qualification/addEducation',addUserEducation);
+app.put('/profile/qualification/editEducation',editUserEducation);
+app.delete('/profile/qualification/deleteUserEducation/:eduId',deleteUserEducation);
+
+app.get('/profile/qualification/language/:userId',getUserLanguage);
+app.post('/profile/qualification/addLanguage',addUserLanguage);
+app.put('/profile/qualification/editLanguage',editUserLanguage);
+app.delete('/profile/qualification/deleteUserLanguage/:langId',deleteUserLanguage);
 
 
 //listen at 300

@@ -20,6 +20,9 @@ const Skill = new mongoose.Schema({
     skill:{type:String,required:false},
     experience:{type:Number,required:false}
 })
+const Certificate = new mongoose.Schema({
+    certificate:{type:String,required:true}
+})
 const IdeaproviderSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -68,6 +71,7 @@ const IdeaproviderSchema = new mongoose.Schema({
             type:[String]
         },
         licence:[Licence],
+        certification:[Certificate],
         language:[Language],
         education:[Education],
         workexperience:[WorkExp],
