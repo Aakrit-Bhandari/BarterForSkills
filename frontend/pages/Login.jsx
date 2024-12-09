@@ -18,13 +18,13 @@ const Login = () => {
                             className="login-button freelance-button" 
                             onClick={() => navigate('/login/freelance')}
                         >
-                            Login as Freelancer
+                            Login or Signup as Freelancer
                         </button>
                         <button 
                             className="login-button workprovider-button" 
                             onClick={() => navigate('/login/workprovider')}
                         >
-                            Login as Work Provider
+                            Login or Signup as Work Provider
                         </button>
                     </div>
                 </div>

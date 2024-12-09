@@ -160,7 +160,7 @@ const Loginworkprovider = () => {
             <div className="mainbox-login">
                 <div className="loginform">
                     <BackButton/>
-                    <b>Login</b>
+                    <b>Login </b><span>or</span><b> Signup</b>
                     <form onSubmit={checkData}>
                         <input type="email" placeholder="email*" value={userData.email} onChange={manageChanges} name="email" readOnly={hiddenOtpBox || hiddenPasswordBox} />
                         <span style={{ color: 'red', fontSize: '12px', display: error ? 'block' : 'none' }}>Enter a valid email Address</span>

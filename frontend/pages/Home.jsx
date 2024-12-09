@@ -50,7 +50,7 @@ const Home = () => {
           <button className="menu-icon" onClick={toggleMenu}>
             <i className="fas fa-bars"></i> {/* Font Awesome icon */}
           </button>
-          <button className="login-btn" onClick={()=>navigate('/login')}>Login</button>
+          <button className="login-btn" onClick={()=>navigate('/login')}>Login/Signup</button>
         </div>  
       </nav>  
 
