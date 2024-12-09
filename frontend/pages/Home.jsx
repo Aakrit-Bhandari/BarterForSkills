@@ -46,11 +46,7 @@ const Home = () => {
         </ul>
 
         <div className="navbar-right">
-          <span className="location-time"></span>
-          <button className="menu-icon" onClick={toggleMenu}>
-            <i className="fas fa-bars"></i> {/* Font Awesome icon */}
-          </button>
-          <button className="login-btn" onClick={()=>navigate('/login')}>Login/Signup</button>
+          <button className="login-btn" onClick={()=>navigate('/login')} style={{width:'110px'}}>Login/Signup</button>
         </div>  
       </nav>  
 
