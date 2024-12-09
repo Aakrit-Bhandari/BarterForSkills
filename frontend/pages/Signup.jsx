@@ -142,18 +142,22 @@ const Signup = () => {
                             }/${encodeURIComponent(userData.username)}`
                         );
                     } else {
-                        setErrorMessage(
+                        alert(
                             "An error occurred while adding the user. Please try again."
                         );
+                        return;
                     }
                 } else {
-                    setErrorMessage("Image upload failed. Please try again.");
+                    alert("Image upload failed. Please try again.");
+                    return;
                 }
             } else {
-                setErrorMessage("Username already exists. Please choose a different one.");
+                alert("Username already exists. Please choose a different one.");
+                return;
             }
         } catch (error) {
-            setErrorMessage("An error occurred: " + error.message);
+            alert("An error occurred: " + error.message);
+            return;
         }
     };
 
@@ -226,9 +230,9 @@ const Signup = () => {
                             placeholder="Password*"
                         />
                         
-                        {errorMessage && (
+                        {/* {errorMessage && (
                             <p style={{ color: "red" }}>{errorMessage}</p>
-                        )}
+                        )} */}
                         <button type="submit" style={{width:'100%',overflow:'hidden'}}>Sign Up</button>
                     </form>
                 </div>
