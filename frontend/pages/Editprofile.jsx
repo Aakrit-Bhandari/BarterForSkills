@@ -723,7 +723,7 @@ const Editprofile = ()=>{
                 )}
             <div className="Profile_Qualificatoin_ContComp Profile_Desig_Comp">
                 <div className="Profile_Design_Heading">
-                    <h1 style={{overflow:'hidden'}}>Qualification</h1>
+                    <h1 style={{overflow:'hidden'}}>Additional Details</h1>
                     <p>We use these details to show you jobs that match your unique skills and experience.</p>
                 </div>
                 <div className="Profile_Design_Second Profile_Design_cont">
