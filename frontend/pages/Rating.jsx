@@ -97,7 +97,7 @@ const Rating = () => {
                 </div>
             )}
             <br />
-            {projectdata && <Joboption data={projectdata} userid={userid} />}
+            {projectdata && <Joboption data={projectdata} userid={userid} ratepage={true}/>}
             <br />
             <div style={{ textAlign: "center" }}>
                 <span style={{ color: "red", textAlign: "center" }}>
