@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import img from "../Images/barter.png"
 import "../src/ProfileDetails.css"
-import Backbutton from "../components/Backbutton.jsx"
+// import Backbutton from "../components/Backbutton.jsx"
 import BackButton from "../components/Backbutton.jsx";
 
 const Editprofile = ()=>{
@@ -25,7 +25,7 @@ const Editprofile = ()=>{
         const fetchSkills = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/skills/${userId}`
+                    `https://barter4skills.netlify.app/profile/qualification/skills/${userId}`
                 );
                 const rawSkills = response.data.datafetched.skills;
                 // console.log("skills",rawSkills);
@@ -49,7 +49,7 @@ const Editprofile = ()=>{
         if(!newSkill||!experience){alert("Empty skill or exp");return;}
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addskill",
+                "https://barter4skills.netlify.app/profile/qualification/addskill",
                 {userId:userId,skill:newSkill,experience}
             );
             const addedSkill = {
@@ -77,7 +77,7 @@ const Editprofile = ()=>{
     const deleteUserSkill = async(skillId) =>
         {
             try{
-                await axios.delete(`http://localhost:5000/profile/qualification/deleteSkill/${skillId}`,{
+                await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteSkill/${skillId}`,{
                     data:{userId:userId},
                 })
                 setSkills(skills.filter((skill)=>skill.id!==skillId))
@@ -104,7 +104,7 @@ const Editprofile = ()=>{
             setSkills(updatedSkills);
             setCurrentEditIndex(null);
     
-            await axios.put("http://localhost:5000/profile/qualification/editskills", {
+            await axios.put("https://barter4skills.netlify.app/profile/qualification/editskills", {
                 userId: userId, 
                 skills: updatedSkills,
             });
@@ -124,8 +124,9 @@ const Editprofile = ()=>{
             try{
                 console.log("userid",userId);
                 const response = await axios.get(
-                   ` http://localhost:5000/profile/qualification/workExp/${userId}`
+                   `https://barter4skills.netlify.app/profile/qualification/workExp/${userId}`
                 );
+                console.log("response",response);
                 const rawWorkExp = response.data.datafetched.workexperience;
                 const parsedWorkExp = rawWorkExp
                 .filter (workexp=>workexp.title&&workexp.company)
@@ -147,7 +148,7 @@ const Editprofile = ()=>{
         if(!newTitle||!company){alert("Empty title or company");return;}
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addWorkExp",
+                "https://barter4skills.netlify.app/profile/qualification/addWorkExp",
                 {userId:userId,title:newTitle,company:company}
             );
             const addedWorkExp = {
@@ -188,7 +189,7 @@ const Editprofile = ()=>{
             setNewTitle("");
             setCompany("");
             setCurrentEditIndex(null);
-            await axios.put("http://localhost:5000/profile/qualification/editWorkExp",{
+            await axios.put("https://barter4skills.netlify.app/profile/qualification/editWorkExp",{
                 userId:userId,
                 title:updatedWorkExp
             });
@@ -200,7 +201,7 @@ const Editprofile = ()=>{
     }
     const deleteWorkExp = async(workExpId)=>{
         try{
-            await axios.delete(`http://localhost:5000/profile/qualification/deleteUserWorkExp/${workExpId}`,{
+            await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteUserWorkExp/${workExpId}`,{
                 data:{userId:userId}
             });
             setTitle(title.filter((workExp)=>workExp.id!==workExpId));
@@ -219,7 +220,7 @@ const Editprofile = ()=>{
         const fetchEducation = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/education/${userId}`
+                    `https://barter4skills.netlify.app/profile/qualification/education/${userId}`
                 );
                 const rawEducation = response.data.datafetched.education;
                 const parsedEducation = rawEducation
@@ -246,7 +247,7 @@ const Editprofile = ()=>{
         }
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addEducation",
+                "https://barter4skills.netlify.app/profile/qualification/addEducation",
                 {userId:userId,levelofedu:newEducation,fieldofstudy:field}
             );
             const addedEdu = {
@@ -282,7 +283,7 @@ const Editprofile = ()=>{
             setNewEducation("");
             setField("");
             setCurrentEditEducation(null);
-            await axios.put("http://localhost:5000/profile/qualification/editEducation",{
+            await axios.put("https://barter4skills.netlify.app/profile/qualification/editEducation",{
                 userId:userId,
                 updatedEducation,
             })
@@ -294,7 +295,7 @@ const Editprofile = ()=>{
     }
     const deleteUserEducation = async(eduId)=>{
         try{
-            await axios.delete(`http://localhost:5000/profile/qualification/deleteUserEducation/${eduId}`,{
+            await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteUserEducation/${eduId}`,{
                 data:{userId:userId}
             });
             setEducation(education.filter((ed)=>ed.id!==eduId));
@@ -314,7 +315,7 @@ const Editprofile = ()=>{
         const fetchLicence = async()=>{
             try{
                 const response = await axios.get(
-                   ` http://localhost:5000/profile/qualification/licence/${userId}`
+                   ` https://barter4skills.netlify.app/profile/qualification/licence/${userId}`
                 );
                 const rawLicence = response.data.datafetched.licence;
                 const parsedLicence = rawLicence
@@ -340,7 +341,7 @@ const Editprofile = ()=>{
         }
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addLicence",
+                "https://barter4skills.netlify.app/profile/qualification/addLicence",
                 {userId:userId,licenceName:newLicence,year:year}
             );
             const addedLicence = {
@@ -374,7 +375,7 @@ const Editprofile = ()=>{
             setNewLicence("");
             setYear("");
             setCurrentLicenceIndex(null);
-            await axios.put("http://localhost:5000/profile/qualification/editLanguage",{
+            await axios.put("https://barter4skills.netlify.app/profile/qualification/editLanguage",{
               userId:userId,
               licence:updatedLicence,
             });
@@ -388,7 +389,7 @@ const Editprofile = ()=>{
     }
     const deleteUserLicence = async(licenceId)=>{
         try{
-            await axios.delete(`http://localhost:5000/profile/qualification/deleteUserLicence/${licenceId}`,{
+            await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteUserLicence/${licenceId}`,{
                 data:{userId:userId}
             })
             setLicence(licence.filter((licence)=>licence.id!==licenceId));
@@ -407,7 +408,7 @@ const Editprofile = ()=>{
         const fetchCertificate = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/certificate/${userId}`
+                    `https://barter4skills.netlify.app/profile/qualification/certificate/${userId}`
                 );
                 const rawCertif = response.data.datafetched.certification;
                 const parsedCertif = rawCertif
@@ -429,7 +430,7 @@ const Editprofile = ()=>{
         if(!newCertificate){alert(" ERRORR Addsomthing");return;}
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addCertificate",
+                "https://barter4skills.netlify.app/profile/qualification/addCertificate",
                 {userId:userId,certificate:newCertificate}
             );
             const addedCertificate = {
@@ -460,7 +461,7 @@ const Editprofile = ()=>{
             setCertificate(updatedCertificate);
             setNewCertificate("");
             setCurrCertifIndex(null);
-            await axios.put('http://localhost:5000/profile/qualification/editUserCertificate',{
+            await axios.put('https://barter4skills.netlify.app/profile/qualification/editUserCertificate',{
                 userId:userId,
                 certificate:updatedCertificate
             });
@@ -474,7 +475,7 @@ const Editprofile = ()=>{
     const deleteCerificate = async(certifId)=>{
         console.log(certifId);
         try{
-            await axios.delete(`http://localhost:5000/profile/qualification/deleteUserCertificate/${certifId}`,{
+            await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteUserCertificate/${certifId}`,{
                 data:{userId:userId}
             });
             setCertificate(certificate.filter((certif)=>certif.id!==certifId));
@@ -492,7 +493,7 @@ const Editprofile = ()=>{
         const fetchLanguage = async()=>{
             try{
                 const response = await axios.get(
-                    `http://localhost:5000/profile/qualification/language/${userId}`
+                    `https://barter4skills.netlify.app/profile/qualification/language/${userId}`
                 );
                 const rawLanguage = response.data.datafetched.language;
                 const parsedLanguage = rawLanguage
@@ -515,7 +516,7 @@ const Editprofile = ()=>{
         if(!newLanguage||!fluency){alert("ERROR addsomething");return;}
         try{
             const response = await axios.post(
-                "http://localhost:5000/profile/qualification/addLanguage",
+                "https://barter4skills.netlify.app/profile/qualification/addLanguage",
                 {userId:userId,langName:newLanguage,proficiency:fluency}
             );
             const addedLanguage ={
@@ -535,7 +536,7 @@ const Editprofile = ()=>{
     }
     const deleteLanugage = async(langId)=>{
         try{
-            await axios.delete(`http://localhost:5000/profile/qualification/deleteUserLanguage/${langId}`,{
+            await axios.delete(`https://barter4skills.netlify.app/profile/qualification/deleteUserLanguage/${langId}`,{
                 data:{userId:userId}
             });
             setLanguage(language.filter((lang)=>lang.id!==langId));
