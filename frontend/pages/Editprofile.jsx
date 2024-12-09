@@ -558,7 +558,7 @@ const Editprofile = ()=>{
                         <h2 className="Profile_modal_Heading">Add Skills</h2>
                         <div className="Profile_modal_Inputs">
                             <input type="text" value={newSkill} onChange={(e)=>setNewSkill(e.target.value)} placeholder="Enter your skills" />
-                            <input type="number" value={experience} onChange={(e)=>setExperience(e.target.value)} placeholder="Years of Experience"></input>
+                            <input type="number" value={Math.abs(experience)} onChange={(e)=>setExperience(e.target.value)} placeholder="Years of Experience"></input>
                         </div>
                         <div className="Profile_modal_display">
                             {skills.map((mp,id)=>(
@@ -613,7 +613,7 @@ const Editprofile = ()=>{
                             <h2 className="Profile_modal_Heading">Add Licence</h2>
                                 <div className="Profile_modal_Inputs">
                                     <input type="text" value={newLicence} onChange={(e)=>setNewLicence(e.target.value)} placeholder="Enter Licence Name" />
-                                    <input type="number" value={year} onChange={(e)=>setYear(e.target.value)} placeholder="Years of Expiry"></input>
+                                    <input type="number" value={Math.abs(year)} onChange={(e)=>setYear(e.target.value)} placeholder="Years of Expiry"></input>
                                 </div>
                                 <div className="Profile_modal_display">
                                 {licence.map((mp,id)=>(
