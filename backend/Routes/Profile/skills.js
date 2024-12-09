@@ -5,6 +5,7 @@ const getUserSkills = async(req,res)=>{
     const userResponse = {...response};
     try{
         const user = await IdeaproviderModel.findById(userId);
+        console.log(user);
         if(user)
         {
             userResponse.userprofilefound = true;
