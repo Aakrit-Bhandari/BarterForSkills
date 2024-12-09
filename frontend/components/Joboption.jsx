@@ -58,6 +58,7 @@ const Joboption = ({data,key,worker,setvisited,setprojectdata,userid,setUser,sta
             console.log("useData",useData);
             if(useData.data.userprofilefound){
                 setadmindata(useData.data.userProfiledata);
+                console.log("admindata",admindata);
             }
         }
         getAdmindata();
