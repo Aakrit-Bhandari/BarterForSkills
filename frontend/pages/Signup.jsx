@@ -109,6 +109,12 @@ const Signup = () => {
             alert('Please upload an image file (jpg or png).');
             return;
         }
+        const allowedExtensions = ['jpg', 'jpeg', 'png'];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert('Invalid file extension. Only jpg and png are allowed.');
+            return;
+        }
 
         try {
             const checkUsername = await axios.get(
