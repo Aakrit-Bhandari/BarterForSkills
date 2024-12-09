@@ -23,6 +23,7 @@ import SubscriptionPageFreelance from '../pages/SubscriptionPageFreelance';
 import Success from '../pages/Success';
 import Subscriptionpage from '../pages/Subscriptionpage';
 import HireFreelancerPage from '../pages/HireFreelancerPage';
+import EditUserProfile from '../pages/EditUserProfile';
 
 
 function App() {
@@ -93,7 +94,8 @@ function App() {
         <Route path='/barter4skills/:username' element={<Userprofile />} />
         <Route path='/rate/:userid/:projectid' element={<Rating/>}/>
         <Route path='/admin/barter4skills' element={<Admin/>}/>
-        <Route path='/editprofile/:userId/:username' element={<Editprofile/>} />
+        <Route path='/editprofile/:userId/:username' element={<EditUserProfile/>} />
+        <Route path='/editprofilee/:userId/:username' element={<Editprofile/>}/>
         <Route path='/subscription/workprovider/wpd78x/:username/:userid' element={<Subscriptionpage/>} />
         <Route path='/subscription/freelance/wpd78x/:username/:userid' element={<SubscriptionPageFreelance/>} />
         <Route path='/contactus' element={<Contactus/>}/>
