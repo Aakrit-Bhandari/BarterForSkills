@@ -104,6 +104,11 @@ const Signup = () => {
             alert("Please upload your profile image.");
             return;
         }
+        const allowedTypes = ['image/jpeg', 'image/png'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Please upload an image file (jpg or png).');
+            return;
+        }
 
         try {
             const checkUsername = await axios.get(
