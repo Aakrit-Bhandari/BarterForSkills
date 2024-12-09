@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Joboption from "../components/Joboption";
 import PersonApplied from "../components/PersonApplied";
+import BackButton from "../components/Backbutton";
 
 const Rating = () => {
     const { userid, projectid } = useParams();
@@ -60,6 +61,7 @@ const Rating = () => {
 
     return (
         <>
+            <BackButton/>
             {rate && (
                 <div className="rating-inc">
                     <div className="top-rating">
