@@ -1,7 +1,7 @@
 import response from "../../response.js";
 import IdeaproviderModel from "../../models/IdeaproviderSchema.js";
 const getUserWorkExp = async(req,res)=>{
-    const userId= req.params.id;
+    const userId= req.params.userId;
     const userResponse = {...response};
     try{
         const user = await IdeaproviderModel.findById(userId);
