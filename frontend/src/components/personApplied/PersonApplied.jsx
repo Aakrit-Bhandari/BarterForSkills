@@ -1,0 +1,139 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  BASIC_SUBSCRIPTION,
+  MID_SUBSCRIPTION,
+} from "../../constants/constants";
+
+const PersonApplied = ({
+  clientid,
+  projectid,
+  setmailsection,
+  setmailuserdata,
+  rating,
+  setRate,
+  setUser,
+  setid,
+  shortlistedusers,
+}) => {
+  const navigate = useNavigate();
+  const [userdata, setuserdata] = useState(null);
+
+  useEffect(() => {
+    const performtask = async () => {
+      const getuserData = await axios.get(
+        // `https://barter-5cky.onrender.com/user/${clientid}`,
+        `http://localhost:3000/user/${clientid}`,
+        {
+          withCredentials: true,
+        },
+      );
+      if (getuserData.data.userprofilefound) {
+        setuserdata(getuserData.data.userProfiledata);
+      }
+    };
+    performtask();
+  }, []);
+
+  //TODO make a common API contract
+  const shortlistuser = async () => {
+    const performshortlisting = await axios.get(
+      // `https://barter-5cky.onrender.com/shortlist/${clientid}/${projectid}`,
+      `http://localhost:3000/shortlist/${clientid}/${projectid}`,
+      {
+        withCredentials: true,
+      },
+    );
+    if (performshortlisting.data.userApplied) {
+      alert("User Shortlisted Successfully...");
+      return;
+    }
+    alert("User Already Shortlisted...");
+  };
+
+  const sendEmailtouser = async () => {
+    setmailsection(true);
+    setmailuserdata(userdata);
+  };
+  const rateUser = async () => {
+    setRate(true);
+    setUser(userdata);
+    setid(userdata._id);
+  };
+
+  //TODO move to utils file and make a switch
+  const userSubscription = userdata?.subscription;
+  const subscription_type =
+    userSubscription === BASIC_SUBSCRIPTION
+      ? "Basic"
+      : userSubscription === MID_SUBSCRIPTION
+        ? "Premium"
+        : "Pro Premium";
+
+  return (
+    <div className="small-divs-applied">
+      <div className="left-applied">
+        <div className="img-logo">
+          <img src={userdata?.personaldetails?.profilephoto} alt="img" />
+        </div>
+        <div className="text-logo">
+          <span>{userdata?.personaldetails?.name}</span>
+          <br />
+          <span style={{ color: "gray" }}>
+            Mob No. +91 {userdata?.personaldetails?.conatactno}
+          </span>
+        </div>
+      </div>
+      <div className="right-applied">
+        <div className="text-right">
+          <span style={{ color: "gray" }}>
+            UserType:{" "}
+            <span style={{ color: "purple" }}>{subscription_type}</span>
+          </span>
+          <br />
+          <span style={{ color: "gray" }}>
+            Skills:{" "}
+            {userdata?.personaldetails?.skills
+              ?.map((skill) => skill.skill)
+              ?.join(", ") || "Not provided"}
+          </span>
+          <br />
+          <span style={{ color: "gray" }}>
+            Linkedin: {userdata?.personaldetails?.linkedinid}
+          </span>
+          <br />
+          <span style={{ color: "gray" }}>
+            Gender: {userdata?.personaldetails?.gender}
+          </span>
+          <br />
+          <span style={{ color: "gray" }}>
+            Rating:{" "}
+            {userdata?.personaldetails?.rating === null
+              ? 0
+              : userdata?.personaldetails?.rating}
+          </span>
+          <br />
+          <div style={{ textAlign: "center" }}>
+            {!rating && !shortlistedusers && (
+              <button onClick={shortlistuser}>Shortlist</button>
+            )}
+            {rating && <button onClick={rateUser}>Rate User</button>}
+            {!rating && !shortlistedusers && <span>&emsp;</span>}
+            <button
+              onClick={() => navigate(`/barter4skills/${userdata?.username}`)}
+            >
+              User Profile
+            </button>
+            &emsp;
+            {!rating && shortlistedusers && (
+              <button onClick={shortlistuser}>Project Cont.</button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PersonApplied;
