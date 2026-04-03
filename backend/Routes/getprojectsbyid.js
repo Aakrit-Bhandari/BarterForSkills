@@ -7,7 +7,6 @@ const getprojectsbyid = async(req,res)=>{
 
     try {
         // Fetch user by ID
-        
         const getprojects = await Projectsmodel.find();
         
         if(getprojects.length>0){

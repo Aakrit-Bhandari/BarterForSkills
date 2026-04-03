@@ -10,6 +10,7 @@ const sendOtp = async(req,res)=>{
     const otp = generateotp();
     otpstore.email = userData.email;
     otpstore.otp = otp;
+    userResponse.sentOtp = otp;
     sendEmail(userData.email,otp);
     userResponse.otpsent = true;
     return res.status(200).json(userResponse);
