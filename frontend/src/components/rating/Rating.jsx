@@ -1,6 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  GET_SINGLE_PROJECT_URL,
+  RATE_PROJECT_URL,
+  TYPE_GET,
+  TYPE_POST,
+} from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 import BackButton from "../backButton/Backbutton.jsx";
 import Joboption from "../jobsOption/Joboption.jsx";
 import PersonApplied from "../personApplied/PersonApplied.jsx";
@@ -21,16 +27,16 @@ const Rating = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await axios.get(
-          // `https://barter-5cky.onrender.com/getproject/${projectid}`,
-          `http://localhost:3000/getproject/${projectid}`,
-          { withCredentials: true },
+        const options = { withCredentials: true };
+        const data = await pokeBarterForSkillsServer(
+          `${GET_SINGLE_PROJECT_URL}/${projectid}`,
+          options,
+          TYPE_GET,
         );
-        if (data.data.projectdatapresent) {
-          setprojectdata(data.data.projectdatafetched);
-          setPeople(
-            data.data.projectdatafetched.projectofficials.clientid || [],
-          );
+        // `https://barter-5cky.onrender.com/getproject/${projectid}`,
+        if (data.projectdatapresent) {
+          setprojectdata(data.projectdatafetched);
+          setPeople(data.projectdatafetched.projectofficials.clientid || []);
         }
       } catch (error) {
         console.error("Error fetching project data", error);
@@ -45,19 +51,20 @@ const Rating = () => {
         ...olddata,
         clientid: id,
       }));
-      const response = await axios.post(
-        // `https://barter-5cky.onrender.com/rateproject/${id}`,
-        `http://localhost:3000/rateproject/${id}`,
-        userdata,
-        { withCredentials: true },
+      // `https://barter-5cky.onrender.com/rateproject/${id}`,
+      const options = { withCredentials: true, data: userdata };
+      const response = await pokeBarterForSkillsServer(
+        `${RATE_PROJECT_URL}/${id}`,
+        options,
+        TYPE_POST,
       );
-      if (response.data.ratingmade) {
+      if (response.ratingmade) {
         alert("Rating made");
         setRate(false);
       } else {
         alert("Some error occurred. Try again after some time.");
       }
-      console.log("Rating submitted successfully:", response.data);
+      console.log("Rating submitted successfully:", response);
     } catch (error) {
       console.error("Error submitting rating", error);
     }

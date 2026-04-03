@@ -1,12 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { CHECKOUT_URL,TYPE_GET, TYPE_POST, USER_URL } from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 import BackButton from "../backButton/Backbutton";
 import "./Subscription.css";
 
 export default function SubscriptionPage() {
   const { username, userid } = useParams();
-  const navigate = useNavigate();
 
   // State for storing plan details
   const [plans, setPlans] = useState([
@@ -42,13 +42,13 @@ export default function SubscriptionPage() {
     // Getting data from the backend about the user
     const getUserData = async () => {
       try {
-        const response = await axios.get(
-          // `https://barter-5cky.onrender.com/user/${userid}`,
-          `http://localhost:3000/user/${userid}`,
+        //   // `https://barter-5cky.onrender.com/user/${userid}`,
+        const options = {};
+        const responseData = await pokeBarterForSkillsServer(
+          `${USER_URL}/${userid},${options},${TYPE_GET}`,
         );
-        const userdata = response.data;
 
-        if (!userdata.userprofilefound) {
+        if (!responseData.userprofilefound) {
           alert(
             "You need to login first... Or some error occurred. Try again after some time.",
           );
@@ -58,10 +58,10 @@ export default function SubscriptionPage() {
         let updatedPlans = [...plans]; // Create a copy of the current plans
 
         // Check current user's subscription and update the buttonText accordingly
-        if (userdata.userProfiledata.subscription === "workprovider-basic") {
+        if (responseData.userProfiledata.subscription === "workprovider-basic") {
           updatedPlans[0].buttonText = "Current Plan";
         } else if (
-          userdata.userProfiledata.subscription === "workprovider-mid"
+          responseData.userProfiledata.subscription === "workprovider-mid"
         ) {
           updatedPlans[1].buttonText = "Current Plan";
         } else {
@@ -80,26 +80,28 @@ export default function SubscriptionPage() {
 
   const paymentmethod = async (plan, subscriptiontype) => {
     try {
-      const response = await axios.post(
-        // "https://barter-5cky.onrender.com/create-checkout-session",
-        "http://localhost:3000/create-checkout-session",
-        {
+      //   // "https://barter-5cky.onrender.com/create-checkout-session",
+      const options = {
+        data: {
           planName: plan.name,
           price: plan.price,
-          userId: userid,
-          subscriptiontype: subscriptiontype,
+          useId: userid,
+          subscriptionType: subscriptiontype,
           username: username,
           usertype: "freelance",
         },
+      };
+      const responseData = await pokeBarterForSkillsServer(
+        `${CHECKOUT_URL},${options},${TYPE_POST}`,
       );
 
-      if (response.data?.url) {
-        window.location.href = response.data.url;
+      if (responseData?.url) {
+        window.location.href = responseData.url;
       } else {
         throw new Error("Invalid response from server.");
       }
     } catch (error) {
-      console.error("Error redirecting to Stripe Checkout:", error);
+      console.error(error);
       alert(
         "An error occurred while processing your payment. Please try again.",
       );

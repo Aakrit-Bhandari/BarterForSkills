@@ -1,50 +1,46 @@
-import axios from "axios";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  LOGIN_URL,
+  SEND_OTP_URL,
+  TYPE_POST,
+  VERIFY_PASSWORD_URL,
+} from "../../../fetchers/constants.js";
+import { pokeBarterForSkillsServer } from "../../../fetchers/fetchers.jsx";
 import Backbutton from "../../backButton/Backbutton.jsx";
 import "../Login.css";
+const initialState = {
+  email: "",
+  usertype: "",
+  subscription: "",
+};
+const updateUserData = (state, action) => {
+  switch (action.type) {
+    case "email":
+      return { ...state, email: action.payload };
+    case "password":
+      return { ...state, password: action.payload };
+    case "userType":
+      return {
+        ...state,
+        usertype: action.payload,
+        subscription: action.payload + "-basic",
+      };
+    default:
+      return state;
+  }
+};
 
-const Loginfreelance = () => {
+export default function Loginfreelance() {
   const [hiddenOtpBox, setHiddenOtpBox] = useState(false);
   const [hiddenPasswordBox, sethiddenPasswordBox] = useState(false);
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    username: "",
-    usertype: "freelance",
-    email: "",
-    password: "",
-    subscription: "freelance-basic",
-    personaldetails: {
-      name: "",
-      conatactno: "",
-      skills: [],
-      location: "",
-      description: "",
-      linkedinid: "",
-      gender: "",
-      rating: "",
-      projectsworkedon: "",
-    },
-  });
+  const [userData, dispatch] = useReducer(updateUserData, initialState);
   const [error, seterror] = useState(false);
-  const [otperror, setotperror] = useState(false);
+  const [otpError, setOtpError] = useState(false);
   const [otp, setOtp] = useState("");
-  const [password, setpassword] = useState("");
-  const [passerror, setpasserror] = useState(false); // Password error state
-
-  const handleOtpChange = (e) => {
-    setOtp(e.target.value);
-  };
-  const handlePassChange = (e) => {
-    setpassword(e.target.value);
-  };
-
-  const manageChanges = (e) => {
-    setUserData((oldData) => ({
-      ...oldData,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false); // Password error state
 
   function isValidEmail(email) {
     // Regex for email validation with period in domain
@@ -55,39 +51,37 @@ const Loginfreelance = () => {
   const checkData = async (e) => {
     e.preventDefault();
     seterror(false);
-    setotperror(false);
-    setpasserror(false); // Reset password error on form submit
+    setOtpError(false);
+    setPasswordError(false); // Reset password error on form submit
     try {
-      const otpVerResponse = await axios.post(
-        // "https://barter-5cky.onrender.com/login",
-        "http://localhost:3000/login",
-        {
-          email: userData.email,
-          otp: otp,
-          usertype: "freelance",
-        },
-        {
-          withCredentials: true,
-        },
+      const options = {
+        withCredentials: true,
+        data: { email: userData.email, otp: otp, usertype: "freelance" },
+      };
+      const response = await pokeBarterForSkillsServer(
+        `${LOGIN_URL}`,
+        options,
+        TYPE_POST,
       );
-      if (otpVerResponse.data.otpverified) {
-        if (otpVerResponse.data.existinguser) {
-          localStorage.setItem(
-            "response-userdata",
-            JSON.stringify(otpVerResponse.data),
-          );
-          navigate(
-            `/welcome/freelance/in23x/${encodeURIComponent(otpVerResponse.data.userData.username)}`,
-          );
+      // "https://barter-5cky.onrender.com/login",
+
+      if (response.otpverified) {
+        if (response.existinguser) {
+          if (response.userData.userType === "freelance")
+            navigate(
+              `/welcome/freelance/in23x/${encodeURIComponent(response.data.userData.username)}`,
+            );
+          else
+            navigate(
+              `/welcome/workprovider/wpd78x/${encodeURIComponent(response.data.userData.username)}`,
+            );
         } else {
-          localStorage.setItem(
-            "response-userdata",
-            JSON.stringify(otpVerResponse.data),
-          );
-          navigate(`/signup/${userData.email}`);
+          navigate(`/signup/${userData.email}`, {
+            state: { usertype: userData.usertype },
+          });
         }
       } else {
-        setotperror(true);
+        setOtpError(true);
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
@@ -97,19 +91,21 @@ const Loginfreelance = () => {
   const sendOtp = async (e) => {
     e.preventDefault();
     sethiddenPasswordBox(false);
-    setotperror(false);
-    setpasserror(false); // Reset password error on OTP request
+    setOtpError(false);
+    setPasswordError(false); // Reset password error on OTP request
     if (isValidEmail(userData.email)) {
       try {
-        const response = await axios.post(
-          // "https://barter-5cky.onrender.com/send-otp",
-          "http://localhost:3000/send-otp",
-          { email: userData.email },
-          {
-            withCredentials: true,
-          },
+        const options = {
+          withCredentials: true,
+          data: { email: userData.email },
+        };
+        const response = await pokeBarterForSkillsServer(
+          `${SEND_OTP_URL}`,
+          options,
+          TYPE_POST,
         );
-        if (response.data.otpsent) {
+        // "https://barter-5cky.onrender.com/send-otp",
+        if (response.otpsent) {
           setHiddenOtpBox(true);
         } else {
           alert("Failed to send OTP");
@@ -140,39 +136,40 @@ const Loginfreelance = () => {
 
   const verifypass = async () => {
     // Check if password is empty or invalid
-    if (!password || password.length < 1) {
-      seterror(true); // Show password error
-      alert("Enter password to continue.");
+    if (!password || password.length < 1 || !isValidPassword(password)) {
+      setPasswordError(true); // Show password error
+      alert("Enter a valid password to continue.");
       return;
     }
 
     // Proceed with password verification if valid
     try {
-      // Make API call to verify password (this is just an example)
-      const passwordVerification = await axios.post(
-        // "https://barter-5cky.onrender.com/verify-password",
-        "http://localhost:3000/verify-password",
-        {
+      const options = {
+        withCredentials: true,
+        data: {
           email: userData.email,
           password: password,
           usertype: userData.usertype,
         },
-        {
-          withCredentials: true,
-        },
+      };
+      const response = await pokeBarterForSkillsServer(
+        `${VERIFY_PASSWORD_URL}`,
+        options,
+        TYPE_POST,
       );
-
-      if (passwordVerification.data.passverified) {
-        setpasserror(false); // Clear error if password is valid
+      // Make API call to verify password (this is just an example)
+      // "https://barter-5cky.onrender.com/verify-password",
+      if (response.passverified) {
+        setPasswordError(false); // Clear error if password is valid
         localStorage.setItem(
           "response-userdata",
-          JSON.stringify(passwordVerification.data),
+          JSON.stringify(response.data),
         );
         navigate(
-          `/welcome/freelance/in23x/${encodeURIComponent(passwordVerification.data.userData.username)}`,
+          `/welcome/freelance/in23x/${encodeURIComponent(response.data.userData.username)}`,
         );
       } else {
-        setpasserror(true); // Set password error if verification fails
+        setPasswordError(true); // Set password error if verification fails
       }
     } catch (error) {
       console.error("Error verifying password:", error);
@@ -180,86 +177,97 @@ const Loginfreelance = () => {
   };
 
   return (
-      <div className="mainbox-login">
-        <div className="loginform">
-          <Backbutton />
-          <b>Login or Signup</b>
-          <form onSubmit={checkData}>
-            <input
-              type="email"
-              placeholder="email*"
-              value={userData.email}
-              onChange={manageChanges}
-              name="email"
-              readOnly={hiddenOtpBox || hiddenPasswordBox}
-            />
-            <span
-              style={{
-                color: "red",
-                fontSize: "12px",
-                display: error ? "block" : "none",
-              }}
-            >
-              Enter a valid email Address
-            </span>
-            <button onClick={getPassword} id="btn">
-              Continue with Password
-            </button>
-            <button onClick={sendOtp} id="btn">
-              Continue with Otp
-            </button>
-            {hiddenPasswordBox && (
-              <div className="otpcentre">
-                <b>Verify with Password</b>
-                <input
-                  type="password"
-                  placeholder="Password*"
-                  name="password"
-                  value={password}
-                  onChange={handlePassChange}
-                />
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    display: passerror ? "block" : "none",
-                  }}
-                >
-                  Wrong Password or Invalid User
-                </span>
-                <button onClick={verifypass} id="btn">
-                  Continue
-                </button>
-              </div>
-            )}
-            {hiddenOtpBox && (
-              <div className="otpcentre">
-                <b>Verify with OTP</b>
-                <input
-                  type="number"
-                  placeholder="otp*"
-                  name="otp"
-                  value={otp}
-                  onChange={handleOtpChange}
-                />
-                <span
-                  style={{
-                    color: "red",
-                    fontSize: "12px",
-                    display: otperror ? "block" : "none",
-                  }}
-                >
-                  Wrong OTP
-                </span>
-                <button type="submit" id="btn">
-                  Continue
-                </button>
-              </div>
-            )}
-          </form>
-        </div>
+    <div className="mainbox-login">
+      <div className="loginform">
+        <Backbutton />
+        <b>Login or Signup</b>
+        <form onSubmit={checkData}>
+          <input
+            type="email"
+            placeholder="email*"
+            value={userData.email}
+            onChange={(e) =>
+              dispatch({ type: "email", payload: e.target.value })
+            }
+            name="email"
+            readOnly={hiddenOtpBox || hiddenPasswordBox}
+          />
+          <select
+            value={userData.usertype}
+            onChange={(e) =>
+              dispatch({ type: "userType", payload: e.target.value })
+            }
+            name="usertype"
+          >
+            <option value="">Select User Type</option>
+            <option value="freelance">Freelance</option>
+            <option value="workprovider">Work Provider</option>
+          </select>
+          <span
+            style={{
+              color: "red",
+              fontSize: "12px",
+              display: error ? "block" : "none",
+            }}
+          >
+            Enter a valid email Address
+          </span>
+          <button onClick={getPassword} id="btn">
+            Continue with Password
+          </button>
+          <button onClick={sendOtp} id="btn">
+            Continue with Otp
+          </button>
+          {hiddenPasswordBox && (
+            <div className="otpcentre">
+              <b>Verify with Password</b>
+              <input
+                type="password"
+                placeholder="Password*"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span
+                style={{
+                  color: "red",
+                  fontSize: "12px",
+                  display: passwordError ? "block" : "none",
+                }}
+              >
+                Wrong Password or Invalid User
+              </span>
+              <button onClick={verifypass} id="btn">
+                Continue
+              </button>
+            </div>
+          )}
+          {hiddenOtpBox && (
+            <div className="otpcentre">
+              <b>Verify with OTP</b>
+              <input
+                type="number"
+                placeholder="otp*"
+                name="otp"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <span
+                style={{
+                  color: "red",
+                  fontSize: "12px",
+                  display: otpError ? "block" : "none",
+                }}
+              >
+                Wrong OTP
+              </span>
+              <button type="submit" id="btn">
+                Continue
+              </button>
+            </div>
+          )}
+        </form>
       </div>
+    </div>
   );
-};
-
-export default Loginfreelance;
+}

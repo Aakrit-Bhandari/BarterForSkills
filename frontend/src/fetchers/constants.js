@@ -5,5 +5,26 @@ export const TYPE_DELETE = "DELETE";
 export const TYPE_PUT = "PUT";
 export const TYPE_PATCH = "PATCH";
 
-
+export const LOGIN_URL = "/login";
 export const CHECK_TOKEN_URL = "/check-token";
+export const GET_WORKS_URL = "/getworks";
+export const GET_PROJECTS_URL = "/getprojects";
+export const GET_PROJECTS_USERID_APPLIED_URL = "/getprojectuseridapplied";
+export const LOGOUT_URL = "/logout";
+export const SUBSCRIPTION_URL = "/subscription";
+export const USER_URL = "/user";
+export const CHECKOUT_URL = "/create-checkout-session";
+export const CHECK_USERNAME_URL = "/check-username";
+export const UPLOAD_IMAGE_URL = "/upload-image";
+export const REGISTER_URL = "/register";
+export const GET_PROJECTS_ALL_URL = "/getprojects-all";
+export const RATE_PROJECT_URL = "/rateproject";
+export const GET_SINGLE_PROJECT_URL = "/getproject";
+export const GET_SINGLE_WORK_URL = "/getwork";
+export const SHORTLIST_URL = "/shortlist";
+export const SEND_MAIL_URL = "/sendmail";
+export const SEND_OTP_URL = "/send-otp";
+export const VERIFY_PASSWORD_URL = "/verify-password";
+export const APPLY_PROJECT_URL = "/apply-project";
+export const EDIT_PROJECT_URL = "/editproject";
+export const DELETE_PROJECT_URL = "/delete-task";

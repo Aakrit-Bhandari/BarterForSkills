@@ -1,7 +1,7 @@
 export const LOGIN_FREELANCE_URL = "/login/freelance";
 export const LOGIN_WORKPROVIDER_URL = "/login/workprovider";
 
-export const FREELANCE = "freelance";
+export const FREELANCER = "freelance";
 export const WORKPROVIDER = "workprovider";
 
 export const SERVE_FREELANCE_URL = "/welcome/freelance/in23x/";

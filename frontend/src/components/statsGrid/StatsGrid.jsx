@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../card/Card.jsx";
 
 const StatsGrid = ({ data }) => {
@@ -18,50 +18,50 @@ const StatsGrid = ({ data }) => {
   useEffect(() => {
     const performtask = () => {
       setdetails({
-        totalsignups: data?.userData?.length,
-        totaljobsposted: data?.projectData?.length,
-        totalfreelance: data?.userData.filter(
+        totalsignups: this.data?.userData?.length,
+        totaljobsposted: this.data?.projectData?.length,
+        totalfreelance: this.data?.userData.filter(
           (dat) => dat.usertype === "freelance",
         ).length,
-        totalworkproviders: data?.userData.filter(
+        totalworkproviders: this.data?.userData.filter(
           (dat) => dat.usertype === "workprovider",
         ).length,
-        basicworkproviders: data?.userData.filter(
+        basicworkproviders: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "workprovider" &&
             dat.subscription === "workprovider-basic",
         ).length,
-        proworkproviders: data?.userData.filter(
+        proworkproviders: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "workprovider" &&
             dat.subscription === "workprovider-mid",
         ).length,
-        propremworkproviders: data?.userData.filter(
+        propremworkproviders: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "workprovider" &&
             dat.subscription === "workprovider-adv",
         ).length,
-        basicfreelancers: data?.userData.filter(
+        basicfreelancers: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "freelance" &&
             dat.subscription === "freelance-basic",
         ).length,
-        profreelancers: data?.userData.filter(
+        profreelancers: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "freelance" &&
             dat.subscription === "freelance-mid",
         ).length,
-        propremfreelancers: data?.userData.filter(
+        propremfreelancers: this.data?.userData.filter(
           (dat) =>
             dat.usertype === "freelance" &&
             dat.subscription === "freelance-adv",
         ).length,
       });
-      console.log("this", data);
+      console.log("this", this.data);
     };
     performtask();
   }, []);
-  console.log("this", data);
+  console.log("this", this.data);
   console.log("thisdet", details);
 
   return (

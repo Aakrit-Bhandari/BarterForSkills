@@ -1,16 +1,20 @@
-import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import Lottie from "lottie-react";
+import { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import signup from "../../assets/sign.json";
+import {
+  REGISTER_URL,
+  TYPE_POST,
+  UPLOAD_IMAGE_URL,
+} from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 
 const initialState = {
   username: "",
   usertype: "",
   email: "",
   password: "",
-  subscription: "-basic", // Added password field here
+  subscription: "-basic",
   personaldetails: {
     name: "",
     conatactno: "",
@@ -25,100 +29,87 @@ const initialState = {
 
 const updateUserData = (state, action) => {
   switch (action.type) {
-    case action.type === "username":
-      return (state.username = action.payload);
-    case action.type === "usertype":
-      return (state.usertype = action.payload);
-    case action.type === "email":
-      return (state.email = action.payload);
-    case action.type === "password":
-      return (state.password = action.payload);
-    case action.type === "subscription":
-      return (state.subscription = action.payload);
-    case action.type === "pDName":
-      return (state.personaldetails.name = action.payload);
-    case action.type === "pDContactNo":
-      return (state.personaldetails.contactno = action.payload);
-    case action.type === "pDLocation":
-      return (state.personaldetails.location = action.payload);
-    case action.type === "pDDescription":
-      return (state.personaldetails.description = action.payload);
-    case action.type === "pDLinkedIn":
-      return (state.personaldetails.linkedinid = action.payload);
-    case action.type === "pDGender":
-      return (state.personaldetails.gender = action.payload);
-    case action.type === "pDProfilePhoto":
-      return (state.personaldetaisl.profilephoto = action.payload);
+    case "username":
+      return { ...state, username: action.payload };
+    case "usertype":
+      return {
+        ...state,
+        usertype: action.payload,
+        subscription: action.payload + "-basic",
+      };
+    case "email":
+      return { ...state, email: action.payload };
+    case "password":
+      return { ...state, password: action.payload };
+    case "subscription":
+      return { ...state, subscription: action.payload };
+    case "pDName":
+      return {
+        ...state,
+        personaldetails: { ...state.personaldetails, name: action.payload },
+      };
+    case "pDContactNo":
+      return {
+        ...state,
+        personaldetails: {
+          ...state.personaldetails,
+          conatactno: action.payload,
+        },
+      };
+    case "pDLocation":
+      return {
+        ...state,
+        personaldetails: { ...state.personaldetails, location: action.payload },
+      };
+    case "pDDescription":
+      return {
+        ...state,
+        personaldetails: {
+          ...state.personaldetails,
+          description: action.payload,
+        },
+      };
+    case "pDLinkedIn":
+      return {
+        ...state,
+        personaldetails: {
+          ...state.personaldetails,
+          linkedinid: action.payload,
+        },
+      };
+    case "pDGender":
+      return {
+        ...state,
+        personaldetails: { ...state.personaldetails, gender: action.payload },
+      };
+    case "pDProfilePhoto":
+      return {
+        ...state,
+        personaldetails: {
+          ...state.personaldetails,
+          profilephoto: action.payload,
+        },
+      };
     default:
       return state;
   }
 };
 
+function isValidPassword(password) {
+  // Regex to check for at least one uppercase letter, one special character, and length > 8
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+  return passwordRegex.test(password);
+}
+
 export default function SignUp() {
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
-  const [localstoragedata, setLocalstoragedata] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("response-userdata")) || {};
-    } catch (error) {
-      console.error("Error parsing localStorage data:", error);
-      return {};
-    }
-  });
 
   const [userData, dispatch] = useReducer(updateUserData, initialState);
-  const state = localStorage.userData || initialState;
-  state.subscription = userData.usertype + "-basic";
-
-  useEffect(() => {
-    if (!userData || !userData.email || !userData.usertype) {
-      navigate("/login");
-    }
-    if (localstoragedata?.anothertypeuser) {
-      alert("Already registered email with another user type.");
-      navigate("/login");
-    }
-  }, [userData, navigate]);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   if (name.startsWith("personaldetails.")) {
-  //     const fieldName = name.split(".")[1];
-  //     setUserData((oldData) => ({
-  //       ...oldData,
-  //       personaldetails: {
-  //         ...oldData.personaldetails,
-  //         [fieldName]: value,
-  //       },
-  //     }));
-  //   } else {
-  //     setUserData((oldData) => ({
-  //       ...oldData,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
-  // const handleSkillsChange = (e) => {
-  //   const skillsArray = e.target.value.split(",").map((skill) => skill.trim());
-  //   setUserData((oldData) => ({
-  //     ...oldData,
-  //     personaldetails: {
-  //       ...oldData.personaldetails,
-  //       skills: skillsArray,
-  //     },
-  //   }));
-  // };
-  function isValidPassword(password) {
-    // Regex to check for at least one uppercase letter, one special character, and length > 8
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-    return passwordRegex.test(password);
-  }
 
   const addUserToDatabase = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
 
     if (!isValidPassword(userData.password)) {
       alert(
@@ -151,54 +142,50 @@ export default function SignUp() {
     }
 
     try {
-      const checkUsername = await axios.get(
-        // `https://barter-5cky.onrender.com/check-username/${userData.username}`,
-        `http://localhost:3000/check-username/${userData.username}`,
-        { withCredentials: true },
+      // `https://barter-5cky.onrender.com/check-username/${userData.username}`,
+      const options = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      // const response = await pokeBarterForSkillsServer(
+      //   `${CHECK_USERNAME_URL}/${userData.username},${options},${TYPE_GET}`,
+      // );
+      const formData = new FormData();
+      formData.append("image", file);
+      options.withCredentials = true;
+      options.data = formData;
+      const uploadResponse = await pokeBarterForSkillsServer(
+        UPLOAD_IMAGE_URL,
+        options,
+        TYPE_POST,
       );
-      if (checkUsername.data.usernameavailable) {
-        const formData = new FormData();
-        formData.append("image", file);
+      //   // "https://barter-5cky.onrender.com/upload-image",
 
-        const uploadResponse = await axios.post(
-          // "https://barter-5cky.onrender.com/upload-image",
-          "http://localhost:3000/upload-image",
-          formData,
-          { withCredentials: true },
+      if (uploadResponse.imageuploaded) {
+        userData.personaldetails.profilephoto = uploadResponse.imageurl;
+
+        //"https://barter-5cky.onrender.com/register",
+
+        const newUserResponse = await pokeBarterForSkillsServer(
+          REGISTER_URL,
+          { data: userData, withCredentials: true },
+          TYPE_POST,
         );
-
-        if (uploadResponse.data.imageuploaded) {
-          userData.personaldetails.profilephoto = uploadResponse.data.imageurl;
-
-          const newUserResponse = await axios.post(
-            //"https://barter-5cky.onrender.com/register",
-            "http://localhost:3000/register",
-            userData,
-            { withCredentials: true },
+        if (newUserResponse.userAdded) {
+          navigate(
+            `/welcome/${
+              userData.usertype === "freelance"
+                ? "freelance/in23x"
+                : "workprovider/wpd78x"
+            }/${encodeURIComponent(userData.username)}`,
           );
-
-          if (newUserResponse.data.userAdded) {
-            localStorage.setItem(
-              "response-userdata",
-              JSON.stringify(newUserResponse.data),
-            );
-            navigate(
-              `/welcome/${
-                userData.usertype === "freelance"
-                  ? "freelance/in23x"
-                  : "workprovider/wpd78x"
-              }/${encodeURIComponent(userData.username)}`,
-            );
-          } else {
-            alert("An error occurred while adding the user. Please try again.");
-            return;
-          }
         } else {
-          alert("Image upload failed. Please try again.");
+          alert("An error occurred while adding the user. Please try again.");
           return;
         }
       } else {
-        alert("Username already exists. Please choose a different one.");
+        alert("Image upload failed. Please try again.");
         return;
       }
     } catch (error) {
@@ -223,15 +210,23 @@ export default function SignUp() {
             <input
               type="email"
               value={userData.email || ""}
-              readOnly
+              onChange={(e) =>
+                dispatch({ type: "email", payload: e.target.value })
+              }
+              placeholder="email"
               required
             />
-            <input
-              type="text"
-              value={userData.usertype || ""}
-              readOnly
+            <select
+              value={userData.userType}
+              onChange={(e) =>
+                dispatch({ type: "usertype", payload: e.target.value })
+              }
               required
-            />
+            >
+              <option value="">Select User Type</option>
+              <option value="freelance">Freelance</option>
+              <option value="workprovider">Work Provider</option>
+            </select>
             <input
               type="text"
               name="username"
@@ -279,14 +274,18 @@ export default function SignUp() {
               type="text"
               placeholder="LinkedIn ID"
               name="personaldetails.linkedinid"
-              value={userData.personaldetails?.linkedinid || ""}
+              value={userData.personaldetails.linkedinid || ""}
               required
-              onChange={(e) => dispatch("pDLinkedIn", e.target.value)}
+              onChange={(e) =>
+                dispatch({ type: "pDLinkedIn", payload: e.target.value })
+              }
             />
             <select
               name="personaldetails.gender"
               value={userData.personaldetails?.gender || ""}
-              onChange={(e) => dispatch("pDGender", e.target.value)}
+              onChange={(e) =>
+                dispatch({ type: "pDGender", payload: e.target.value })
+              }
               required
             >
               <option value="">Gender*</option>
@@ -305,10 +304,9 @@ export default function SignUp() {
               type="password"
               name="password"
               value={userData.password}
-              onChange={(e) => ({
-                type: "password",
-                payload: e.target.value,
-              })}
+              onChange={(e) =>
+                dispatch({ type: "password", payload: e.target.value })
+              }
               required
               placeholder="Password*"
             />

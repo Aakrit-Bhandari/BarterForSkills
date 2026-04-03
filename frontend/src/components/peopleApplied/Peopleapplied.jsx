@@ -1,6 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+  GET_SINGLE_PROJECT_URL,
+  SEND_MAIL_URL,
+  TYPE_GET,
+  TYPE_POST,
+} from "../../fetchers/constants.js";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers.jsx";
 import BackButton from "../backButton/Backbutton.jsx";
 import JobApplied from "../jobsApplied/JobApplied.jsx";
 import Joboption from "../jobsOption/Joboption.jsx";
@@ -25,18 +31,18 @@ const Peopleapplied = () => {
   useEffect(() => {
     const getProjectData = async () => {
       try {
-        const response = await axios.get(
-          // `https://barter-5cky.onrender.com/getproject/${projectid}`,
-          `http://localhost:3000/getproject/${projectid}`,
-          {
-            withCredentials: true,
-          },
+        // `https://barter-5cky.onrender.com/getproject/${projectid}`,
+        const options = { withCredentials: true };
+        const response = await pokeBarterForSkillsServer(
+          `${GET_SINGLE_PROJECT_URL}/${projectid}`,
+          options,
+          TYPE_GET,
         );
 
-        if (response.data.projectdatapresent) {
-          setDatapro(response.data.projectdatafetched);
+        if (response.projectdatapresent) {
+          setDatapro(response.projectdatafetched);
           setPeople(
-            response.data.projectdatafetched.projectofficials.clientsapplied,
+            response.projectdatafetched.projectofficials.clientsapplied,
           );
         }
       } catch (error) {
@@ -48,15 +54,14 @@ const Peopleapplied = () => {
   }, [projectid]);
 
   const performtask = async () => {
-    const mailsending = await axios.post(
-      // "https://barter-5cky.onrender.com/sendmail",
-      "http://localhost:3000/sendmail",
-      usermailData,
-      {
-        withCredentials: true,
-      },
+    // "https://barter-5cky.onrender.com/sendmail",
+    const options = { withCredentials: true, data: usermailData };
+    const mailResponse = await pokeBarterForSkillsServer(
+      SEND_MAIL_URL,
+      options,
+      TYPE_POST,
     );
-    if (mailsending.data.mailsent) {
+    if (mailResponse.mailsent) {
       alert("Mail was successfully sent");
       setmailsection(false);
       return;

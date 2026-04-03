@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
+import { GET_SINGLE_PROJECT_URL, TYPE_GET } from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 
 const JobApplied = ({ projectid, setDatapro, setshortlistedusers }) => {
   const [activeTab, setActiveTab] = useState("all");
@@ -35,11 +37,17 @@ const JobApplied = ({ projectid, setDatapro, setshortlistedusers }) => {
     const getProjectData = async () => {
       try {
         // const response = await axios.get(`https://barter-5cky.onrender.com/getproject/${projectid}`, {
-        const response = await axios.get(
-          `http://localhost:3000/getproject/${projectid}`,
-          {
-            withCredentials: true,
-          },
+        // const response = await axios.get(
+        //   `http://localhost:3000/getproject/${projectid}`,
+        //   {
+        //     withCredentials: true,
+        //   },
+        // );
+        const options = { withCredentials: true };
+        const response = await pokeBarterForSkillsServer(
+          `${GET_SINGLE_PROJECT_URL}/${projectid}`,
+          options,
+          TYPE_GET,
         );
 
         if (response.data.projectdatapresent) {

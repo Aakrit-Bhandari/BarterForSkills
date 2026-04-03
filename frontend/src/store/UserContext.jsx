@@ -1,49 +1,71 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CHECK_TOKEN_URL, TYPE_GET } from "../fetchers/constants";
+import { CHECK_TOKEN_URL, LOGOUT_URL, TYPE_GET } from "../fetchers/constants";
 import { pokeBarterForSkillsServer } from "../fetchers/fetchers";
 import {
   FREELANCER,
-  LOGIN_FREELANCE_URL,
-  LOGIN_WORKPROVIDER_URL,
   SERVE_FREELANCE_URL,
   SERVE_WORKPROVIDER_URL,
   WORKPROVIDER,
 } from "./paths";
 import { UserStore, initialState } from "./UserStore";
 
-export const UserProvider = ({ children }) => {
+const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState(initialState);
   const location = useLocation();
   const navigate = useNavigate();
   //Fetch user Data everyTime
+
   const options = {
     withCredentials: true,
   };
   useEffect(() => {
-    const fetchUserData = pokeBarterForSkillsServer(
-      `${CHECK_TOKEN_URL},${options},${TYPE_GET}`,
-    );
-    if (fetchUserData.tokenalreadypresent) {
-      if (
-        location.pathname === LOGIN_FREELANCE_URL &&
-        fetchUserData.userData.userData.usertype === FREELANCER
-      ) {
-        navigate(`${SERVE_FREELANCE_URL}${fetchUserData.userData.username}`);
-      } else if (
-        location.pathname === LOGIN_WORKPROVIDER_URL &&
-        fetchUserData.userData.userData.usertype === WORKPROVIDER
-      ) {
-        navigate(`${SERVE_WORKPROVIDER_URL}${fetchUserData.userData.username}`);
+    const fetchUserData = async () => {
+      const fetchData = await pokeBarterForSkillsServer(
+        CHECK_TOKEN_URL,
+        options,
+        TYPE_GET,
+      );
+      if (fetchData.tokenalreadypresent) {
+        if (fetchData.userData.userData.usertype === FREELANCER) {
+          setUserData(fetchData.userData);
+          navigate(`${SERVE_FREELANCE_URL}${fetchData.userData.username}`);
+        } else if (fetchData.userData.userData.usertype === WORKPROVIDER) {
+          setUserData(fetchData.userData);
+          navigate(`${SERVE_WORKPROVIDER_URL}${fetchData.userData.username}`);
+        }
+      } else {
+        if (![FREELANCER, WORKPROVIDER, "/"].includes(location.pathname)) {
+          navigate("/login");
+        }
       }
-      setUserData(...userData, fetchUserData.userData);
-    } else {
-      if (![FREELANCER, WORKPROVIDER, "/"].includes(location.pathname)) {
-        navigate("/login");
-      }
-    }
+    };
     fetchUserData();
   }, []);
 
-  return <UserStore.Provider value={userData}>{children}</UserStore.Provider>;
+  const performLogout = async () => {
+    // const logout = await axios.get("http://localhost:3000/logout", {
+    //   // const logout = await axios.get("https://barter-5cky.onrender.com/logout", {
+    //   withCredentials: true,
+    // });
+    const options = { withCredentials: true };
+    const logoutData = await pokeBarterForSkillsServer(
+      LOGOUT_URL,
+      options,
+      TYPE_GET,
+    );
+    if (logoutData.logoutdone) {
+      navigate("/");
+    } else {
+      alert("Logout not done... Some Error occured..");
+    }
+  };
+
+  return (
+    <UserStore.Provider value={{ userData, performLogout }}>
+      {children}
+    </UserStore.Provider>
+  );
 };
+
+export default UserProvider;

@@ -1,11 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  BASIC_SUBSCRIPTION,
-  MID_SUBSCRIPTION,
-} from "../../constants/constants";
-
+import { getSubscriptionType } from "../../constants/constants";
+import { SHORTLIST_URL, TYPE_GET, USER_URL } from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 const PersonApplied = ({
   clientid,
   projectid,
@@ -22,15 +19,15 @@ const PersonApplied = ({
 
   useEffect(() => {
     const performtask = async () => {
-      const getuserData = await axios.get(
-        // `https://barter-5cky.onrender.com/user/${clientid}`,
-        `http://localhost:3000/user/${clientid}`,
-        {
-          withCredentials: true,
-        },
+      // `https://barter-5cky.onrender.com/user/${clientid}`,
+      const options = { withCredentials: true };
+      const getuserData = await pokeBarterForSkillsServer(
+        `${USER_URL}/${clientid}`,
+        options,
+        TYPE_GET,
       );
-      if (getuserData.data.userprofilefound) {
-        setuserdata(getuserData.data.userProfiledata);
+      if (getuserData.userprofilefound) {
+        setuserdata(getuserData.userProfiledata);
       }
     };
     performtask();
@@ -38,14 +35,14 @@ const PersonApplied = ({
 
   //TODO make a common API contract
   const shortlistuser = async () => {
-    const performshortlisting = await axios.get(
-      // `https://barter-5cky.onrender.com/shortlist/${clientid}/${projectid}`,
-      `http://localhost:3000/shortlist/${clientid}/${projectid}`,
-      {
-        withCredentials: true,
-      },
+    // `https://barter-5cky.onrender.com/shortlist/${clientid}/${projectid}`,
+    const options = { withCredentials: true };
+    const performShortListing = await pokeBarterForSkillsServer(
+      `${SHORTLIST_URL}/${clientid}/${projectid}`,
+      options,
+      TYPE_GET,
     );
-    if (performshortlisting.data.userApplied) {
+    if (performShortListing.userApplied) {
       alert("User Shortlisted Successfully...");
       return;
     }
@@ -62,14 +59,8 @@ const PersonApplied = ({
     setid(userdata._id);
   };
 
-  //TODO move to utils file and make a switch
   const userSubscription = userdata?.subscription;
-  const subscription_type =
-    userSubscription === BASIC_SUBSCRIPTION
-      ? "Basic"
-      : userSubscription === MID_SUBSCRIPTION
-        ? "Premium"
-        : "Pro Premium";
+  const subscription_type = getSubscriptionType(userSubscription);
 
   return (
     <div className="small-divs-applied">

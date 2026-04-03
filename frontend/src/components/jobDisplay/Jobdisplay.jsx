@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
+import { EDIT_PROJECT_URL, TYPE_POST } from "../../fetchers/constants";
+import { pokeBarterForSkillsServer } from "../../fetchers/fetchers";
 import Joboption from "../jobsOption/Joboption.jsx";
 
 const Jobdisplay = ({ projectdata, filtercount, worker, userid, status }) => {
@@ -54,13 +55,12 @@ const Jobdisplay = ({ projectdata, filtercount, worker, userid, status }) => {
     }));
   };
   const performupdate = async () => {
-    const updated = await axios.post(
+    const options = { withCredentials: true, data: project };
+    await pokeBarterForSkillsServer(
       // `https://barter-5cky.onrender.com/editproject/${project?._id}`,
-      `http://localhost:3000/editproject/${project?._id}`,
-      project,
-      {
-        withCredentials: true,
-      },
+      `${EDIT_PROJECT_URL}/${project?._id}`,
+      options,
+      TYPE_POST,
     );
   };
   const handleClose = () => {

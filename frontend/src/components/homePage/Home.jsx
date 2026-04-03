@@ -10,7 +10,7 @@ import "./Home.css"; // Import the CSS file
 import Lottie from "lottie-react";
 import image from "../../assets/barter.png";
 
-const Home = () => {
+export default function Home() {
   // State for mobile menu visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -51,12 +51,13 @@ const Home = () => {
         </ul>
 
         <div className="navbar-right">
-          <button
-            className="login-btn"
-            onClick={() => navigate("/login")}
-            style={{ width: "110px" }}
-          >
-            Login/Signup
+          <button className="login-btn" onClick={() => navigate("/login")}>
+            Login
+          </button>
+        </div>
+        <div className="">
+          <button className="login-btn" onClick={() => navigate("/signUp")}>
+            SignUp
           </button>
         </div>
       </nav>
@@ -189,7 +190,7 @@ const Home = () => {
             </div>
           </div>
           <div className="actions">
-            <button className="btn sign-up" onClick={() => navigate("/login")}>
+            <button className="btn sign-up" onClick={() => navigate("/signUp")}>
               Sign up for free
             </button>
             <button
@@ -206,6 +207,4 @@ const Home = () => {
       <Lady />
     </div>
   );
-};
-
-export default Home;
+}
