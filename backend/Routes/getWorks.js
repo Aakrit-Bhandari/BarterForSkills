@@ -6,15 +6,9 @@ const getWorks = async (req, res) => {
     try {
         const userResponse = await Projectsmodel.find();
 
-        if (userResponse && userResponse.length > 0) {
-            resData.projectdatapresent = true;
-            resData.projectdatafetched = userResponse;
-            return res.status(200).json(resData);
-        } else {
-            resData.projectdatapresent = false;
-            resData.message = "No projects found";
-            return res.status(404).json(resData);
-        }
+        resData.projectdatapresent = userResponse.length > 0;
+        resData.projectdatafetched = userResponse;
+        return res.status(200).json(resData);
     } catch (error) {
         resData.projectdatapresent = false;
         resData.message = "An error occurred while fetching projects";
